@@ -1,0 +1,9 @@
+Web-ready project photography goes here.
+
+Export selected shots from photos-source/ as WebP/AVIF — hero ~1600px wide,
+project cards ~800px wide — and name them descriptively, e.g.
+hero-cinema-room.webp, project-residential-windermere.webp.
+
+See PHOTO_MANIFEST.md for the source inventory and which originals are
+high-res enough to use. src/data/projects.ts already references the
+expected filenames.
