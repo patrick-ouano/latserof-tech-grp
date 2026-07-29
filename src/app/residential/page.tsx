@@ -11,7 +11,7 @@ import { ProjectCard } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/motion/Reveal";
 import { Spotlight } from "@/components/motion/Spotlight";
 import { projectsIn } from "@/data/projects";
-import { CTA_HREF, disciplines, site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, disciplines, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Residential",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const FAQ: QA[] = [
   {
     q: "Do you publish pricing?",
-    a: "No. Every system is specified for the room it goes in, so a price list would be guesswork on both sides. The walkthrough is free and it is what produces a real number.",
+    a: "No. Every system is specified for the rooms it goes in, so a price list would be guesswork on both sides. We do not give remote quotes — a free on-site survey is what comes first.",
   },
   {
     q: "Will you work on a system somebody else installed?",
@@ -39,7 +39,7 @@ const FAQ: QA[] = [
   },
   {
     q: "How far do you travel?",
-    a: `${site.serviceArea} and greater Orlando. The workshop is in ${site.address.city}.`,
+    a: `${site.serviceArea}. The workshop is in ${site.address.city}.`,
   },
   {
     q: "We're still building. When should we call you?",
@@ -65,7 +65,7 @@ export default function ResidentialPage() {
         }}
       >
         <div className="flex flex-wrap gap-[14px]">
-          <Button href={CTA_HREF}>Book a walkthrough</Button>
+          <Button href={CTA_HREF}>{CTA_LABEL}</Button>
           <Button href={site.phoneHref} variant="ghost">
             Call {site.phoneDisplay}
           </Button>

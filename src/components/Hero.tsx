@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Button } from "@/components/Button";
-import { CTA_HREF } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL } from "@/lib/site";
 
 const TRUST = ["Licensed & insured", "Residential + commercial", "In-house service"];
 
@@ -100,7 +100,7 @@ export function Hero() {
             className="animate-enter mt-10 flex flex-wrap gap-[14px]"
             style={{ animationDelay: "520ms" }}
           >
-            <Button href={CTA_HREF}>Get a system quote</Button>
+            <Button href={CTA_HREF}>{CTA_LABEL}</Button>
             <Button href="#work" variant="ghost">
               See the work
             </Button>

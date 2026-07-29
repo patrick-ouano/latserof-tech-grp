@@ -60,7 +60,7 @@ export default function WorkPage() {
                 ? "One project above is waiting on photography."
                 : `${awaitingPhoto} projects above are waiting on photography.`}{" "}
               We would rather show a gap than someone else&rsquo;s stock
-              photograph. To see that work in person, ask on the walkthrough.
+              photograph. To see that work in person, ask on the survey.
             </p>
           </Reveal>
         )}

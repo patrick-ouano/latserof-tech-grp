@@ -1,13 +1,13 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 test.describe("navigation", () => {
   test("every CTA lands on the quote form", async ({ page }) => {
     await page.goto("/");
     await page
-      .getByRole("link", { name: "Get a system quote" })
+      .getByRole("link", { name: "Request for Survey" })
       .click();
     await expect(page).toHaveURL(/\/contact$/);
-    await expect(page.getByRole("button", { name: /request a walkthrough/i }))
+    await expect(page.getByRole("button", { name: /Request for Survey/i }))
       .toBeVisible();
   });
 
@@ -83,3 +83,4 @@ test.describe("mobile drawer", () => {
     await expect(page.locator("#mobile-nav")).toHaveAttribute("inert", "");
   });
 });
+

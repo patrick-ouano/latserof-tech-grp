@@ -13,7 +13,7 @@ import { Section } from "@/components/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { Spotlight } from "@/components/motion/Spotlight";
 import { projectsIn } from "@/data/projects";
-import { CTA_HREF, disciplines, site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, disciplines, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Commercial",
@@ -47,7 +47,7 @@ export default function CommercialPage() {
         }}
       >
         <div className="flex flex-wrap gap-[14px]">
-          <Button href={CTA_HREF}>Book a walkthrough</Button>
+          <Button href={CTA_HREF}>{CTA_LABEL}</Button>
           <Button href={site.phoneHref} variant="ghost">
             Call {site.phoneDisplay}
           </Button>

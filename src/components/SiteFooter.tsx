@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { CTA_HREF, navLinks, site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, navLinks, site } from "@/lib/site";
 
 /**
  * Footer + legal line.
@@ -60,7 +60,7 @@ export function SiteFooter() {
                 href={CTA_HREF}
                 className="transition-colors duration-200 hover:text-gold"
               >
-                Book a walkthrough
+                {CTA_LABEL}
               </Link>
             </li>
           </ul>

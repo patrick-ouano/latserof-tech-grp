@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
-import { CTA_HREF, navLinks, site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, navLinks, site } from "@/lib/site";
 
 /**
  * Sticky header.
@@ -121,7 +121,7 @@ export function SiteHeader() {
               rather than class order, so it would never hide. */}
           <div className="hidden md:block">
             <Button href={CTA_HREF} size="sm">
-              Book a walkthrough
+              {CTA_LABEL}
             </Button>
           </div>
           <a
@@ -186,7 +186,7 @@ export function SiteHeader() {
               className="w-full"
               onClick={close}
             >
-              Book a walkthrough
+              {CTA_LABEL}
             </Button>
             <a
               href={site.phoneHref}

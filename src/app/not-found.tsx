@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
-import { CTA_HREF, navLinks, site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, navLinks, site } from "@/lib/site";
 import Link from "next/link";
 
 /**
@@ -26,7 +26,7 @@ export default function NotFound() {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-[14px]">
-          <Button href={CTA_HREF}>Book a walkthrough</Button>
+          <Button href={CTA_HREF}>{CTA_LABEL}</Button>
           <Button href={site.phoneHref} variant="ghost">
             Call {site.phoneDisplay}
           </Button>

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+﻿import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -31,7 +31,7 @@ describe("QuoteForm", () => {
     const user = userEvent.setup();
     render(<QuoteForm />);
 
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     expect(fetchMock).not.toHaveBeenCalled();
     const alert = await screen.findByRole("alert");
@@ -44,7 +44,7 @@ describe("QuoteForm", () => {
     const user = userEvent.setup();
     render(<QuoteForm />);
 
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     // Without this, a keyboard or screen-reader user is left where they
     // were with no idea the submit did nothing.
@@ -55,7 +55,7 @@ describe("QuoteForm", () => {
     const user = userEvent.setup();
     render(<QuoteForm />);
 
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
     expect(await screen.findByRole("alert")).toHaveTextContent(/tell us your name/i);
 
     await user.type(screen.getByLabelText(/^Name/), "T");
@@ -70,7 +70,7 @@ describe("QuoteForm", () => {
     render(<QuoteForm />);
 
     await fillMinimum(user);
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
     const [url, init] = fetchMock.mock.calls[0];
@@ -87,10 +87,10 @@ describe("QuoteForm", () => {
     render(<QuoteForm />);
 
     await fillMinimum(user);
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     const status = await screen.findByRole("status");
-    expect(status).toHaveTextContent(/we've got it|we’ve got it/i);
+    expect(status).toHaveTextContent(/we've got it|weâ€™ve got it/i);
     expect(screen.getByRole("link", { name: site.phoneDisplay })).toHaveAttribute(
       "href",
       site.phoneHref,
@@ -107,14 +107,14 @@ describe("QuoteForm", () => {
     render(<QuoteForm />);
 
     await fillMinimum(user);
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent("Server says no.");
   });
 
   /**
    * The worst outcome for a lead-generation form is telling the visitor it
-   * worked when it did not — they stop chasing and nobody calls them back.
+   * worked when it did not â€” they stop chasing and nobody calls them back.
    */
   it("never claims success when delivery fails, and points at the phone", async () => {
     fetchMock.mockResolvedValue({
@@ -126,7 +126,7 @@ describe("QuoteForm", () => {
     render(<QuoteForm />);
 
     await fillMinimum(user);
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/couldn't send/i);
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
@@ -138,7 +138,7 @@ describe("QuoteForm", () => {
     render(<QuoteForm />);
 
     await fillMinimum(user);
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(site.phoneDisplay);
   });
@@ -150,7 +150,7 @@ describe("QuoteForm", () => {
 
     await user.type(screen.getByLabelText(/^Name/), "Thomas");
     await user.type(screen.getByLabelText(/^Email/), "t@example.com");
-    await user.click(screen.getByRole("button", { name: /request a walkthrough/i }));
+    await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
   });
@@ -175,3 +175,4 @@ describe("QuoteForm", () => {
     expect(honeypot.closest("[aria-hidden='true']")).not.toBeNull();
   });
 });
+

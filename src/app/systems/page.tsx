@@ -115,7 +115,7 @@ export default function SystemsPage() {
                   </p>
                   <p className="max-w-[34ch] font-body text-[15px] text-muted">
                     We would rather show a gap than someone else&rsquo;s stock
-                    photo. Ask to see this work on the walkthrough.
+                    photo. Ask to see this work on the survey.
                   </p>
                 </div>
               )}

@@ -1,7 +1,7 @@
-import { Button } from "@/components/Button";
+﻿import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
-import { site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, site } from "@/lib/site";
 
 /**
  * Full-bleed gold band. The one place on the site where the ground is not
@@ -31,20 +31,29 @@ export function CtaBand() {
             id="cta-heading"
             className="font-heading text-h2 font-extrabold text-ink"
           >
-            Tell us the rooms. We&rsquo;ll tell you what they need.
+            Tell us the rooms. We&rsquo;ll come and look.
           </h2>
           <p className="mt-4 font-body text-lede text-on-gold-body">
-            Walkthroughs are free anywhere in Central Florida — new
-            construction, renovation or a system that needs rescuing.
+            Free on-site surveys across {site.serviceArea} — new construction,
+            renovation or a system that needs rescuing. No remote quotes; the
+            survey comes first.
           </p>
         </Reveal>
 
-        <Reveal index={1} className="w-full sm:w-auto">
+        <Reveal index={1} className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button
-            href={site.phoneHref}
+            href={CTA_HREF}
             variant="ink"
             size="lg"
             className="w-full whitespace-nowrap sm:w-auto"
+          >
+            {CTA_LABEL}
+          </Button>
+          <Button
+            href={site.phoneHref}
+            variant="ghost"
+            size="lg"
+            className="w-full whitespace-nowrap border-ink/25 text-ink hover:border-ink hover:bg-ink/5 sm:w-auto"
           >
             Call {site.phoneDisplay}
           </Button>

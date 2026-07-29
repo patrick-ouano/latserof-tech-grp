@@ -4,12 +4,11 @@ import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { QuoteForm } from "@/components/QuoteForm";
 import { Reveal } from "@/components/motion/Reveal";
-import { site } from "@/lib/site";
+import { CTA_LABEL, site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Book a walkthrough",
-  description:
-    "Free walkthroughs anywhere in Central Florida — new construction, renovation, or a system that needs rescuing.",
+  title: CTA_LABEL,
+  description: `Free on-site surveys across ${site.serviceArea} — new construction, renovation, or a system that needs rescuing. No remote quotes.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -26,20 +25,20 @@ const ASIDE = [
 ];
 
 /**
- * Destination for every CTA on the site: "Book a walkthrough", "Get a system
- * quote", and the gold CTA-band button (see CTA_HREF in src/lib/site.ts).
+ * Destination for every primary CTA. Survey / walkthrough request only —
+ * Thomas does not price jobs off a form.
  */
 export default function ContactPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Book a walkthrough"
+        eyebrow={CTA_LABEL}
         title={
           <>
             Tell us <span className="text-gradient-gold">the rooms</span>.
           </>
         }
-        lede="Walkthroughs are free anywhere in Central Florida — new construction, renovation or a system that needs rescuing. Tell us roughly what you’re after and we’ll come and look."
+        lede={`Surveys are free across ${site.serviceArea} — new construction, renovation or a system that needs rescuing. Tell us roughly what you’re after and we’ll come and look. We do not give remote quotes.`}
       />
 
       <Container className="py-16 xl:py-20">

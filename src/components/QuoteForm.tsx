@@ -12,7 +12,7 @@ import {
   type FieldErrors,
   type QuoteRequest,
 } from "@/lib/quote";
-import { site } from "@/lib/site";
+import { CTA_LABEL, site } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -101,7 +101,7 @@ export function QuoteForm() {
         </h2>
         <p className="mt-3 max-w-[52ch] font-body text-[17px] leading-[1.65] text-body-dim">
           We&rsquo;ll be in touch within one business day to arrange the
-          walkthrough. If it&rsquo;s urgent, call{" "}
+          survey. If it&rsquo;s urgent, call{" "}
           <a href={site.phoneHref} className="font-semibold text-gold hover:text-paper">
             {site.phoneDisplay}
           </a>
@@ -251,7 +251,7 @@ export function QuoteForm() {
 
       <div className="mt-10 flex flex-wrap items-center gap-6">
         <Button variant="gold" size="md" asSubmit disabled={status === "sending"}>
-          {status === "sending" ? "Sending…" : "Request a walkthrough"}
+          {status === "sending" ? "Sending…" : CTA_LABEL}
         </Button>
         <p className="font-body text-[15px] text-muted">
           Or call{" "}

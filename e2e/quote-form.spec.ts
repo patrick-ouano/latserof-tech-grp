@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 /**
  * The form is the site's only conversion point, so it is exercised against
@@ -26,7 +26,7 @@ test.describe("quote form", () => {
       await route.abort();
     });
 
-    await page.getByRole("button", { name: /request a walkthrough/i }).click();
+    await page.getByRole("button", { name: /Request for Survey/i }).click();
 
     const alert = alertIn(page);
     await expect(alert).toBeVisible();
@@ -41,7 +41,7 @@ test.describe("quote form", () => {
 
     await page.getByLabel(/^Name/).fill("Thomas Forestal");
     await page.getByLabel(/^Phone/).fill("(407) 927-4434");
-    await page.getByRole("button", { name: /request a walkthrough/i }).click();
+    await page.getByRole("button", { name: /Request for Survey/i }).click();
 
     await expect(page.getByRole("status")).toContainText(/we.ve got it/i);
   });
@@ -60,7 +60,7 @@ test.describe("quote form", () => {
     // off-screen and not directly clickable.
     await page.locator("label").filter({ hasText: "Networks that hold" }).click();
     await page.locator("label").filter({ hasText: /^Commercial$/ }).click();
-    await page.getByRole("button", { name: /request a walkthrough/i }).click();
+    await page.getByRole("button", { name: /Request for Survey/i }).click();
 
     await expect(page.getByRole("status")).toBeVisible();
     expect(body.scope).toEqual(["Networks that hold"]);
@@ -82,7 +82,7 @@ test.describe("quote form", () => {
 
     await page.getByLabel(/^Name/).fill("Thomas");
     await page.getByLabel(/^Phone/).fill("4079274434");
-    await page.getByRole("button", { name: /request a walkthrough/i }).click();
+    await page.getByRole("button", { name: /Request for Survey/i }).click();
 
     await expect(alertIn(page)).toContainText(/407/);
     await expect(page.getByRole("status")).toHaveCount(0);
@@ -100,3 +100,4 @@ test.describe("quote form", () => {
     ).toBeChecked();
   });
 });
+
