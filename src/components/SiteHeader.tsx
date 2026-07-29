@@ -21,8 +21,19 @@ import { CTA_HREF, navLinks, site } from "@/lib/site";
  * phone icon button.
  */
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  /**
+   * The drawer is open for one route only.
+   *
+   * Storing *where* it was opened rather than a bare boolean means any
+   * navigation closes it for free — including browser back/forward, which
+   * an onClick handler never sees. It also avoids closing it from an
+   * effect, which would be a setState cascade on every route change.
+   */
+  const [openAt, setOpenAt] = useState<string | null>(null);
+  const open = openAt === pathname;
+  const close = () => setOpenAt(null);
 
   // Lock the page behind the drawer, and let Escape close it.
   useEffect(() => {
@@ -32,7 +43,7 @@ export function SiteHeader() {
     document.body.style.overflow = "hidden";
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
 
@@ -41,9 +52,6 @@ export function SiteHeader() {
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
-
-  // A route change means the drawer's job is done.
-  useEffect(() => setOpen(false), [pathname]);
 
   return (
     <header
@@ -126,7 +134,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpenAt(open ? null : pathname)}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -160,7 +168,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => setOpen(false)}
+              onClick={close}
               aria-current={pathname.startsWith(link.href) ? "page" : undefined}
               style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
               className={
@@ -176,7 +184,7 @@ export function SiteHeader() {
               href={CTA_HREF}
               size="md"
               className="w-full"
-              onClick={() => setOpen(false)}
+              onClick={close}
             >
               Book a walkthrough
             </Button>

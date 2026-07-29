@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { CtaBand } from "@/components/CtaBand";
 import { Hero } from "@/components/Hero";
 import { PartnerBand } from "@/components/PartnerBand";
@@ -16,6 +18,13 @@ import { ServiceList } from "@/components/ServiceList";
  * them, because the section above commits to "Four disciplines, one
  * contractor" and a fifth row would contradict signed-off copy.
  */
+// Title and description come from the root layout's defaults; only the
+// canonical is page-specific. It lives here rather than in the layout
+// because a canonical set on the layout is inherited by every route.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function HomePage() {
   return (
     <>

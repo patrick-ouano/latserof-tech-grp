@@ -54,30 +54,114 @@ export const site = {
  * is displayed in Space Mono and is part of the design, not an index —
  * keep it on the data so it can never drift from the order.
  */
+/**
+ * `title` and `body` are approved homepage copy — do not paraphrase them.
+ *
+ * `includes`, `residential` and `commercial` are DRAFT, written for the
+ * pages the handoff never covered. Every line is derived from the approved
+ * body copy above it or from a business fact in this file — nothing here
+ * claims a capability the client has not already stated. Logged in
+ * QUESTIONS-FOR-THOMAS.md for his review.
+ */
 export const disciplines = [
   {
     number: "01",
     slug: "cinema",
     title: "Cinema & media rooms",
     body: "Screen and seating layout, acoustic treatment, calibrated projection and surround — built to the room, not to a box on a shelf.",
+    includes: [
+      "Screen and seating layout",
+      "Acoustic treatment",
+      "Calibrated projection",
+      "Surround sound",
+      "Media and great rooms",
+    ],
+    residential: "A dedicated cinema, or a great room that has to work for a film on Friday and the game on Sunday.",
+    commercial: "Screening and presentation rooms where the picture and the seating have to be laid out together.",
   },
   {
     number: "02",
     slug: "control",
     title: "Control & lighting",
     body: "One app and one keypad standard through the house — scenes, shades, climate and music that behave the same in every room.",
+    includes: [
+      "One app, one keypad standard",
+      "Lighting scenes",
+      "Motorised shades",
+      "Climate",
+      "Multi-room music",
+    ],
+    residential: "One standard through the house, so nobody has to remember which room works differently.",
+    commercial: "Room-by-room control for meeting spaces, so the people using them do not need training.",
   },
   {
     number: "03",
     slug: "networks",
     title: "Networks that hold",
     body: "Structured cabling, managed switching and wireless coverage surveyed room by room — the layer everything else depends on.",
+    includes: [
+      "Structured cabling",
+      "Managed switching",
+      "Wireless surveyed room by room",
+      "Equipment racks",
+    ],
+    residential: "The layer everything else depends on — and the one thing worth doing properly before the walls close.",
+    commercial: "Cabling, switching and coverage specified for the building rather than assumed from a floor plan.",
   },
   {
     number: "04",
     slug: "cameras",
     title: "Cameras & access",
     body: "Surveillance, intercom and door access with local recording — reviewed and serviced by us, monitored from anywhere by you.",
+    includes: [
+      "Surveillance cameras",
+      "Intercom",
+      "Door access",
+      "Local recording",
+      "Remote viewing",
+    ],
+    residential: "Cameras and door access you can check from anywhere, recorded locally rather than rented back to you.",
+    commercial: "Entry control and surveillance for premises with staff, stock or restricted areas.",
+  },
+] as const;
+
+export type Discipline = (typeof disciplines)[number];
+
+/**
+ * Dealer lines, per CLAUDE.md's business facts.
+ *
+ * Rendered as type, never as logo files: dealer marketing rights for the
+ * vendor assets in photos-source/ are still an open question with Thomas
+ * (see PHOTO_MANIFEST.md), and setting the names in Archivo sidesteps it
+ * without misrepresenting anything.
+ */
+export const brands = ["Crestron", "Control4", "Lutron"] as const;
+
+/**
+ * How a job runs, start to finish. DRAFT — derived from approved copy
+ * ("Walkthroughs are free anywhere in Central Florida"; "designed, wired and
+ * supported by the same crew that installed it") rather than invented.
+ */
+export const process = [
+  {
+    number: "01",
+    title: "Walkthrough",
+    body: "We come and look at the rooms. Free anywhere in Central Florida, whether it is new construction, a renovation or a system that needs rescuing.",
+  },
+  {
+    number: "02",
+    title: "Design",
+    body: "Layout, equipment and cabling specified for the actual room — not a package picked off a shelf and made to fit.",
+  },
+  {
+    number: "03",
+    title: "Install",
+    body: "Wired, mounted, racked and labelled by the same crew that designed it.",
+  },
+  {
+    number: "04",
+    title: "Service",
+    body: "Support afterwards from the people who installed it, so nobody is reading your system back to you off a ticket. Service calls by appointment.",
   },
 ] as const;
 
