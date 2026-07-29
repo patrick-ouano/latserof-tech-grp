@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Barlow, Space_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
@@ -46,8 +47,25 @@ export const metadata: Metadata = {
     siteName: site.brand,
     locale: "en_US",
     url: site.url,
+    title: `${site.brand} — Home theater, smart home and commercial AV in Central Florida`,
+    description:
+      "Cinema rooms, control and lighting, networking and surveillance — designed, wired and supported by the crew that installed it.",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Private cinema room installed by Latserof Technologies",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og-image.jpg"],
   },
   alternates: { canonical: "/" },
+  // Local trades get shared over WhatsApp and Messenger constantly; without
+  // the image above a shared link renders as bare text with no preview.
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -69,6 +87,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <LocalBusinessJsonLd />
+        {/* No-op outside Vercel, so local and preview runs stay clean.
+            Cookieless and IP-anonymised, so no consent banner is required. */}
+        <Analytics />
       </body>
     </html>
   );

@@ -81,6 +81,23 @@ export const disciplines = [
   },
 ] as const;
 
+/**
+ * Complementary offerings delivered with a partner rather than in-house.
+ *
+ * Kept separate from `disciplines` deliberately: the homepage copy commits
+ * to "Four disciplines, one contractor", and quietly making it five would
+ * contradict a headline the client signed off on.
+ */
+export const partners = {
+  visualPrivacy: {
+    name: "Corio Design",
+    href: "https://www.coriodesign.com/visualprivacy",
+    title: "Visual privacy for glass offices",
+    body: "Cloaking glass that keeps screens unreadable from outside the room, and switchable film that turns a wall from clear to opaque on a switch. Built for boardrooms, medical suites and any office where the glass is the security problem.",
+    linkLabel: "See visual privacy solutions",
+  },
+} as const;
+
 /** Header nav, in order. Matches the handoff header spec. */
 export const navLinks = [
   { href: "/residential", label: "Residential" },

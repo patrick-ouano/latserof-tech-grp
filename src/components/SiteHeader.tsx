@@ -9,7 +9,7 @@ import { Container } from "@/components/Container";
 import { CTA_HREF, navLinks, site } from "@/lib/site";
 
 /**
- * Sticky header. Stays solid #0B0B0B when stuck — no transparency, per the
+ * Sticky header. Stays solid ink when stuck, no transparency, per the
  * handoff.
  *
  * Below 768px the nav collapses to a full-height drawer (solid black, gold
@@ -42,10 +42,10 @@ export function SiteHeader() {
         <Link
           href="/"
           className="flex items-center gap-4"
-          aria-label={`${site.brand} — home`}
+          aria-label={`${site.brand} home`}
         >
           <Image
-            src="/logo-badge.png"
+            src="/logo-badge.webp"
             alt="Latserof Tech Grp"
             width={54}
             height={54}
@@ -63,10 +63,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav
-          aria-label="Main"
-          className="hidden items-center gap-[34px] lg:flex"
-        >
+        <nav aria-label="Main" className="hidden items-center gap-[34px] lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -110,7 +107,7 @@ export function SiteHeader() {
         </div>
       </Container>
 
-      {/* Mobile drawer — solid black, gold links, full height */}
+      {/* Mobile drawer: solid black, gold links, full height */}
       <div
         id="mobile-nav"
         hidden={!open}

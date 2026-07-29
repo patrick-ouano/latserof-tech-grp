@@ -31,7 +31,6 @@ Ordered by what blocks launch.
 ### Business details
 
 - [ ] **Licence number.** The site says "Licensed & insured low-voltage contractor." Florida low-voltage contractors are licensed through the ECLB and the number is normally shown in advertising. Confirm whether it needs displaying — cheap now, annoying to retrofit.
-- [ ] **Which brands is he an authorised dealer for?** The brief says Crestron, Control4 and Lutron. His photos show Control4, Triad, Araknis, ClareVision, AVPro/MXnet, Sonos and Middle Atlantic — no Crestron or Lutron anywhere. Claiming dealer status he doesn't hold is a real risk.
 - [ ] **Domain** — registered at GoDaddy. Need:
 	- [ ] The exact domain name
 	- [ ] Either GoDaddy login, or he adds two DNS records we send him. *(Deploying to Vercel — the domain stays at GoDaddy, only the DNS points elsewhere. Nothing transfers, nothing is at risk.)*
@@ -40,7 +39,10 @@ Ordered by what blocks launch.
 
 ### Logo
 
-- [ ] **Vector version of the emblem** — SVG or EPS. The PNG we have is 1MB and will look soft on a phone or retina laptop. Whoever designed the badge should have the original.
+- [ ] **A real vector of the emblem** — SVG or EPS, still outstanding.
+	- The file supplied as `Latserof Tech Grp Logo Vector.svg` is **not a vector**. It's a single 2160px JPEG wrapped in an `<svg>` tag — zero drawn paths — which is why it's 1.6MB, larger than the PNG it was meant to replace. It's also a *photograph of the physical embroidered patch lying on white fabric*, with the wordmark included and no transparency, so it can't sit on the site's black background.
+	- Whoever produced the embroidery digitising file will have the real artwork. Ask for **.svg, .eps or .ai** — and specifically for artwork with a transparent background, not a photo of the patch.
+	- Not urgent: the badge is now served at 31KB (down from 979KB) and looks correct at every size the site uses. The vector only matters if the mark ever needs to appear large — vehicle livery, signage, print.
 
 ---
 
@@ -70,6 +72,8 @@ Only the homepage is designed. These have no content yet:
 
 - [x] **Legal name** — ~~Latserof Tech Grp LLC~~ → **Latserof Technologies Grp Inc.** Already corrected in the code. *(The design handoff still has the old LLC name in the footer; that's been overridden.)*
 - [x] **Domain exists** — registered at GoDaddy. Still need the name and DNS access.
+- [x] **Dealer brands** — Crestron, Control4 and Lutron confirmed correct as written in the brief. No change needed.
+- [x] **Visual privacy** — added to the homepage as a partner offering with Corio Design, linking to [coriodesign.com/visualprivacy](https://www.coriodesign.com/visualprivacy). Placed after the four disciplines rather than as a fifth one, so it doesn't contradict the "Four disciplines, one contractor" line. *Worth confirming with him: is the copy right, and should Corio be named?*
 
 ## On file
 
