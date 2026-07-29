@@ -25,7 +25,7 @@ export type Project = {
   image: string | null;
   /** Alt text. Describe the installation, not the file. */
   alt?: string;
-  /** Set only once project detail pages are confirmed in scope. */
+  /** Set only if project detail pages are added later — not in scope. */
   slug?: string;
 };
 
@@ -59,30 +59,26 @@ export const projects: Project[] = [
     alt: "Rack-mounted AV-over-IP distribution system with dual reference monitors",
   },
   {
-    // No surveillance photograph exists in the source collection — not one
-    // camera, NVR or monitor across all 38 files. Rather than dress the card
-    // in a vendor's stock photo, it renders a placeholder that says so.
-    //
-    // Kept THIRD deliberately: the homepage shows the first three, and the
-    // approved handoff specifies those as RESIDENTIAL / COMMERCIAL /
-    // SURVEILLANCE. Reordering this entry silently drops a card the client
-    // signed off on — and hides the photo gap from the person who can fix it.
     category: "SURVEILLANCE",
-    title: "16-camera retail system",
-    location: "Kissimmee, FL",
-    image: null,
-    alt: "",
+    title: "Multi-camera outdoor system",
+    location: "Central Florida",
+    image: "/images/project-surveillance-cameras.webp",
+    alt: "Outdoor bullet camera labelled CAM 6 mounted on a stacked-stone wall",
   },
   {
     category: "RESIDENTIAL",
     title: "Blue-LED cinema & wet bar",
-    // "Central Florida" rather than a city: the three entries above take
-    // their cities from the design handoff, but nobody has confirmed which
-    // job each room actually was. Naming a city we cannot stand behind is
-    // worse than naming the region we can. See QUESTIONS-FOR-THOMAS.md.
+    // Locations provisional until Thomas confirms cities.
     location: "Central Florida",
     image: "/images/project-modern-theater.webp",
     alt: "Cinema room with charcoal walls, blue LED cove lighting, black quilted recliners with lit bases and a wet bar at the rear",
+  },
+  {
+    category: "RESIDENTIAL",
+    title: "Architectural exterior lighting",
+    location: "Central Florida",
+    image: "/images/project-residential-lighting.webp",
+    alt: "Modern two-story home at night with architectural and landscape lighting",
   },
   {
     category: "RESIDENTIAL",

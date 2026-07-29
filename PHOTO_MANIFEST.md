@@ -118,20 +118,26 @@ evidence of a Latserof camera install.
 
 The homepage has three project cards: RESIDENTIAL, COMMERCIAL, SURVEILLANCE.
 
-- **Residential** — covered many times over. No problem.
-- **Commercial** — effectively uncovered. `A3D15F9C` (MXnet rack) is the only shot that reads commercial, and it's a rack, not a room. `Foerstal 676` is the right subject at the wrong resolution.
-- **Surveillance** — **zero photos across all 38 files.** No cameras, no NVR, no monitor wall, nothing.
+- **Residential** — covered many times over. No problem. New exterior lighting
+  shots (`C454E4AC`, `8F842BF6`, `15E7E267`) strengthen the "safer and smarter"
+  residential story.
+- **Commercial** — still thin on *rooms*. `A3D15F9C` (MXnet rack) is the main
+  commercial read; schools / restaurants / businesses are confirmed as the
+  audience, but we still lack a conference-room photo.
+- **Surveillance** — ~~zero photos~~ **resolved 2026-07-29.** New camera installs
+  (`23C5DD64`, `6D3F0035`, and related) now feed `system-cameras.webp` and
+  `project-surveillance-cameras.webp`.
 
-Ask Thomas for: one boardroom / conference-room AV install, and one camera or
-NVR install. Phone photos are fine — the Dec 2023 set was shot on a Pixel and
-is the best material here.
+Locations still pending from Thomas (cities per room group).
 
-## Other open questions for Thomas
-1. **Locations** for each room above (city is enough — "Windermere, FL"). Ask per *room group* (A–H), not per file — several files are one job.
-2. ~~Legal entity name.~~ **Resolved 2026-07-29: Latserof Technologies Grp Inc.** Now in `src/lib/site.ts`. The design handoff's footer copy still says "Latserof Tech Grp LLC" and is wrong — see the warning in CLAUDE.md.
-3. **Is he happy appearing on the site?** Five photos have him in frame. An owner-at-work shot would suit the About page well, but that's his call.
-4. **Bigger original of `Foerstal 676`?**
-5. **Dealer marketing rights** for the Control4 / Araknis / ClareVision assets — most dealer programs grant this, but confirm before anything goes on the site.
+## Other questions
+1. **Locations** for each room above (city is enough). Ask per *room group*, not per file.
+2. ~~Legal entity name.~~ **Resolved: Latserof Technologies Grp LLC.**
+3. ~~Happy appearing on the site?~~ **Yes** — About page uses `about-owner.webp`
+   from `20170509_170045`.
+4. **Bigger original of `Foerstal 676`?** (optional)
+5. License number — keep current site copy; not a priority.
+6. Domain is on GoDaddy — point DNS at Vercel when ready.
 
 ## Online presence
 Essentially none. Searches for the company name, the legal name, and the owner

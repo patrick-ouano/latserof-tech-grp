@@ -16,7 +16,7 @@
  * the security limits"), so run `py scripts/convert-heic.py` first.
  */
 
-import { existsSync, mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -26,6 +26,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = path.join(ROOT, "photos-source");
 const OUT = path.join(ROOT, "public", "images");
 const PUBLIC = path.join(ROOT, "public");
+const APP = path.join(ROOT, "src", "app");
 
 /**
  * `position` controls which part survives the crop. Portrait rack shots and
@@ -53,9 +54,8 @@ const PHOTOS = [
     height: 1067,
     position: "centre",
   },
-  // No surveillance entry: there is no camera/NVR photo in the collection.
-  // ProjectGrid renders a placeholder plate for any project without an image.
-
+  // Surveillance photography added 2026-07-29 (see project-surveillance-
+  // cameras.webp further down). The homepage still keeps SURVEILLANCE third.
   // --- Page header bands -------------------------------------------------
   // One landscape shot per page, sitting beside the heading rather than
   // under it. Chosen so each page opens on work that matches its subject.
@@ -87,11 +87,17 @@ const PHOTOS = [
     height: 1200,
     position: "centre",
   },
+  {
+    // Thomas in a completed attic cinema — he confirmed he is happy to
+    // appear on the site (2026-07-29). Portrait crop for the About column.
+    src: "20170509_170045.jpg",
+    out: "about-owner.webp",
+    width: 1200,
+    height: 1500,
+    position: "centre",
+  },
 
   // --- /systems, one per discipline --------------------------------------
-  // Cameras & access has no entry on purpose: there is not one camera, NVR
-  // or monitor across all 38 source photos. That section renders an honest
-  // note instead of a borrowed vendor render.
   {
     src: "IMG_4002-converted.jpg",
     out: "system-cinema.webp",
@@ -115,6 +121,33 @@ const PHOTOS = [
     out: "system-networks.webp",
     width: 1400,
     height: 1050,
+    position: "centre",
+  },
+  {
+    // New 2026-07-29 delivery — outdoor bullet cameras on a conduit run.
+    // Closes the surveillance photography gap.
+    src: "23C5DD64-D64A-4A69-A3E1-709B57AF895E.jpg",
+    out: "system-cameras.webp",
+    width: 1400,
+    height: 1050,
+    position: "centre",
+  },
+  {
+    // Close detail of a labelled camera (CAM 6) on stacked stone — strong
+    // project-card read for the surveillance slot on the homepage.
+    src: "6D3F0035-C8DC-4158-9EE6-371257F90B36.jpg",
+    out: "project-surveillance-cameras.webp",
+    width: 1600,
+    height: 1067,
+    position: "centre",
+  },
+  {
+    // Night exterior with architectural / landscape lighting — residential
+    // "safer and smarter" curb appeal without inventing a cinema frame.
+    src: "C454E4AC-9CAE-4F7C-90F6-439668485FFA.jpg",
+    out: "project-residential-lighting.webp",
+    width: 1600,
+    height: 1067,
     position: "centre",
   },
 
@@ -197,6 +230,89 @@ const LOGO_SRC = path.join(
   "logo-badge.png",
 );
 
+/**
+ * Favicons, from the same emblem.
+ *
+ * These sit in src/app/, not public/ — Next's App Router treats `favicon.ico`,
+ * `icon.png` and `apple-icon.png` there as file conventions and emits the
+ * <link> tags itself, hashed for cache-busting. Putting them in public/ would
+ * ship them unhashed and untagged.
+ *
+ * The emblem is composited onto ink rather than left transparent. A browser
+ * tab is not guaranteed to be dark — a transparent gold-on-nothing mark lands
+ * on whatever the tab strip is, which for a light theme means gold on white,
+ * and the brand rule is that the badge never sits on a non-black surface.
+ *
+ * INSET keeps the emblem off the very edge of the square; at 16px a mark that
+ * bleeds to the border reads as a smudge rather than a shape.
+ */
+const ICON_INSET = 0.08;
+const ICO_SIZES = [16, 32, 48];
+
+/**
+ * One square icon: emblem centred on ink, as a PNG buffer.
+ *
+ * `palette` quantises. Do that for the standalone PNGs — the mark is two
+ * colours and their blend, so it is invisible there and roughly halves the
+ * file. Do NOT do it for the .ico payloads: Next decodes favicon.ico at build
+ * time to emit the <link> tag, and its decoder rejects a non-RGBA PNG inside
+ * the container with "The PNG is not in RGBA format!". Those sizes are tiny
+ * as truecolour anyway.
+ */
+async function iconPng(size, { palette = true } = {}) {
+  const inner = Math.round(size * (1 - ICON_INSET * 2));
+  const emblem = await sharp(LOGO_SRC)
+    .resize(inner, inner, {
+      fit: "contain",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
+    .png()
+    .toBuffer();
+
+  return sharp({
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background: { r: 0x0b, g: 0x0b, b: 0x0b, alpha: 1 }, // --color-ink
+    },
+  })
+    .composite([{ input: emblem, gravity: "centre" }])
+    .ensureAlpha() // the composite is opaque; the .ico decoder still wants RGBA
+    .png({ compressionLevel: 9, palette, quality: 90 })
+    .toBuffer();
+}
+
+/**
+ * Pack PNGs into an .ico. Windows and every browser since IE11 accept PNG
+ * payloads inside the container, so there is no BMP encoding to do here:
+ * a 6-byte header, one 16-byte directory entry per size, then the PNGs.
+ */
+function buildIco(images) {
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0); // reserved
+  header.writeUInt16LE(1, 2); // type 1 = icon
+  header.writeUInt16LE(images.length, 4);
+
+  const directory = Buffer.alloc(16 * images.length);
+  let offset = header.length + directory.length;
+
+  images.forEach(({ size, data }, i) => {
+    const at = i * 16;
+    directory.writeUInt8(size >= 256 ? 0 : size, at); // 0 means 256
+    directory.writeUInt8(size >= 256 ? 0 : size, at + 1);
+    directory.writeUInt8(0, at + 2); // palette colours
+    directory.writeUInt8(0, at + 3); // reserved
+    directory.writeUInt16LE(1, at + 4); // colour planes
+    directory.writeUInt16LE(32, at + 6); // bits per pixel
+    directory.writeUInt32LE(data.length, at + 8);
+    directory.writeUInt32LE(offset, at + 12);
+    offset += data.length;
+  });
+
+  return Buffer.concat([header, directory, ...images.map((i) => i.data)]);
+}
+
 let failed = 0;
 
 function report(name, info) {
@@ -266,6 +382,40 @@ async function run() {
       report("logo-badge.webp", info);
     } catch (err) {
       console.error(`  FAILED   logo-badge.webp: ${err.message}`);
+      failed += 1;
+    }
+
+    console.log("\nfavicons");
+    try {
+      // 192, not 512: browsers prefer the PNG over the .ico for the tab, so
+      // this is fetched on every page load. There is no web manifest on this
+      // site, so nothing ever asks for the 512px install icon that would
+      // justify the extra ~110KB. 180 is the fixed size Apple asks for.
+      for (const [name, size] of [
+        ["icon.png", 192],
+        ["apple-icon.png", 180],
+      ]) {
+        const data = await iconPng(size);
+        writeFileSync(path.join(APP, name), data);
+        report(name, { width: size, height: size, size: data.length });
+      }
+
+      const ico = buildIco(
+        await Promise.all(
+          ICO_SIZES.map(async (size) => ({
+            size,
+            data: await iconPng(size, { palette: false }),
+          })),
+        ),
+      );
+      writeFileSync(path.join(APP, "favicon.ico"), ico);
+      report(`favicon.ico (${ICO_SIZES.join("/")})`, {
+        width: ICO_SIZES.at(-1),
+        height: ICO_SIZES.at(-1),
+        size: ico.length,
+      });
+    } catch (err) {
+      console.error(`  FAILED   favicons: ${err.message}`);
       failed += 1;
     }
   }

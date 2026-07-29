@@ -90,7 +90,7 @@ describe("QuoteForm", () => {
     await user.click(screen.getByRole("button", { name: /Request for Survey/i }));
 
     const status = await screen.findByRole("status");
-    expect(status).toHaveTextContent(/we've got it|weâ€™ve got it/i);
+    expect(status).toHaveTextContent(/we.?ve got it/i);
     expect(screen.getByRole("link", { name: site.phoneDisplay })).toHaveAttribute(
       "href",
       site.phoneHref,
