@@ -85,7 +85,10 @@ jobs:
       # /api/quote is dynamic by design and is the one allowed exception.
       - name: Assert every page route still prerenders
         run: |
-          dynamic=$(grep -E '(^|[^a-z])ƒ ' build.log | grep -v '/api/' || true)
+          # Match "ƒ /route" only. The legend Next prints at the bottom is
+          # "ƒ  (Dynamic)  server-rendered on demand" — two spaces and no
+          # slash — and matching that would fail this job on every run.
+          dynamic=$(grep -E 'ƒ /' build.log | grep -v 'ƒ /api/' || true)
           if [ -n "$dynamic" ]; then
             echo "These page routes are no longer static:"
             echo "$dynamic"
