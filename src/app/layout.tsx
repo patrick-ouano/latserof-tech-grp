@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Archivo, Barlow, Space_Mono } from "next/font/google";
 import "./globals.css";
+
+import { LocalBusinessJsonLd } from "@/components/LocalBusinessJsonLd";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/lib/site";
 
 /* The three brand families, self-hosted by next/font — no request leaves the
@@ -37,6 +41,13 @@ export const metadata: Metadata = {
   },
   description:
     "Home theater, smart home and commercial AV in Central Florida. Cinema rooms, control and lighting, networking and surveillance — designed, wired and supported by the crew that installed it.",
+  openGraph: {
+    type: "website",
+    siteName: site.brand,
+    locale: "en_US",
+    url: site.url,
+  },
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -45,8 +56,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${archivo.variable} ${barlow.variable} ${spaceMono.variable} h-full`}
     >
-      <body className="min-h-full bg-ink font-body text-paper antialiased">
-        {children}
+      <body className="flex min-h-full flex-col bg-ink font-body text-paper antialiased">
+        <a
+          href="#main"
+          className="sr-only rounded-btn focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[60] focus:bg-gold focus:px-4 focus:py-2 focus:font-heading focus:text-[14px] focus:font-extrabold focus:text-ink"
+        >
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
+        <LocalBusinessJsonLd />
       </body>
     </html>
   );

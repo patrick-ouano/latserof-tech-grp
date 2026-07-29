@@ -44,10 +44,21 @@
 --------------------------------------------------------------------------- */
 
 /* Focus: visible 2px gold outline with 2px offset on every interactive
-   element. Per the handoff: "Do not remove outlines." */
+   element. Per the handoff: "Do not remove outlines."
+
+   The 2px offset puts the ring on the page background rather than on the
+   control, so gold reads clearly against the near-black ground. */
 :focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
+}
+
+/* ...except inside the gold CTA band, where a gold ring on a gold ground
+   would have no contrast at all. The handoff specifies one focus colour
+   site-wide and doesn't account for its own inverted band; ink here is
+   ~8:1 against the gold, matching the ratio gold gets on black. */
+.bg-gold :focus-visible {
+  outline-color: var(--color-ink);
 }
 
 /* Any scroll or hover animation added later must respect this. Enforcing it
