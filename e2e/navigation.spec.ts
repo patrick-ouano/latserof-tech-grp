@@ -5,6 +5,7 @@ test.describe("navigation", () => {
     await page.goto("/");
     await page
       .getByRole("link", { name: "Request for Survey" })
+      .first()
       .click();
     await expect(page).toHaveURL(/\/contact$/);
     await expect(page.getByRole("button", { name: /Request for Survey/i }))

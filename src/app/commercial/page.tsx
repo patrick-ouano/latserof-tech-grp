@@ -17,8 +17,7 @@ import { CTA_HREF, CTA_LABEL, disciplines, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Commercial",
-  description:
-    "Boardroom AV, conferencing, structured cabling, access control and surveillance for Central Florida businesses.",
+  description: `AV, conferencing, structured cabling, access control and surveillance for schools, restaurants and businesses across ${site.serviceArea}.`,
   alternates: { canonical: "/commercial" },
 };
 
@@ -40,7 +39,7 @@ export default function CommercialPage() {
             <span className="text-gradient-gold">on the first try</span>.
           </>
         }
-        lede="Boardroom AV and conferencing, structured cabling, access control and surveillance — specified for the building, installed by the crew that designed it, and serviced by the same people afterwards."
+        lede="Schools, restaurants and businesses — boardroom and venue AV, conferencing, structured cabling, access control and surveillance, specified for the building, installed by the crew that designed it, and serviced by the same people afterwards. Design services available upon request."
         photo={{
           src: "/images/header-commercial.webp",
           alt: "Equipment racks with shelves labelled router, access points and network switch, beside a monitor running configuration software",

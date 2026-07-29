@@ -15,8 +15,7 @@ import { CTA_HREF, CTA_LABEL, disciplines, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Residential",
-  description:
-    "Home theater, whole-house audio, lighting control, networking and surveillance for Central Florida homes.",
+  description: `Home theater, whole-house audio, lighting control, networking and surveillance for houses and residences across ${site.serviceArea}.`,
   alternates: { canonical: "/residential" },
 };
 
@@ -58,7 +57,7 @@ export default function ResidentialPage() {
             <span className="text-gradient-gold">one standard</span>.
           </>
         }
-        lede="Cinema, audio, lighting, networking and cameras through the whole house — designed together so there is one app, one keypad standard, and one number to call when something needs attention."
+        lede="Houses and residences — cinema, audio, lighting, networking and cameras through the whole home, designed together so there is one app, one keypad standard, and one number to call when something needs attention. Design services available upon request."
         photo={{
           src: "/images/header-residential.webp",
           alt: "Loft landing in a modern home with a wall-mounted display and a glass railing",
@@ -133,8 +132,9 @@ export default function ResidentialPage() {
             <p className="max-w-[62ch] font-body text-lede text-paper-dim">
               We are a licensed low-voltage contractor, not a retail
               electronics store. There is no showroom to browse, no boxes to
-              buy off us, and no package deals — we design a system for a
-              specific set of rooms and then install and support it.
+              buy off us, and no package deals — we survey the rooms, design
+              a system for them, and then install and support it. Design
+              services are available upon request.
             </p>
           </div>
         </Reveal>

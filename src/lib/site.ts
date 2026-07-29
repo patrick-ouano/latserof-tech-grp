@@ -164,13 +164,13 @@ export const brands = ["Crestron", "Control4", "Lutron"] as const;
 export const process = [
   {
     number: "01",
-    title: "Walkthrough",
-    body: "We come and look at the rooms. Free anywhere in Central Florida, whether it is new construction, a renovation or a system that needs rescuing.",
+    title: "Survey",
+    body: `We come and look at the rooms. Free across ${site.serviceArea}, whether it is new construction, a renovation or a system that needs rescuing.`,
   },
   {
     number: "02",
     title: "Design",
-    body: "Layout, equipment and cabling specified for the actual room — not a package picked off a shelf and made to fit.",
+    body: "Layout, equipment and cabling specified for the actual room — not a package picked off a shelf and made to fit. Full design services are available upon request.",
   },
   {
     number: "03",

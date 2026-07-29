@@ -5,10 +5,9 @@ import { CTA_HREF, CTA_LABEL } from "@/lib/site";
 
 const TRUST = ["Licensed & insured", "Residential + commercial", "In-house service"];
 
-/* The headline's three hard line breaks are part of the approved copy, so
-   each line is its own masked row and enters on its own beat. Copy is final
-   — do not paraphrase. */
-const HEADLINE = ["One system.", "Every room.", "Zero guesswork."];
+/* Tagline confirmed by Thomas 2026-07-29. Split across two masked rows so
+   the hero entrance still has a beat — do not paraphrase. */
+const HEADLINE = ["Making Your Home", "Safer and Smarter."];
 
 /**
  * Hero band. Two columns at >=1024px; below that the photo stacks ABOVE the
@@ -61,7 +60,7 @@ export function Hero() {
               aria-hidden="true"
             />
             <span className="font-heading text-[12px] leading-none font-bold tracking-[0.24em] text-gold uppercase">
-              Orlando · Central Florida
+              Greater Orlando · Central Florida · Tampa
             </span>
           </p>
 
@@ -93,7 +92,7 @@ export function Hero() {
           >
             Home theater, whole-house audio, lighting, networking and
             surveillance — designed, wired and supported by the same crew that
-            installed it.
+            installed it. Design services available upon request.
           </p>
 
           <div

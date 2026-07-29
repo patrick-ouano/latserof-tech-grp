@@ -37,17 +37,16 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brand} — Home theater, smart home and commercial AV in Central Florida`,
+    default: `${site.brand} — ${site.tagline}`,
     template: `%s — ${site.brand}`,
   },
-  description:
-    "Home theater, smart home and commercial AV in Central Florida. Cinema rooms, control and lighting, networking and surveillance — designed, wired and supported by the crew that installed it.",
+  description: `${site.tagline}. Home theater, smart home and commercial AV across ${site.serviceArea}. Cinema rooms, control and lighting, networking and surveillance — designed, wired and supported by the crew that installed it.`,
   openGraph: {
     type: "website",
     siteName: site.brand,
     locale: "en_US",
     url: site.url,
-    title: `${site.brand} — Home theater, smart home and commercial AV in Central Florida`,
+    title: `${site.brand} — ${site.tagline}`,
     description:
       "Cinema rooms, control and lighting, networking and surveillance — designed, wired and supported by the crew that installed it.",
     images: [
