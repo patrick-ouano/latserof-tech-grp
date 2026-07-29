@@ -1,15 +1,18 @@
 # Latserof Technologies Group — website
 
 ## Business facts (do not invent alternatives)
-- Legal name: **Latserof Technologies Grp Inc.** Display brand: **Latserof Technologies**.
-  - ⚠️ The design handoff predates this and writes the legal name as "Latserof Tech Grp LLC" in two places — the footer lockup (`LATSEROF TECH GRP`) and the legal line (`© 2026 Latserof Tech Grp LLC · Licensed & insured low-voltage contractor`). **Both are wrong; it's an Inc., not an LLC.** Use `site.legalName` when building the footer and ignore the handoff on this one point. The corrected lockup is longer, so check it still fits the footer column.
-- Owner: Thomas John Forestal (Owner / Operations Manager, Custom Design & Engineering).
+- Legal name: **Latserof Technologies Grp LLC**. Display brand: **Latserof Technologies**.
+- Tagline: **Making Your Home Safer and Smarter**.
+- Owner: Thomas John Forestal (Owner / Operations Manager, Custom Design & Engineering). Happy to appear on the site.
 - Phone: **(407) 927-4434** — always link as `tel:+14079274434`.
+- Quote / survey form delivery: **tj@927hifi.com** (`QUOTE_TO_EMAIL`).
 - Address: 3050 Dyer Blvd, Suite 242, Kissimmee, FL 34741.
 - Hours: Mon–Fri 8:00–5:00. Service calls by appointment.
-- Service area: Central Florida / greater Orlando.
-- Business type: licensed low-voltage / custom AV & automation integrator (Crestron, Control4, Lutron dealer). **Not** a retail electronics store — no public pricing, no e-commerce, no SKU-level product pages.
+- Service area: Greater Orlando, Central Florida and Tampa.
+- Business type: licensed low-voltage / custom AV & automation integrator. Industry partners with **21st Century Distribution** and **SnapAV** — dealer lines from those catalogs (Control4, Crestron, Lutron, Episode, Binary, ClareVision, Araknis, etc.). **Not** a retail electronics store — no public pricing, no e-commerce, no SKU-level product pages. No priced quotes on the site; CTAs request a **survey / walkthrough** only.
 - Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Cameras & access.
+- Design services available upon request.
+- Primary CTA label: **Request for Survey** → `/contact`.
 
 ## Design system — status
 - **The whole site is built.** Homepage, Residential, Commercial, Systems, Work, About and Contact all ship real content, and `PageStub` has been deleted.
@@ -77,13 +80,11 @@ public/                  logo-badge.webp, images/ (project photos)
 ## Status
 Site is complete and builds static. **Open before launch:**
 - Thomas to re-approve the reworked homepage (he signed off on flatter 2a).
-- Real photography for the commercial-room and surveillance gaps.
-- Confirm the project locations in `src/data/projects.ts` (`locationConfirmed` is unset on all three) — they came from the handoff, not from him.
+- Project locations in `src/data/projects.ts` — he will provide cities later (`locationConfirmed` unset).
 - A vector logo. `public/logo-badge.webp` is a raster export.
-- `RESEND_API_KEY` + `QUOTE_TO_EMAIL` in Vercel, or the form returns 503.
-- Confirm the production domain (`site.url` is a placeholder).
-
-See `QUESTIONS-FOR-THOMAS.md` for the full list.
+- `RESEND_API_KEY` in Vercel; `QUOTE_TO_EMAIL` defaults to `tj@927hifi.com` in `.env.example`.
+- Confirm the production domain on GoDaddy (`site.url` is a placeholder hostname until DNS is pointed at Vercel).
+- License number: keep whatever is currently on the site; not a priority.
 
 ## Responsive
 The fixed breakpoint type ladder is gone — the `clamp()` scale in `@theme` covers 375–1440px continuously, so nothing snaps and the awkward in-between widths are handled. Layout breakpoints still apply:

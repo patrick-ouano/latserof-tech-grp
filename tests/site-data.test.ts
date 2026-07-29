@@ -35,9 +35,9 @@ describe("business facts", () => {
     expect(dialled).toBe(`1${displayed}`);
   });
 
-  it("is an Inc., not the LLC the design handoff still says", () => {
-    expect(site.legalName).toContain("Inc.");
-    expect(site.legalName).not.toContain("LLC");
+  it("is an LLC, as confirmed by Thomas", () => {
+    expect(site.legalName).toContain("LLC");
+    expect(site.legalName).not.toContain("Inc.");
   });
 
   it("has an absolute site url with no trailing slash", () => {

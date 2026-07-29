@@ -22,7 +22,7 @@ const ASIDE = [
       `${site.address.city}, ${site.address.state} ${site.address.zip}`,
     ],
   },
-  { label: "SERVICE AREA", lines: [`${site.serviceArea} and greater Orlando`] },
+  { label: "SERVICE AREA", lines: [site.serviceArea] },
 ];
 
 /**

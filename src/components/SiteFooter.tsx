@@ -8,11 +8,8 @@ import { CTA_HREF, navLinks, site } from "@/lib/site";
  * Footer + legal line.
  *
  * The emblem repeats here and is decorative, so alt="" keeps screen readers
- * from announcing the brand twice.
- *
- * Note the legal name: the design handoff says "Latserof Tech Grp LLC",
- * which is wrong on both counts. It is Latserof Technologies Grp Inc. Read
- * it from site.legalName, never inline.
+ * from announcing the brand twice. Legal name comes from site.legalName
+ * (LLC) — never inline a stale handoff string.
  */
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -93,7 +90,7 @@ export function SiteFooter() {
           <p>{site.hours.display}</p>
           <p className="mt-1 text-muted">{site.hours.note}</p>
           <p className="mt-5 text-muted">
-            Serving {site.serviceArea} and greater Orlando.
+            Serving {site.serviceArea}.
           </p>
         </div>
       </Container>

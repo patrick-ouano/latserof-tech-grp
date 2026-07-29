@@ -83,7 +83,7 @@ test.describe("routes", () => {
     expect(data["@type"]).toBe("LocalBusiness");
     // Search engines want a dialable number with a country code.
     expect(data.telephone).toBe("+14079274434");
-    expect(data.legalName).toContain("Inc.");
+    expect(data.legalName).toContain("LLC");
 
     // Structured data pointing at a missing image is worse than none.
     for (const url of [data.logo, data.image]) {

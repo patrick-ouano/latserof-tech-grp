@@ -11,15 +11,19 @@
 export const site = {
   /**
    * Legal entity name — use in the footer lockup and legal line.
-   * Confirmed by Thomas 2026-07-29. Note this supersedes "Latserof Tech Grp
-   * LLC", which appears in the design handoff's footer copy and is wrong:
-   * the entity is an Inc., not an LLC.
+   * Confirmed by Thomas 2026-07-29: LLC (an earlier note saying Inc. was wrong).
    */
-  legalName: "Latserof Technologies Grp Inc.",
+  legalName: "Latserof Technologies Grp LLC",
   /** Display brand — use in nav, titles, and body copy. */
   brand: "Latserof Technologies",
 
-  /** Deploy target. Update once the production domain is confirmed. */
+  /** Brand tagline — hero H1 and metadata. Confirmed by Thomas 2026-07-29. */
+  tagline: "Making Your Home Safer and Smarter",
+
+  /**
+   * Deploy target. Domain is on GoDaddy; confirm the final hostname before
+   * launch and update here + in Vercel.
+   */
   url: "https://latseroftech.com",
 
   owner: {
@@ -44,7 +48,8 @@ export const site = {
     note: "Service calls by appointment",
   },
 
-  serviceArea: "Central Florida",
+  /** Display string for humans. Prefer this over inventing a shorter region. */
+  serviceArea: "Greater Orlando, Central Florida and Tampa",
 
   descriptor: "Low-voltage system design, installation and service.",
 } as const;
@@ -206,7 +211,10 @@ export const navLinks = [
 ] as const;
 
 /**
- * Where every call-to-action resolves. "Book a walkthrough", "Get a system
- * quote", and the CTA-band button all point at the same destination.
+ * Where every call-to-action resolves. All primary CTAs use CTA_LABEL and
+ * point here — survey / walkthrough request, not a priced quote.
  */
 export const CTA_HREF = "/contact";
+
+/** Primary CTA label site-wide. Confirmed by Thomas 2026-07-29. */
+export const CTA_LABEL = "Request for Survey";

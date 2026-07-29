@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const FACTS = [
   { label: "WORKSHOP", lines: [site.address.street, `${site.address.city}, ${site.address.state} ${site.address.zip}`] },
   { label: "HOURS", lines: [site.hours.display, site.hours.note] },
-  { label: "SERVICE AREA", lines: [site.serviceArea, "and greater Orlando"] },
+  { label: "SERVICE AREA", lines: [site.serviceArea] },
   { label: "TRADE", lines: ["Licensed & insured", "low-voltage contractor"] },
 ];
 

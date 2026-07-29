@@ -35,15 +35,8 @@ export function LocalBusinessJsonLd() {
       addressCountry: site.address.country,
     },
     areaServed: {
-      "@type": "GeoCircle",
-      description: `${site.serviceArea} / greater Orlando`,
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        // Kissimmee, FL — approximate, from the business address.
-        latitude: 28.2919,
-        longitude: -81.4076,
-      },
-      geoRadius: "80000",
+      "@type": "AdministrativeArea",
+      name: site.serviceArea,
     },
     openingHoursSpecification: [
       {
