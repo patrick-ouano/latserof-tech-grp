@@ -1,125 +1,266 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens — Direction 2a, "Gallery Black"
+   Design tokens — "Gallery Black, lit"
 
-   Source of truth: design/Latserof Technologies website design/
-   design_handoff_latserof_homepage/README.md ("Design Tokens").
+   An evolution of Direction 2a, not a replacement. The palette is unchanged
+   and deliberately so: public/logo-badge.webp is a gold-on-black embroidered
+   emblem that must never be recoloured, so it anchors ink / gold / paper in
+   the header and footer of every page. A second hue would fight it.
 
-   These are the ONLY colors in the site. Three real colors — near-black,
-   gold, warm off-white — plus tints. Do not introduce a second accent, and
-   never hardcode a hex in a component: reference the token by name
-   (bg-ink, text-gold, border-hairline, ...).
+   What changed is everything the emblem does NOT constrain — depth,
+   geometry and motion:
+
+     - surfaces gained an elevation ramp instead of one flat #111
+     - gold gained a ramp, so it can be a gradient and a glow, not just a fill
+     - radius went 2px -> 10/16/24px
+     - shadows and glow are now allowed
+     - the fixed 36/44/52/62px type ladder became a fluid clamp() scale
+
+   Supersedes the "no shadows / 0 radius" constraints in the original
+   handoff. See CLAUDE.md.
 --------------------------------------------------------------------------- */
 @theme {
-  /* Color */
-  --color-ink: #0b0b0b; /* page background, footer, button-on-gold fill */
-  --color-raised: #111111; /* service-row hover fill; the "#111" in the handoff */
-  --color-hairline: #1e1c19; /* 1px dividers between sections and list rows */
-  --color-gold: #c6a15b; /* primary accent: buttons, eyebrows, rules, CTA band */
-  --color-gold-hover: #b08f4c; /* gold button hover (see "Interactions") */
+  /* --- Core palette. Unchanged; the emblem locks these. --------------- */
+  --color-ink: #0b0b0b; /* page ground, deepest surface */
+  --color-gold: #c6a15b; /* primary accent */
   --color-paper: #f2efe8; /* primary text on dark */
-  --color-paper-dim: #d6d1c7; /* hero subhead */
-  --color-body-dim: #b5afa5; /* service row descriptions, footer body */
-  --color-muted: #9a948a; /* meta text, captions, locations */
-  --color-muted-deep: #8f8a80; /* footer descriptor */
-  --color-nav: #cfcac1; /* nav links */
-  --color-stroke: #4a453d; /* secondary (ghost) button border */
-  --color-legal: #5e5a53; /* copyright line */
-  --color-on-gold-body: #1f1a10; /* body copy inside the gold CTA band */
 
-  /* Typography — families are bound to the next/font variables set in
-     layout.tsx. Archivo: headings, nav, buttons. Barlow: body, meta.
-     Space Mono: numerals (01–04) and category labels ONLY. */
+  /* --- Elevation ramp. Warms as it rises, so a raised card reads as lit
+         rather than just lighter. ------------------------------------- */
+  --color-surface-1: #101010;
+  --color-surface-2: #15120e;
+  --color-surface-3: #1c1813;
+  --color-raised: #111111; /* legacy alias — service-row hover fill */
+
+  /* --- Gold ramp. Enables gradient text, gradient borders and glow
+         without introducing a second accent colour. ------------------- */
+  --color-gold-bright: #e6cd97;
+  --color-gold-hover: #b08f4c;
+  --color-gold-deep: #8a6d34;
+
+  /* --- Text tints (from the handoff token table) ---------------------- */
+  --color-paper-dim: #d6d1c7;
+  --color-body-dim: #b5afa5;
+  --color-muted: #9a948a;
+  --color-muted-deep: #8f8a80;
+  --color-nav: #cfcac1;
+  --color-legal: #6e6a63; /* bumped from #5E5A53 for 4.5:1 at 14px */
+  --color-on-gold-body: #1f1a10;
+
+  /* --- Lines --------------------------------------------------------- */
+  --color-hairline: #1e1c19;
+  --color-hairline-strong: #2a2621;
+  --color-stroke: #4a453d;
+
+  /* --- Typography. Families bind to the next/font variables in
+         layout.tsx. Archivo: headings, nav, buttons. Barlow: body, meta.
+         Space Mono: numerals and category labels only. --------------- */
   --font-heading: var(--font-archivo), sans-serif;
   --font-body: var(--font-barlow), sans-serif;
   --font-mono: var(--font-space-mono), monospace;
 
-  /* Geometry — 2px on buttons is the only radius on the site.
-     Everything else is 0. No shadows anywhere. */
-  --radius-btn: 2px;
-}
+  /* --- Fluid type scale.
+         Replaces the per-breakpoint px ladder: one clamp() covers 375px
+         through 1440px continuously, so nothing snaps at a breakpoint and
+         the awkward in-between widths (820px, 1100px) are handled. ---- */
+  --text-display: clamp(2.5rem, 1.1rem + 5.8vw, 5.25rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
 
-/* ---------------------------------------------------------------------------
-   Base rules — the two site-wide accessibility non-negotiables.
---------------------------------------------------------------------------- */
+  --text-h1: clamp(2.125rem, 1.35rem + 3.2vw, 3.75rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.025em;
 
-/* Focus: visible 2px gold outline with 2px offset on every interactive
-   element. Per the handoff: "Do not remove outlines."
+  --text-h2: clamp(1.75rem, 1.35rem + 1.7vw, 2.625rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
 
-   The 2px offset puts the ring on the page background rather than on the
-   control, so gold reads clearly against the near-black ground. */
-:focus-visible {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
-}
+  --text-h3: clamp(1.25rem, 1.1rem + 0.62vw, 1.625rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
 
-/* ...except inside the gold CTA band, where a gold ring on a gold ground
-   would have no contrast at all. The handoff specifies one focus colour
-   site-wide and doesn't account for its own inverted band; ink here is
-   ~8:1 against the gold, matching the ratio gold gets on black. */
-.bg-gold :focus-visible {
-  outline-color: var(--color-ink);
-}
+  --text-lede: clamp(1.0625rem, 0.97rem + 0.4vw, 1.3125rem);
+  --text-lede--line-height: 1.6;
 
-/* Any scroll or hover animation added later must respect this. Enforcing it
-   globally means the constraint holds by default rather than per-component. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  --text-copy: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-copy--line-height: 1.7;
+
+  /* Never below 16px, per the responsive spec. */
+  --text-meta: 1rem;
+  --text-meta--line-height: 1.6;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1;
+
+  /* --- Geometry ------------------------------------------------------ */
+  --radius-btn: 10px;
+  --radius-card: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* --- Elevation. Layered: a tight contact shadow plus a wide ambient
+         one. A single large blur reads as fog on a near-black ground. -- */
+  --shadow-card:
+    0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px -12px rgb(0 0 0 / 0.7);
+  --shadow-lift:
+    0 2px 4px rgb(0 0 0 / 0.5), 0 28px 60px -20px rgb(0 0 0 / 0.85);
+  --shadow-glow:
+    0 0 0 1px rgb(198 161 91 / 0.3), 0 20px 60px -24px rgb(198 161 91 / 0.55);
+  --shadow-glow-sm: 0 8px 30px -12px rgb(198 161 91 / 0.5);
+
+  /* --- Motion -------------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --dur-fast: 160ms;
+  --dur-base: 320ms;
+  --dur-slow: 620ms;
+
+  --animate-sheen: sheen 6s var(--ease-out-quint) infinite;
+  --animate-drift: drift 18s ease-in-out infinite alternate;
+  --animate-enter: enter var(--dur-slow) var(--ease-out-expo) both;
+
+  @keyframes sheen {
+    0%,
+    to {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(-3%, -2%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(3%, 2%, 0) scale(1.12);
+    }
+  }
+
+  /* Shared by the hero entrance and the scroll-reveal fallback. */
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 22px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes reveal-blur {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translate3d(0, 12px, 0) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
+  }
+
+  /* Clip wipe — used on display headings. */
+  @keyframes reveal-wipe {
+    from {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 8px, 0);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 -20% 0);
+      transform: none;
+    }
   }
 }
 
 /* ---------------------------------------------------------------------------
-   Typography
-
-   Light text on a near-black ground behaves differently from the reverse:
-   glyphs optically thicken and bleed, which is what makes dark UIs feel
-   muddier than their light counterparts at the same settings. The rules
-   below compensate.
+   Base
 --------------------------------------------------------------------------- */
 
+/* Focus: visible 2px gold ring, 2px offset, on every interactive element.
+   The offset puts the ring on the page ground rather than on the control,
+   so gold reads clearly against near-black. Do not remove outlines. */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ...except on gold, where a gold ring would have no contrast at all.
+   Ink on gold is ~8:1, matching the ratio gold gets on black. */
+.bg-gold :focus-visible,
+.on-gold :focus-visible {
+  outline-color: var(--color-ink);
+}
+
 html {
-  /* Anchor jumps ("See the work") glide rather than teleport. The
-     reduced-motion block above overrides this. */
   scroll-behavior: smooth;
+  /* Sticky header height + breathing room, so anchored sections
+     ("See the work", /systems#cinema) never land under the header. */
+  scroll-padding-top: 7rem;
+  color-scheme: dark;
 }
 
 body {
   /* Grayscale antialiasing thins light-on-dark type back toward its
      intended weight. Without it, Barlow 400 on #0B0B0B reads closer to 500
-     and the page feels heavier and less crisp than the design intends. */
+     and the page feels heavier than intended. */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
 /* Headings: balance wrapping so a display line never drops a single orphan
-   word onto its own row. This is the single biggest "looks professionally
-   set" difference on a marketing page, and it costs nothing. */
+   word onto its own row. */
 h1,
 h2,
 h3 {
   text-wrap: balance;
 }
 
-/* Body copy: `pretty` only prevents orphans, without the reflow cost of
-   `balance` on long paragraphs. */
+/* `pretty` prevents orphans without the reflow cost of `balance` on long
+   paragraphs. */
 p,
 li {
   text-wrap: pretty;
 }
 
-/* Space Mono uppercase labels (01-04, RESIDENTIAL, CONTACT, HOURS) sit at
-   13px, where uppercase monospace is genuinely hard to scan. The handoff
-   says "no extra tracking" but was written for a 1280px mock, not for a
-   phone. A little air measurably improves legibility and costs nothing
-   visually at this size. */
+/* Space Mono uppercase labels sit at 13px, where uppercase monospace is
+   genuinely hard to scan. A little tracking measurably helps and costs
+   nothing visually at this size. */
 .font-mono {
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -128,30 +269,346 @@ li {
 /* ---------------------------------------------------------------------------
    Scroll reveal
 
-   Per the handoff: 12px rise + fade, 400ms, once, reduced-motion respected.
-   Elements start hidden only when JS is available to reveal them, so the
-   page degrades to fully visible content without it.
+   Three independent layers, each safe on its own. The failure mode of a
+   reveal animation is content that stays invisible forever, so no layer is
+   allowed to hide anything it cannot also show.
+
+     1. No JavaScript at all      -> nothing is ever hidden.
+     2. Scroll-driven animations  -> pure CSS, no JS needed to reveal.
+     3. Neither                   -> IntersectionObserver + a 1.2s failsafe
+                                     (see components/motion/Reveal.tsx).
+
+   The `js` and `sda` classes are set by a blocking script in <head>, before
+   first paint — setting them in an effect caused content to paint visible,
+   snap hidden, then animate.
 --------------------------------------------------------------------------- */
+
+/* Layer 1. */
 [data-reveal] {
   opacity: 1;
 }
 
+/* Layer 3: the observer path. */
 html.js [data-reveal] {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translate3d(0, 22px, 0);
   transition:
-    opacity 400ms cubic-bezier(0.2, 0.6, 0.2, 1),
-    transform 400ms cubic-bezier(0.2, 0.6, 0.2, 1);
+    opacity var(--dur-slow) var(--ease-out-expo),
+    transform var(--dur-slow) var(--ease-out-expo),
+    filter var(--dur-slow) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+html.js [data-reveal="fade"] {
+  transform: none;
+}
+
+html.js [data-reveal="blur"] {
+  filter: blur(10px);
+  transform: translate3d(0, 12px, 0) scale(0.985);
+}
+
+html.js [data-reveal="wipe"] {
+  clip-path: inset(0 0 100% 0);
+  transform: translate3d(0, 8px, 0);
 }
 
 html.js [data-reveal][data-revealed] {
   opacity: 1;
   transform: none;
+  filter: none;
+  clip-path: inset(0 0 -20% 0);
+  will-change: auto;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html.js [data-reveal] {
+/* Layer 2: scroll-driven. Takes over from layer 3 entirely where supported,
+   which is why it resets the transition properties above. Stagger is done
+   with a range offset rather than a delay — inside a scroll timeline a
+   delay is measured in scroll distance, not time. */
+@supports (animation-timeline: view()) {
+  html.sda [data-reveal] {
     opacity: 1;
     transform: none;
+    filter: none;
+    transition: none;
+    animation: reveal-rise linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--reveal-index, 0) * 5%) entry
+      calc(55% + var(--reveal-index, 0) * 5%);
+  }
+
+  html.sda [data-reveal="fade"] {
+    animation-name: reveal-fade;
+  }
+  html.sda [data-reveal="blur"] {
+    animation-name: reveal-blur;
+  }
+  html.sda [data-reveal="wipe"] {
+    animation-name: reveal-wipe;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Surfaces & effects
+--------------------------------------------------------------------------- */
+
+/* Frosted panel. The border and the translucent fill do the work; the blur
+   only matters over the gradient meshes. */
+.glass {
+  background: color-mix(in oklab, var(--color-surface-2) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--color-hairline-strong);
+}
+
+/* Ambient gold bloom, for behind hero and CTA content. Purely decorative
+   and pointer-transparent — never put text contrast at its mercy. */
+.mesh-glow {
+  position: absolute;
+  inset: -30% -10% auto -10%;
+  height: 130%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      42% 46% at 22% 26%,
+      rgb(198 161 91 / 0.2) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      38% 40% at 78% 12%,
+      rgb(230 205 151 / 0.11) 0%,
+      transparent 70%
+    );
+  filter: blur(28px);
+  animation: var(--animate-drift);
+}
+
+/* Gold gradient text. Falls back to a flat gold fill wherever
+   background-clip: text is unsupported. */
+.text-gradient-gold {
+  color: var(--color-gold);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .text-gradient-gold {
+    background: linear-gradient(
+      104deg,
+      var(--color-paper) 0%,
+      var(--color-paper) 38%,
+      var(--color-gold-bright) 62%,
+      var(--color-gold) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* 1px gradient border on a rounded box, drawn with a masked pseudo-element
+   so the fill underneath stays whatever it wants to be. */
+.border-gradient {
+  position: relative;
+}
+
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-gold) 55%, transparent),
+    transparent 42%,
+    transparent 62%,
+    color-mix(in oklab, var(--color-gold) 25%, transparent)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Pointer-tracked bloom. --mx/--my are written by components/motion/
+   Spotlight.tsx; with no pointer they stay unset and this is invisible. */
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out-quint);
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(198 161 91 / 0.14),
+    transparent 62%
+  );
+}
+
+.spotlight:hover::after,
+.spotlight:focus-within::after {
+  opacity: 1;
+}
+
+/* Route-change entrance, replayed by app/template.tsx on every navigation.
+   Short and shallow on purpose: a page transition that outlasts the time it
+   takes to read the first heading reads as lag, not polish. */
+.route-enter {
+  animation: enter 420ms var(--ease-out-expo) both;
+}
+
+/* Header shell.
+   The declared state — and the no-support fallback — is solid ink with a
+   hairline, because a header that fails to become opaque leaves nav links
+   sitting over page content. Only where scroll-driven animations exist does
+   it start clear at the top of the page and settle into frosted glass. */
+.header-shell {
+  background-color: var(--color-ink);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+@supports (animation-timeline: scroll()) {
+  .header-shell {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    animation: header-settle linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 110px;
+  }
+}
+
+@keyframes header-settle {
+  from {
+    background-color: rgb(11 11 11 / 0);
+    border-bottom-color: rgb(30 28 25 / 0);
+    backdrop-filter: blur(0) saturate(1);
+    -webkit-backdrop-filter: blur(0) saturate(1);
+  }
+  to {
+    background-color: rgb(11 11 11 / 0.8);
+    border-bottom-color: rgb(30 28 25 / 1);
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  }
+}
+
+/* Reading-progress bar in the header, and the hero photo drift.
+
+   Both are pure CSS scroll-driven animations — no JS, no scroll listener,
+   no layout thrash. Where `animation-timeline` is unsupported the bar simply
+   never grows and the photo simply never drifts, which is the correct
+   failure for two purely decorative effects. */
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: scroll-progress linear;
+  animation-timeline: scroll(root block);
+}
+
+@keyframes scroll-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.parallax {
+  animation: parallax linear both;
+  animation-timeline: view();
+  animation-range: cover;
+}
+
+@keyframes parallax {
+  from {
+    transform: translate3d(0, -5%, 0) scale(1.14);
+  }
+  to {
+    transform: translate3d(0, 5%, 0) scale(1.14);
+  }
+}
+
+/* Divider that fades out at both ends instead of butting into the gutter. */
+.hairline-gradient {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-hairline-strong) 12%,
+    var(--color-hairline-strong) 88%,
+    transparent
+  );
+}
+
+/* Underline that wipes in from the left. Used on nav and inline links. */
+.link-wipe {
+  position: relative;
+}
+
+.link-wipe::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out-expo);
+}
+
+.link-wipe:hover::after,
+.link-wipe:focus-visible::after,
+.link-wipe[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion
+
+   Global and last, so it overrides every rule above. Everything must end in
+   its final, fully visible state — this block is also the safety net that
+   guarantees no reveal can strand content.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    /* Delays must go too. A staggered entrance uses `animation-fill-mode:
+       both`, so a surviving 480ms delay would hold the element at its
+       *hidden* first keyframe — collapsing the duration alone would trade a
+       slow fade for a blank flash. */
+    animation-delay: 0ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  html.js [data-reveal],
+  html.sda [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+
+  .mesh-glow,
+  .parallax,
+  .scroll-progress {
+    animation: none !important;
+  }
+
+  .parallax {
+    transform: none !important;
   }
 }

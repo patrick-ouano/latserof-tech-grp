@@ -1,38 +1,54 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
+import { Reveal } from "@/components/motion/Reveal";
 import { site } from "@/lib/site";
 
 /**
  * Full-bleed gold band. The one place on the site where the ground is not
  * near-black, and the only place body copy uses `on-gold-body`.
  *
- * Below 768px it stacks and the button goes full width, per the spec.
+ * `on-gold` flips the focus ring to ink — a gold ring on a gold ground has
+ * no contrast at all (see globals.css).
+ *
+ * Below 768px it stacks and the button goes full width.
  */
 export function CtaBand() {
   return (
-    <section aria-labelledby="cta-heading" className="bg-gold text-ink">
-      <Container className="flex flex-col items-start gap-8 py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:py-[52px]">
-        <div className="max-w-[720px]">
+    <section
+      aria-labelledby="cta-heading"
+      className="on-gold relative overflow-hidden bg-gradient-to-br from-gold-bright via-gold to-gold-hover text-ink"
+    >
+      {/* Radial highlight, so a 240px-tall block of flat gold reads as a lit
+          surface rather than a swatch. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_120%_at_15%_0%,rgba(255,255,255,0.28),transparent_60%)]"
+      />
+
+      <Container className="relative flex flex-col items-start gap-9 py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-12 xl:py-20">
+        <Reveal className="max-w-[720px]">
           <h2
             id="cta-heading"
-            className="font-heading text-[28px] leading-[1.2] font-extrabold tracking-[-0.01em] xl:text-[34px]"
+            className="font-heading text-h2 font-extrabold text-ink"
           >
             Tell us the rooms. We&rsquo;ll tell you what they need.
           </h2>
-          <p className="mt-3 font-body text-[17px] leading-[1.6] text-on-gold-body md:text-[19px]">
+          <p className="mt-4 font-body text-lede text-on-gold-body">
             Walkthroughs are free anywhere in Central Florida — new
             construction, renovation or a system that needs rescuing.
           </p>
-        </div>
+        </Reveal>
 
-        <Button
-          href={site.phoneHref}
-          variant="ink"
-          size="lg"
-          className="w-full whitespace-nowrap sm:w-auto"
-        >
-          Call {site.phoneDisplay}
-        </Button>
+        <Reveal index={1} className="w-full sm:w-auto">
+          <Button
+            href={site.phoneHref}
+            variant="ink"
+            size="lg"
+            className="w-full whitespace-nowrap sm:w-auto"
+          >
+            Call {site.phoneDisplay}
+          </Button>
+        </Reveal>
       </Container>
     </section>
   );

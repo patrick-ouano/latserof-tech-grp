@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Barlow, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -63,10 +63,32 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/images/og-image.jpg"],
   },
-  alternates: { canonical: "/" },
+  // NOTE: no `alternates.canonical` here on purpose. A canonical set on the
+  // root layout is inherited by every route, so each page was declaring
+  // itself canonical to "/" — which tells search engines the five content
+  // pages are duplicates of the homepage. Each page sets its own.
+  //
   // Local trades get shared over WhatsApp and Messenger constantly; without
-  // the image above a shared link renders as bare text with no preview.
+  // the OG image above, a shared link renders as bare text with no preview.
 };
+
+export const viewport: Viewport = {
+  themeColor: "#0b0b0b",
+  colorScheme: "dark",
+};
+
+/**
+ * Sets the two capability classes before first paint.
+ *
+ *   js  — JavaScript ran, so it is safe for CSS to hide scroll-reveal
+ *         content. Without this class nothing is ever hidden.
+ *   sda — native scroll-driven animations are supported, so reveals are
+ *         handled in pure CSS and Reveal.tsx stands down.
+ *
+ * This has to be blocking and it has to be early: setting the class in an
+ * effect meant content painted visible, snapped hidden, then animated.
+ */
+const CAPABILITY_SCRIPT = `try{var d=document.documentElement;d.classList.add('js');if(window.CSS&&CSS.supports&&CSS.supports('animation-timeline','view()'))d.classList.add('sda')}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -75,6 +97,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivo.variable} ${barlow.variable} ${spaceMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-ink font-body text-paper antialiased">
+        {/* First child of <body> so it executes before any [data-reveal]
+            element is parsed, and therefore before any of them paint. */}
+        <script dangerouslySetInnerHTML={{ __html: CAPABILITY_SCRIPT }} />
         <a
           href="#main"
           className="sr-only rounded-btn focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[60] focus:bg-gold focus:px-4 focus:py-2 focus:font-heading focus:text-[14px] focus:font-extrabold focus:text-ink"

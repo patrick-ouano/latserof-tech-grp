@@ -18,8 +18,8 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 const label = "block font-heading text-[13px] font-bold tracking-[0.12em] text-paper uppercase";
 const field =
-  "w-full rounded-btn border border-hairline bg-raised px-4 py-3 font-body text-[17px] text-paper " +
-  "placeholder:text-muted-deep transition-colors duration-150 hover:border-stroke " +
+  "w-full rounded-btn border border-hairline-strong bg-surface-2 px-4 py-3.5 font-body text-[17px] text-paper " +
+  "placeholder:text-muted-deep transition-colors duration-200 hover:border-stroke " +
   "focus:border-gold focus:outline-none";
 const fieldInvalid = "border-gold";
 
@@ -94,9 +94,9 @@ export function QuoteForm() {
     return (
       <div
         role="status"
-        className="border border-gold bg-raised p-8 md:p-10"
+        className="border-gradient rounded-card bg-surface-2 p-8 md:p-10"
       >
-        <h2 className="font-heading text-[24px] leading-[1.2] font-extrabold text-paper">
+        <h2 className="font-heading text-h3 font-extrabold text-paper">
           Thanks — we&rsquo;ve got it.
         </h2>
         <p className="mt-3 max-w-[52ch] font-body text-[17px] leading-[1.65] text-body-dim">
@@ -340,11 +340,11 @@ function Chip({
   return (
     <label
       className={
-        "cursor-pointer rounded-btn border px-4 py-2.5 font-body text-[16px] transition-colors duration-150 " +
+        "cursor-pointer rounded-pill border px-4 py-2.5 font-body text-[16px] transition duration-300 ease-out-expo " +
         "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-gold " +
         (checked
-          ? "border-gold bg-gold text-ink"
-          : "border-stroke text-body-dim hover:border-gold hover:text-gold")
+          ? "border-gold bg-gradient-to-b from-gold-bright to-gold text-ink shadow-glow-sm"
+          : "border-stroke text-body-dim hover:border-gold hover:bg-surface-2 hover:text-gold")
       }
     >
       <input

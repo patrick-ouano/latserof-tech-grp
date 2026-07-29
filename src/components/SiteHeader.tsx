@@ -3,20 +3,26 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { CTA_HREF, navLinks, site } from "@/lib/site";
 
 /**
- * Sticky header. Stays solid ink when stuck, no transparency, per the
- * handoff.
+ * Sticky header.
  *
- * Below 768px the nav collapses to a full-height drawer (solid black, gold
- * links) and the gold CTA collapses to a phone icon button.
+ * Clear at the top of the page, settling into frosted glass as you scroll —
+ * driven entirely by a CSS scroll timeline (`.header-shell` in globals.css),
+ * so there is no scroll listener and no re-render per frame. Where scroll
+ * timelines are unsupported it is simply solid ink from the start.
+ *
+ * Below 1024px the nav collapses to a drawer and the gold CTA collapses to a
+ * phone icon button.
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   // Lock the page behind the drawer, and let Escape close it.
   useEffect(() => {
@@ -36,21 +42,38 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  // A route change means the drawer's job is done.
+  useEffect(() => setOpen(false), [pathname]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-ink">
-      <Container className="flex items-center justify-between py-5">
+    <header
+      className={
+        "header-shell sticky top-0 z-50 transition-colors duration-300 " +
+        // The shell is translucent at the top of the page; with the drawer
+        // open that would show the page scrolling behind the nav.
+        (open ? "!border-hairline !bg-ink" : "")
+      }
+    >
+      {/* Reading progress. Decorative: where scroll timelines are
+          unsupported it stays at zero width and simply never appears. */}
+      <div
+        aria-hidden="true"
+        className="scroll-progress absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-gold-deep via-gold to-gold-bright"
+      />
+
+      <Container className="flex items-center justify-between py-4 xl:py-5">
         <Link
           href="/"
-          className="flex items-center gap-4"
+          className="group flex items-center gap-4"
           aria-label={`${site.brand} home`}
         >
           <Image
             src="/logo-badge.webp"
-            alt="Latserof Tech Grp"
+            alt={site.brand}
             width={54}
             height={54}
             priority
-            className="h-[54px] w-[54px] shrink-0"
+            className="h-[46px] w-[46px] shrink-0 transition-transform duration-500 ease-out-expo group-hover:scale-[1.06] motion-reduce:transform-none xl:h-[54px] xl:w-[54px]"
           />
           <span className="grid gap-[5px]">
             <span className="font-heading text-[16px] leading-none font-extrabold tracking-[0.16em] text-paper">
@@ -63,20 +86,27 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav aria-label="Main" className="hidden items-center gap-[34px] lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="font-heading text-[14px] font-semibold text-nav transition-colors duration-[120ms] hover:text-paper"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
+          {navLinks.map((link) => {
+            const active = pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={
+                  "link-wipe font-heading text-[14px] font-semibold transition-colors duration-200 hover:text-paper " +
+                  (active ? "text-paper" : "text-nav")
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
-          {/* Full CTA from 768px; phone icon below that, per the spec.
+          {/* Full CTA from 768px; phone icon below that.
               Visibility lives on this wrapper, not on the Button: Button's
               base classes already set `inline-flex`, and a competing
               `hidden` on the same element resolves by stylesheet order
@@ -89,7 +119,7 @@ export function SiteHeader() {
           <a
             href={site.phoneHref}
             aria-label={`Call ${site.phoneDisplay}`}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-btn bg-gold text-ink transition-colors duration-150 hover:bg-gold-hover md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-btn bg-gradient-to-b from-gold-bright to-gold text-ink transition duration-300 ease-out-expo hover:shadow-glow-sm md:hidden"
           >
             <PhoneIcon />
           </a>
@@ -100,27 +130,43 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex h-11 w-11 items-center justify-center text-paper lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-btn text-paper transition-colors duration-200 hover:text-gold lg:hidden"
           >
-            {open ? <CloseIcon /> : <MenuIcon />}
+            <MenuGlyph open={open} />
           </button>
         </div>
       </Container>
 
-      {/* Mobile drawer: solid black, gold links, full height */}
+      {/* Mobile drawer.
+          Positioned off the header itself (`top-full`) and sized against it
+          (`100dvh - 100%`), so it stays correct whatever the header's height
+          resolves to. It previously hardcoded a 95px offset, which silently
+          broke the moment the header's padding changed.
+
+          Kept mounted so it can animate; `inert` takes it out of the tab
+          order and the accessibility tree while closed. */}
       <div
         id="mobile-nav"
-        hidden={!open}
-        // 95px = 54px emblem + 20px padding top/bottom + 1px border.
-        className="fixed inset-x-0 top-[95px] bottom-0 z-40 overflow-y-auto bg-ink lg:hidden"
+        inert={!open}
+        className={
+          "absolute inset-x-0 top-full h-[calc(100dvh-100%)] overflow-y-auto border-t border-hairline bg-ink transition duration-300 ease-out-expo lg:hidden " +
+          (open
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-2 opacity-0")
+        }
       >
-        <nav aria-label="Mobile" className="flex h-full flex-col">
-          {navLinks.map((link) => (
+        <nav aria-label="Mobile" className="flex min-h-full flex-col">
+          {navLinks.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="border-b border-hairline px-6 py-5 font-heading text-[18px] font-semibold text-gold"
+              aria-current={pathname.startsWith(link.href) ? "page" : undefined}
+              style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
+              className={
+                "border-b border-hairline px-6 py-5 font-heading text-[18px] font-semibold text-gold transition-all duration-500 ease-out-expo " +
+                (open ? "translate-x-0 opacity-100" : "translate-x-3 opacity-0")
+              }
             >
               {link.label}
             </Link>
@@ -136,7 +182,7 @@ export function SiteHeader() {
             </Button>
             <a
               href={site.phoneHref}
-              className="mt-6 block font-body text-[17px] text-muted"
+              className="mt-6 block font-body text-[17px] text-muted transition-colors hover:text-gold"
             >
               {site.phoneDisplay}
             </a>
@@ -147,29 +193,22 @@ export function SiteHeader() {
   );
 }
 
-function MenuIcon() {
+/**
+ * Hamburger that morphs into a close glyph — the bars rotate into the cross
+ * rather than swapping icons, which is the detail that makes the toggle feel
+ * built rather than assembled.
+ */
+function MenuGlyph({ open }: { open: boolean }) {
+  const bar =
+    "absolute left-0 h-[2px] w-[22px] bg-current transition-all duration-300 ease-out-expo";
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M3 6h18M3 12h18M3 18h18"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="square"
+    <span aria-hidden="true" className="relative block h-[16px] w-[22px]">
+      <span className={`${bar} ${open ? "top-[7px] rotate-45" : "top-0"}`} />
+      <span className={`${bar} top-[7px] ${open ? "opacity-0" : "opacity-100"}`} />
+      <span
+        className={`${bar} ${open ? "top-[7px] -rotate-45" : "top-[14px]"}`}
       />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M5 5l14 14M19 5L5 19"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="square"
-      />
-    </svg>
+    </span>
   );
 }
 
