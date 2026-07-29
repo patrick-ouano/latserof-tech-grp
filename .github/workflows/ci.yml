@@ -1,0 +1,123 @@
+name: CI
+
+# Deployment is NOT here. Vercel's Git integration builds and deploys every
+# push and pull request by itself once the repo is imported — a deploy step
+# in this workflow would only duplicate it and race with it.
+#
+# What this workflow does is gate that deploy: Vercel will happily ship a
+# preview whose types are broken and whose tests fail, so these are the
+# checks that say so on the pull request. Make them required in
+# Settings > Branches to stop a red build reaching main.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A new push supersedes the run in flight; no point finishing a check on a
+# commit nobody will look at again. `main` is exempt so the record stays.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  quality:
+    name: Types, lint & unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npx eslint src e2e tests
+
+      - name: Unit tests
+        run: npm run test -- --reporter=verbose
+
+  build:
+    name: Production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      # Next's own cache. Keyed on the lockfile plus source, so a source-only
+      # change still reuses the dependency-level work.
+      - uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('src/**') }}
+          restore-keys: |
+            next-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
+      - name: Build
+        run: npm run build 2>&1 | tee build.log
+
+      # This site is statically generated and that is the whole deployment
+      # model. A page that quietly turns dynamic still builds, still passes
+      # every other check, and silently costs a function invocation on every
+      # request — so it is asserted rather than assumed.
+      #
+      # /api/quote is dynamic by design and is the one allowed exception.
+      - name: Assert every page route still prerenders
+        run: |
+          dynamic=$(grep -E '(^|[^a-z])ƒ ' build.log | grep -v '/api/' || true)
+          if [ -n "$dynamic" ]; then
+            echo "These page routes are no longer static:"
+            echo "$dynamic"
+            exit 1
+          fi
+          echo "All page routes are static."
+
+  e2e:
+    name: End-to-end
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      # Only the browsers the config actually uses; --with-deps pulls the
+      # system libraries the runner does not ship.
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

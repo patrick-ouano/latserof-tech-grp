@@ -92,6 +92,15 @@ The fixed breakpoint type ladder is gone — the `clamp()` scale in `@theme` cov
 - 768–1023px: hero stacks (photo above text), card grids → 2-col.
 - <768px: single column, 24px gutter, hamburger drawer (solid black, gold links). Body copy never below 16px.
 
+## Testing & CI
+- **Vitest** (`tests/`, jsdom) for validation rules, data invariants, components and the quote route. **Playwright** (`e2e/`) against a *production build* on port 3100 — it checks prerendered markup, no-JS behaviour and reduced motion, none of which `next dev` represents faithfully.
+- `npm test` · `npm run test:e2e`. Both must pass before a commit that touches `src/`.
+- In Playwright, emulate reduced motion with `page.emulateMedia()`, **not** `test.use({ reducedMotion })` — the latter silently does not apply here and the test passes against the animated build, proving nothing.
+- Scope `getByRole("alert")` to the form: Next injects its own `role="alert"` route announcer into every page.
+- The scope/property chips are `sr-only` inputs (keeps them keyboard- and form-native), so Playwright cannot click them directly — click the wrapping `<label>`.
+- CI (`.github/workflows/ci.yml`) runs typecheck, lint, unit, build and e2e. **It does not deploy** — Vercel's Git integration does that on its own, and a deploy step would race with it. The `build` job asserts every page route still prerenders; `/api/quote` is the only permitted dynamic route.
+- Security headers live in `next.config.ts`, not `vercel.json`, so they apply to `next start` and can be asserted in `e2e/headers.spec.ts`. There is deliberately no CSP: `layout.tsx` ships a required inline script, so a real CSP needs a per-request nonce and that would end static prerendering.
+
 ## Working conventions for this project
 - This is a learning project for Claude Code — prefer Plan mode for anything multi-file (new pages, restructuring), default/manual approval for smaller edits.
 - Commit incrementally with descriptive messages rather than one giant commit.
