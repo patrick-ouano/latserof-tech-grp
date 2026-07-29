@@ -1,9 +1,12 @@
 # Photo manifest — Latserof Tech Grp source photos
 
-Raw folder: `photos-source/` (38 files, gitignored). Reviewed 2026-07-29 — every
+Raw folder: `photos-source/` (43 files, gitignored). Reviewed 2026-07-29 — every
 file below has been opened and described. **Locations are still unknown** and
 need confirming with Thomas; they're the one thing that can't be read off the
 pixels.
+
+38 are Latserof's own project photos. 5 are vendor marketing collateral — see
+"Vendor marketing assets" below; those must not be used as project photography.
 
 HEIC files convert cleanly (verified with pillow-heif). No manual conversion or
 renaming is needed — the export script handles crop, resize, WebP and naming.
@@ -79,6 +82,38 @@ Ultra-wide, so a square hero crop loses a lot. Fine for wide banners.
 
 ---
 
+## Vendor marketing assets — NOT project photography
+
+Five files added 2026-07-29 are manufacturer/distributor collateral, not
+Latserof's own installs. They are third-party copyrighted material.
+
+| File | What it is |
+|---|---|
+| `AN-830-AP_Interior Access point.jpg` | Araknis / Snap One lifestyle photo — poolside luxury home, ceiling AP. Desert mountains in shot; not Florida |
+| `C4-VBTX39.jpg` | Control4 marketing photo — model using a T5 in-wall touchscreen |
+| `ClareVision_App_Android_Stacked_View.png` | ClareVision app UI render, six camera tiles (Patio, Front Door, Channels 01–04) |
+| `C4Yourself Campaign Flyer 2026.pdf` | Control4 / ADI event flyer. "© 2026 ADI Global Distribution. All Rights Reserved." |
+| `13C Control4 X4 FAQ.pdf` | Control4 X4 dealer FAQ |
+
+**These must not go on project cards.** Presenting a vendor's stock photography
+as a Latserof installation would misrepresent the work — and the Araknis shot is
+visibly not Florida, so it would be a conspicuous error.
+
+Where they *can* legitimately be used, subject to confirming dealer marketing
+rights with Thomas:
+
+- A **"brands we carry"** strip — Control4, Araknis, ClareVision. Standard and
+  expected for a dealer, and it lends credibility.
+- The **ClareVision screenshot** illustrates the camera app experience, which
+  maps directly onto the discipline-04 copy ("monitored from anywhere by you").
+  Usable as a labelled product/UI illustration — never as an install photo.
+- The PDFs are reference only. Nothing in them belongs on the site.
+
+They do **not** close the surveillance gap: a vendor's app mockup is not
+evidence of a Latserof camera install.
+
+---
+
 ## Gaps that block the approved homepage
 
 The homepage has three project cards: RESIDENTIAL, COMMERCIAL, SURVEILLANCE.
@@ -92,10 +127,11 @@ NVR install. Phone photos are fine — the Dec 2023 set was shot on a Pixel and
 is the best material here.
 
 ## Other open questions for Thomas
-1. **Locations** for each room above (city is enough — "Windermere, FL").
-2. **Legal entity name.** CLAUDE.md says *Latserof Tech Grp LLC*; his LinkedIn says *Latserof Technologies Grp Inc.* These disagree, and the footer legal line plus the `LocalBusiness` JSON-LD both need the correct one.
+1. **Locations** for each room above (city is enough — "Windermere, FL"). Ask per *room group* (A–H), not per file — several files are one job.
+2. ~~Legal entity name.~~ **Resolved 2026-07-29: Latserof Technologies Grp Inc.** Now in `src/lib/site.ts`. The design handoff's footer copy still says "Latserof Tech Grp LLC" and is wrong — see the warning in CLAUDE.md.
 3. **Is he happy appearing on the site?** Five photos have him in frame. An owner-at-work shot would suit the About page well, but that's his call.
 4. **Bigger original of `Foerstal 676`?**
+5. **Dealer marketing rights** for the Control4 / Araknis / ClareVision assets — most dealer programs grant this, but confirm before anything goes on the site.
 
 ## Online presence
 Essentially none. Searches for the company name, the legal name, and the owner

@@ -9,8 +9,13 @@
  * These values are fixed by the client. Do not invent alternatives.
  */
 export const site = {
-  /** Legal entity name — use in the footer lockup and legal line. */
-  legalName: "Latserof Tech Grp LLC",
+  /**
+   * Legal entity name — use in the footer lockup and legal line.
+   * Confirmed by Thomas 2026-07-29. Note this supersedes "Latserof Tech Grp
+   * LLC", which appears in the design handoff's footer copy and is wrong:
+   * the entity is an Inc., not an LLC.
+   */
+  legalName: "Latserof Technologies Grp Inc.",
   /** Display brand — use in nav, titles, and body copy. */
   brand: "Latserof Technologies",
 

@@ -1,7 +1,8 @@
 # Latserof Technologies Group — website
 
 ## Business facts (do not invent alternatives)
-- Legal name: **Latserof Tech Grp LLC**. Display brand: **Latserof Technologies**.
+- Legal name: **Latserof Technologies Grp Inc.** Display brand: **Latserof Technologies**.
+  - ⚠️ The design handoff predates this and writes the legal name as "Latserof Tech Grp LLC" in two places — the footer lockup (`LATSEROF TECH GRP`) and the legal line (`© 2026 Latserof Tech Grp LLC · Licensed & insured low-voltage contractor`). **Both are wrong; it's an Inc., not an LLC.** Use `site.legalName` when building the footer and ignore the handoff on this one point. The corrected lockup is longer, so check it still fits the footer column.
 - Owner: Thomas John Forestal (Owner / Operations Manager, Custom Design & Engineering).
 - Phone: **(407) 927-4434** — always link as `tel:+14079274434`.
 - Address: 3050 Dyer Blvd, Suite 242, Kissimmee, FL 34741.
