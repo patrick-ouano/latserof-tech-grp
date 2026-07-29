@@ -8,9 +8,11 @@ import { CtaBand } from "@/components/CtaBand";
 import { PageHeader } from "@/components/PageHeader";
 import { PartnerBand } from "@/components/PartnerBand";
 import { ProcessSteps } from "@/components/ProcessSteps";
+import { ProjectCard } from "@/components/ProjectGrid";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { Spotlight } from "@/components/motion/Spotlight";
+import { projectsIn } from "@/data/projects";
 import { CTA_HREF, disciplines, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -39,6 +41,10 @@ export default function CommercialPage() {
           </>
         }
         lede="Boardroom AV and conferencing, structured cabling, access control and surveillance — specified for the building, installed by the crew that designed it, and serviced by the same people afterwards."
+        photo={{
+          src: "/images/header-commercial.webp",
+          alt: "Equipment racks with shelves labelled router, access points and network switch, beside a monitor running configuration software",
+        }}
       >
         <div className="flex flex-wrap gap-[14px]">
           <Button href={CTA_HREF}>Book a walkthrough</Button>
@@ -75,6 +81,26 @@ export default function CommercialPage() {
               </Spotlight>
             </Reveal>
           ))}
+        </ul>
+      </Section>
+
+      <Section
+        id="recent"
+        title="Recent work"
+        meta={
+          <Link href="/work" className="link-wipe font-heading font-extrabold text-gold">
+            See all work
+          </Link>
+        }
+      >
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {projectsIn(["COMMERCIAL", "NETWORKING", "SURVEILLANCE"], 3).map(
+            (project, i) => (
+              <Reveal as="li" key={project.title} index={i} className="min-w-0">
+                <ProjectCard project={project} />
+              </Reveal>
+            ),
+          )}
         </ul>
       </Section>
 

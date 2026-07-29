@@ -7,8 +7,10 @@ import { PageHeader } from "@/components/PageHeader";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
+import { ProjectCard } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/motion/Reveal";
 import { Spotlight } from "@/components/motion/Spotlight";
+import { projectsIn } from "@/data/projects";
 import { CTA_HREF, disciplines, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -57,6 +59,10 @@ export default function ResidentialPage() {
           </>
         }
         lede="Cinema, audio, lighting, networking and cameras through the whole house — designed together so there is one app, one keypad standard, and one number to call when something needs attention."
+        photo={{
+          src: "/images/header-residential.webp",
+          alt: "Loft landing in a modern home with a wall-mounted display and a glass railing",
+        }}
       >
         <div className="flex flex-wrap gap-[14px]">
           <Button href={CTA_HREF}>Book a walkthrough</Button>
@@ -91,6 +97,24 @@ export default function ResidentialPage() {
                   What that includes
                 </Link>
               </Spotlight>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
+      <Section
+        id="recent"
+        title="Recent rooms"
+        meta={
+          <Link href="/work" className="link-wipe font-heading font-extrabold text-gold">
+            See all work
+          </Link>
+        }
+      >
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {projectsIn(["RESIDENTIAL"], 3).map((project, i) => (
+            <Reveal as="li" key={project.title} index={i} className="min-w-0">
+              <ProjectCard project={project} />
             </Reveal>
           ))}
         </ul>

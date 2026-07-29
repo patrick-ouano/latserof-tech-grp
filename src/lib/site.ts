@@ -76,6 +76,9 @@ export const disciplines = [
       "Surround sound",
       "Media and great rooms",
     ],
+    image: "/images/system-cinema.webp",
+    imageAlt:
+      "Cinema room with dark wood panelling, striped drapes, wall sconces and a projection screen",
     residential: "A dedicated cinema, or a great room that has to work for a film on Friday and the game on Sunday.",
     commercial: "Screening and presentation rooms where the picture and the seating have to be laid out together.",
   },
@@ -91,6 +94,9 @@ export const disciplines = [
       "Climate",
       "Multi-room music",
     ],
+    image: "/images/system-control.webp",
+    imageAlt:
+      "Media room lit by blue LED cove lighting above acoustic wall panels and tiered seating",
     residential: "One standard through the house, so nobody has to remember which room works differently.",
     commercial: "Room-by-room control for meeting spaces, so the people using them do not need training.",
   },
@@ -105,6 +111,9 @@ export const disciplines = [
       "Wireless surveyed room by room",
       "Equipment racks",
     ],
+    image: "/images/system-networks.webp",
+    imageAlt:
+      "Patch panel terminated with colour-coded green and red network cabling",
     residential: "The layer everything else depends on — and the one thing worth doing properly before the walls close.",
     commercial: "Cabling, switching and coverage specified for the building rather than assumed from a floor plan.",
   },
@@ -120,6 +129,11 @@ export const disciplines = [
       "Local recording",
       "Remote viewing",
     ],
+    // No photograph: there is not one camera, NVR or monitor across all 38
+    // source frames. /systems renders an honest note here rather than a
+    // vendor's stock render. See PHOTO_MANIFEST.md.
+    image: null,
+    imageAlt: "",
     residential: "Cameras and door access you can check from anywhere, recorded locally rather than rented back to you.",
     commercial: "Entry control and surveillance for premises with staff, stock or restricted areas.",
   },

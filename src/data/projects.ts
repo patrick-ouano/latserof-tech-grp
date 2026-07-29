@@ -29,6 +29,20 @@ export type Project = {
   slug?: string;
 };
 
+/**
+ * Projects in the given categories, newest-listed first.
+ *
+ * Lets /residential and /commercial show their own work without either page
+ * hardcoding a list that would drift the moment Thomas adds a job.
+ */
+export function projectsIn(
+  categories: readonly string[],
+  limit?: number,
+): Project[] {
+  const found = projects.filter((p) => categories.includes(p.category));
+  return limit ? found.slice(0, limit) : found;
+}
+
 export const projects: Project[] = [
   {
     category: "RESIDENTIAL",
@@ -48,10 +62,54 @@ export const projects: Project[] = [
     // No surveillance photograph exists in the source collection — not one
     // camera, NVR or monitor across all 38 files. Rather than dress the card
     // in a vendor's stock photo, it renders a placeholder that says so.
+    //
+    // Kept THIRD deliberately: the homepage shows the first three, and the
+    // approved handoff specifies those as RESIDENTIAL / COMMERCIAL /
+    // SURVEILLANCE. Reordering this entry silently drops a card the client
+    // signed off on — and hides the photo gap from the person who can fix it.
     category: "SURVEILLANCE",
     title: "16-camera retail system",
     location: "Kissimmee, FL",
     image: null,
     alt: "",
+  },
+  {
+    category: "RESIDENTIAL",
+    title: "Blue-LED cinema & wet bar",
+    // "Central Florida" rather than a city: the three entries above take
+    // their cities from the design handoff, but nobody has confirmed which
+    // job each room actually was. Naming a city we cannot stand behind is
+    // worse than naming the region we can. See QUESTIONS-FOR-THOMAS.md.
+    location: "Central Florida",
+    image: "/images/project-modern-theater.webp",
+    alt: "Cinema room with charcoal walls, blue LED cove lighting, black quilted recliners with lit bases and a wet bar at the rear",
+  },
+  {
+    category: "RESIDENTIAL",
+    title: "Tiered theater, damask acoustics",
+    location: "Central Florida",
+    image: "/images/project-tiered-theater.webp",
+    alt: "Stepped cinema room with red and gold damask acoustic panels, mahogany trim and black recliners",
+  },
+  {
+    category: "RESIDENTIAL",
+    title: "Gold-plaster cinema",
+    location: "Central Florida",
+    image: "/images/project-goldplaster-theater.webp",
+    alt: "Cinema room with gold plaster walls, film-reel patterned carpet and tiered seating",
+  },
+  {
+    category: "RESIDENTIAL",
+    title: "Barrel-vault attic theater",
+    location: "Central Florida",
+    image: "/images/project-attic-theater.webp",
+    alt: "Attic cinema room with a curved barrel-vaulted ceiling and tan leather recliners",
+  },
+  {
+    category: "NETWORKING",
+    title: "Rack build & structured cabling",
+    location: "Central Florida",
+    image: "/images/project-control4-rack.webp",
+    alt: "Equipment rack with labelled Triad amplification and Control4 automation hardware",
   },
 ];

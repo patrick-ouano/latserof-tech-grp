@@ -40,6 +40,10 @@ export default function AboutPage() {
           </>
         }
         lede="Latserof Technologies is a licensed, insured low-voltage contractor working out of Kissimmee. We design the system, pull the cable, mount the hardware and support it afterwards — all in-house."
+        photo={{
+          src: "/images/header-about.webp",
+          alt: "Two technicians mounting a large display on a dark wood wall, with moving blankets protecting the floor",
+        }}
       >
         <div className="flex flex-wrap gap-[14px]">
           <Button href={CTA_HREF}>Book a walkthrough</Button>

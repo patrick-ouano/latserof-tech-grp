@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { BrandStrip } from "@/components/BrandStrip";
 import { CheckList } from "@/components/CheckList";
@@ -67,18 +68,57 @@ export default function SystemsPage() {
           title={d.title}
           meta={<span className="font-mono text-gold">{d.number}</span>}
         >
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start lg:gap-14">
             <Reveal>
               <p className="max-w-[54ch] font-body text-lede text-paper-dim">
                 {d.body}
               </p>
-            </Reveal>
 
-            <Reveal index={1}>
-              <h3 className="mb-5 font-mono text-[12px] leading-none font-bold text-gold">
+              <h3 className="mt-9 mb-5 font-mono text-[12px] leading-none font-bold text-gold">
                 WHAT THAT INCLUDES
               </h3>
               <CheckList items={d.includes} />
+            </Reveal>
+
+            <Reveal index={1} variant="blur">
+              {d.image ? (
+                <figure className="relative aspect-[4/3] overflow-hidden rounded-card border border-hairline">
+                  <Image
+                    src={d.image}
+                    alt={d.imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 46vw, 100vw"
+                    className="object-cover"
+                  />
+                </figure>
+              ) : (
+                /* Honest gap rather than a vendor render. Visible to Thomas
+                   in review, which is the point — he is the only person who
+                   can close it. */
+                <div className="flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-card border border-dashed border-stroke bg-surface-2 px-6 text-center">
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    className="text-stroke"
+                  >
+                    <path
+                      d="M3 5h18v14H3z M3 16l5-5 4 4 3-3 6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                  <p className="font-mono text-[11px] leading-relaxed tracking-[0.08em] text-muted-deep">
+                    PHOTOGRAPHY PENDING
+                  </p>
+                  <p className="max-w-[34ch] font-body text-[15px] text-muted">
+                    We would rather show a gap than someone else&rsquo;s stock
+                    photo. Ask to see this work on the walkthrough.
+                  </p>
+                </div>
+              )}
             </Reveal>
           </div>
         </Section>

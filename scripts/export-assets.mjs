@@ -55,6 +55,111 @@ const PHOTOS = [
   },
   // No surveillance entry: there is no camera/NVR photo in the collection.
   // ProjectGrid renders a placeholder plate for any project without an image.
+
+  // --- Page header bands -------------------------------------------------
+  // One landscape shot per page, sitting beside the heading rather than
+  // under it. Chosen so each page opens on work that matches its subject.
+  {
+    // Modern loft landing — bright and current, and the only interior in the
+    // set that reads "house" rather than "cinema".
+    src: "7EC124A9-9139-493A-9BA9-5DC06D03D07F-converted.jpg",
+    out: "header-residential.webp",
+    width: 1600,
+    height: 1200,
+    position: "centre",
+  },
+  {
+    // Two racks with shelves labelled ROUTER / ACCESS POINTS / NETWORK
+    // SWITCH. The source is 3213x5712, so a landscape crop keeps only the
+    // middle band — which is where the labelling is.
+    src: "990503C8-784A-48B4-80EB-336A8A0856DE-converted.jpg",
+    out: "header-commercial.webp",
+    width: 1600,
+    height: 1200,
+    position: "centre",
+  },
+  {
+    // Two techs mounting a display. The only "we do the work" frame in the
+    // set, which is exactly what an About page wants.
+    src: "FBF2DD95-7975-4942-BCED-EDBF3BF87D15-converted.jpg",
+    out: "header-about.webp",
+    width: 1600,
+    height: 1200,
+    position: "centre",
+  },
+
+  // --- /systems, one per discipline --------------------------------------
+  // Cameras & access has no entry on purpose: there is not one camera, NVR
+  // or monitor across all 38 source photos. That section renders an honest
+  // note instead of a borrowed vendor render.
+  {
+    src: "IMG_4002-converted.jpg",
+    out: "system-cinema.webp",
+    width: 1400,
+    height: 1050,
+    position: "centre",
+  },
+  {
+    // Blue LED cove lighting — the one frame that actually shows lighting
+    // being controlled, rather than a keypad we do not have a photo of.
+    src: "PXL_20231222_194002088.jpeg",
+    out: "system-control.webp",
+    width: 1400,
+    height: 1050,
+    position: "centre",
+  },
+  {
+    // Patch-panel detail, green and red cabling. Reads as "structured
+    // cabling" more legibly than another rack elevation does.
+    src: "20120907_135926.jpg",
+    out: "system-networks.webp",
+    width: 1400,
+    height: 1050,
+    position: "centre",
+  },
+
+  // --- Additional /work cards --------------------------------------------
+  // One frame per ROOM, never two angles of the same job on two cards — see
+  // the room groups in PHOTO_MANIFEST.md.
+  {
+    src: "PXL_20231222_193801294.jpeg",
+    out: "project-modern-theater.webp",
+    width: 1600,
+    height: 1067,
+    position: "centre",
+  },
+  {
+    // Already a 21:9 crop, so squaring it off loses a lot; 3:2 is as tall as
+    // this one can go.
+    src: "4922FD94-6B4C-44D9-8644-5E679091530F.JPG",
+    out: "project-tiered-theater.webp",
+    width: 1600,
+    height: 1067,
+    position: "centre",
+  },
+  {
+    src: "B442C482-F1D7-444E-8DC8-2BC3AB64465D.JPG",
+    out: "project-goldplaster-theater.webp",
+    width: 1600,
+    height: 1067,
+    position: "centre",
+  },
+  {
+    src: "20170921_151033.jpg",
+    out: "project-attic-theater.webp",
+    width: 1600,
+    height: 1067,
+    position: "centre",
+  },
+  {
+    // Triad + Control4, clean and well-labelled. A different pair of racks
+    // from the header shot above.
+    src: "20180906_134352.jpg",
+    out: "project-control4-rack.webp",
+    width: 1600,
+    height: 1067,
+    position: "centre",
+  },
 ];
 
 /**
