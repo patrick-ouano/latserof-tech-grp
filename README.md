@@ -1,7 +1,8 @@
 # Latserof Technologies — website
 
-Marketing site for **Latserof Technologies Grp Inc.**, a licensed low-voltage /
-AV integrator in Kissimmee, FL serving Central Florida.
+Marketing site for **Latserof Technologies Grp LLC**, a licensed low-voltage /
+AV integrator in Kissimmee, FL serving Greater Orlando, Central Florida and
+Tampa.
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind 4 · deployed on Vercel.
 Statically generated; the only server-rendered route is the quote handler.
