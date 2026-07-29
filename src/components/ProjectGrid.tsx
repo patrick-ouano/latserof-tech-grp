@@ -19,9 +19,16 @@ export function ProjectGrid() {
           Recent installations
         </h2>
 
+        {/* Deliberately not scroll-revealed. These cards are the portfolio —
+            the whole reason a visitor scrolls this far — and an animation
+            that fails leaves them blank. The handoff lists scroll reveal as
+            optional; it is not worth risking the primary content for. The
+            supplementary partner band above still uses it. */}
         <ul className="grid gap-[22px] md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+            <li key={project.title} className="group min-w-0">
+              <ProjectCard project={project} />
+            </li>
           ))}
         </ul>
       </Container>
@@ -29,9 +36,11 @@ export function ProjectGrid() {
   );
 }
 
+/* Root element and the `group` class live on the Reveal <li> wrapper, so
+   this renders a fragment rather than nesting another block. */
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <li className="group min-w-0">
+    <>
       <div className="relative h-[250px] overflow-hidden">
         {project.image ? (
           <Image
@@ -57,7 +66,7 @@ function ProjectCard({ project }: { project: Project }) {
           {project.location}
         </p>
       </div>
-    </li>
+    </>
   );
 }
 

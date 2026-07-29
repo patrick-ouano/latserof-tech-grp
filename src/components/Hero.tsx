@@ -22,8 +22,14 @@ export function Hero() {
     >
       <div className="mx-auto grid w-full max-w-[1280px] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
         {/* Photo first in the DOM so it stacks above the text on small
-            screens without needing order utilities. Reordered at lg. */}
-        <div className="relative min-h-[380px] overflow-hidden lg:order-2 lg:min-h-[600px]">
+            screens without needing order utilities. Reordered at lg.
+
+            Above 1280 the negative right margin pulls the photo out of the
+            centred canvas and onto the viewport edge. The handoff was drawn
+            at exactly 1280 where the two coincide; without this, a wide
+            monitor shows dead black to the right of the image. The offset is
+            exactly half the overflow, so it lands flush and never scrolls. */}
+        <div className="relative min-h-[380px] overflow-hidden lg:order-2 lg:min-h-[600px] xl:mr-[calc((1280px-100vw)/2)]">
           <Image
             src="/images/hero-cinema-theater.webp"
             alt="Private cinema room with tiered seating, acoustic treatment and a projection screen"

@@ -43,8 +43,13 @@ export function ServiceList() {
                 {d.title}
               </h3>
               {/* Starts in column 2 on the two-column layout so it sits under
-                  the title rather than beside the number. */}
-              <p className="col-start-2 font-body text-[17px] leading-[1.6] text-body-dim xl:col-start-3 xl:text-[18px]">
+                  the title rather than beside the number.
+
+                  Capped at 68ch: the description column is ~750px wide at
+                  1280, which puts these lines near 90 characters. Anything
+                  much past 75 makes the eye lose its place on the return
+                  sweep, and it is worse on a dark ground. */}
+              <p className="col-start-2 max-w-[68ch] font-body text-[17px] leading-[1.65] text-body-dim xl:col-start-3 xl:text-[18px]">
                 {d.body}
               </p>
             </li>
