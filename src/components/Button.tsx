@@ -1,12 +1,12 @@
 import Link from "next/link";
-import type { ComponentProps, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 /**
  * The two button treatments in the design. 2px radius, no shadow, no lift —
  * hover is a colour change only, per the handoff's interaction notes.
  *
- * `size` maps to the two paddings that actually appear: header (15/26) and
- * hero + CTA band (18/30 and 20/34).
+ * `size` maps to the three paddings that actually appear: header (15/26),
+ * hero (18/30) and CTA band (20/34).
  */
 type Variant = "gold" | "ghost" | "ink";
 type Size = "sm" | "md" | "lg";
@@ -16,7 +16,7 @@ type Size = "sm" | "md" | "lg";
    which was overriding the gold ring with the button's own text colour. */
 const base =
   "inline-flex items-center justify-center rounded-btn font-heading font-extrabold " +
-  "transition-colors duration-150";
+  "transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   gold: "bg-gold text-ink hover:bg-gold-hover",
@@ -31,33 +31,47 @@ const sizes: Record<Size, string> = {
   lg: "px-[34px] py-[20px] text-[16px]",
 };
 
-export function Button({
-  href,
-  variant = "gold",
-  size = "md",
-  className = "",
-  children,
-  ...rest
-}: {
-  href: string;
+type CommonProps = {
   variant?: Variant;
   size?: Size;
   className?: string;
   children: ReactNode;
-} & Omit<ComponentProps<typeof Link>, "href" | "className" | "children">) {
+};
+
+type Props = CommonProps &
+  (
+    | { asSubmit: true; href?: never; disabled?: boolean; onClick?: never }
+    | {
+        asSubmit?: false;
+        href: string;
+        disabled?: never;
+        onClick?: () => void;
+      }
+  );
+
+export function Button(props: Props) {
+  const { variant = "gold", size = "md", className = "", children } = props;
   const cls = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  // tel: and mailto: are not routes — Link would try to prefetch them.
-  if (href.startsWith("tel:") || href.startsWith("mailto:")) {
+  if (props.asSubmit) {
     return (
-      <a href={href} className={cls}>
+      <button type="submit" disabled={props.disabled} className={cls}>
+        {children}
+      </button>
+    );
+  }
+
+  // tel: and mailto: are not routes — Link would try to prefetch them.
+  if (props.href.startsWith("tel:") || props.href.startsWith("mailto:")) {
+    return (
+      <a href={props.href} className={cls}>
         {children}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={cls} {...rest}>
+    <Link href={props.href} className={cls} onClick={props.onClick}>
       {children}
     </Link>
   );
