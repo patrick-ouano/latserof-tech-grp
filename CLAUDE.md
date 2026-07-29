@@ -12,25 +12,42 @@
 - Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Cameras & access.
 
 ## Design system — status
-- **Homepage: fully designed** — Direction 2a, "Gallery Black." Source of truth: `design/Latserof Technologies website design/design_handoff_latserof_homepage/README.md` (full token table + copy) and `design/Latserof Technologies website design/design_handoff_latserof_homepage/reference/homepage-2a.html` (static HTML reference — NOT production code, just look/spacing/copy at 1280px, no responsive behavior).
-- **All other pages (Residential, Commercial, Systems, Work, About, and a Contact/Quote page): not yet designed.** When building these, extend the homepage's approved tokens and component patterns rather than inventing a new visual language. If a page needs a layout the homepage doesn't cover, flag it for a quick design pass before committing to code.
-- Read the handoff README in full before writing any component — it has exact copy, spacing, hover states, and accessibility notes. Copy in the reference file is final; don't paraphrase headlines.
+- **The whole site is built.** Homepage, Residential, Commercial, Systems, Work, About and Contact all ship real content, and `PageStub` has been deleted.
+- The current visual language is **"Gallery Black, lit"** — an evolution of the approved Direction 2a, decided 2026-07-29. It keeps 2a's palette and typography and reworks its depth, geometry and motion. `src/app/globals.css` is the source of truth; read its `@theme` block before writing any component.
+- **The design handoff is now historical.** `design/Latserof Technologies website design/design_handoff_latserof_homepage/` still holds the original token table, the exact approved copy, and `reference/homepage-2a.html`. Treat it as the authority on **copy** (still final — don't paraphrase headlines) and as *superseded* on radius, shadow, hover and type-scale. Where it and `globals.css` disagree about styling, `globals.css` wins.
+- ⚠️ **Thomas signed off on 2a, not on this.** The homepage he approved looked flatter. Get the reworked homepage re-approved before launch.
 
-## Non-negotiable design constraints (apply site-wide, not just homepage)
-- Palette is 3 real colors only: near-black `#0B0B0B` (`ink`), gold `#C6A15B`, warm off-white `#F2EFE8` (`paper`), plus tints (see README token table). **No second accent color.**
+## Design constraints (apply site-wide)
+Still binding:
+- Palette is ink `#0B0B0B` / gold `#C6A15B` / paper `#F2EFE8`, plus tints and the surface + gold ramps in `@theme`. **No second accent color** — `public/logo-badge.webp` is a gold-on-black emblem that must never be recolored, so it anchors this palette in the header and footer of every page.
 - Type: Archivo (headings/nav/buttons), Barlow (body/meta), Space Mono (numerals + category labels only).
-- Border radius: 2px on buttons, 0 everywhere else. No shadows anywhere.
-- No text ever sits directly over a photo without a solid plate behind it.
-- `tel:` links for every phone number. Respect `prefers-reduced-motion` on any scroll/hover animation.
-- Tailwind theme tokens (`ink`, `gold`, `paper`, `hairline`, etc.) are defined once in the `@theme` block in `src/app/globals.css` — this is Tailwind v4, which moved theme config out of JS and into CSS, so there is no `tailwind.config` file. Reference tokens by name in components (`bg-ink`, `text-gold`, `border-hairline`); never hardcode hex inline.
+- `tel:` links for every phone number. Respect `prefers-reduced-motion` on every animation — `globals.css` enforces this globally, including animation *delays*, which matter as much as durations when fill-mode is `both`.
+- Body copy never below 16px. Focus rings are never removed.
+- Tailwind theme tokens are defined once in the `@theme` block in `src/app/globals.css` — this is Tailwind v4, which moved theme config out of JS and into CSS, so there is no `tailwind.config` file. Reference tokens by name (`bg-ink`, `text-gold`, `shadow-glow`, `text-h2`); never hardcode a hex inline.
+
+Superseded by the rework (the handoff still states the old rule — ignore it):
+- ~~Border radius 2px on buttons, 0 everywhere else~~ → `--radius-btn` 10px, `--radius-card` 16px, `--radius-lg` 24px, `--radius-pill`.
+- ~~No shadows anywhere~~ → `--shadow-card`, `--shadow-lift`, `--shadow-glow`, `--shadow-glow-sm`.
+- ~~Hover is a colour change only, no lift~~ → buttons and cards lift and glow.
+- ~~Fixed 36/44/52/62px type ladder~~ → fluid `clamp()` scale (`text-display`, `text-h1`…`text-meta`).
+- ~~No text over a photo~~ → still true in practice everywhere, but now a judgment call rather than a rule. If you do it, put a scrim behind the text.
+
+### Motion
+Three layers, ordered so nothing can ever strand content invisible:
+1. **No JS** → nothing is ever hidden (the `js` class that hides is only set by script).
+2. **Scroll-driven animations** (`animation-timeline: view()`) → pure CSS, no JS needed to reveal.
+3. **Neither** → `IntersectionObserver` in `src/components/motion/Reveal.tsx`, plus a 1.2s failsafe.
+
+The `js` / `sda` capability classes are set by a blocking script in `layout.tsx` **before first paint** — setting them in an effect causes content to paint visible, snap hidden, then animate. The header shell, hero parallax and reading-progress bar are all CSS scroll timelines; there is deliberately **no scroll listener anywhere in the site**.
 
 ## Assets
 - Logo: `public/logo-badge.png` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**) and `public/logo-wordmark.png` (horizontal lockup, use if a wider version is needed). Originals live in `design/Latserof Technologies website design/design_handoff_latserof_homepage/assets/`. These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch. The badge PNG is ~1MB, far heavier than a 54px header mark warrants; the vector solves this, otherwise re-export at 2x display size.
-- Photography: see `PHOTO_MANIFEST.md` for the raw source photos and which ones map to which slot. All homepage reference photos are Pexels placeholders and **must** be swapped for real project photography before launch.
+- Photography: see `PHOTO_MANIFEST.md`. The *reference HTML* hotlinks Pexels placeholders; the **shipped images are real Latserof work**, exported from `photos-source/` by `npm run assets`. Two gaps remain and are not solvable from the existing files: no commercial *room* photo, and **zero** surveillance photos across all 38 source frames. `/work` renders an honest "PHOTOGRAPHY PENDING" plate for the latter rather than borrowing stock — do not fill it with vendor imagery.
+- The five vendor marketing files in `photos-source/` (Control4, Araknis, ClareVision) are third-party copyright and **must not** appear as project photography. Dealer names render as type in `BrandStrip`, never as logo files, until Thomas confirms marketing rights.
 - Projects data should be modeled as data (not hardcoded JSX) — `{ category, title, location, image, slug? }` — since Thomas will add new installs over time.
 
 ## Forms
-No contact/quote form exists yet in any design. Needs: name, phone, email, property type (Residential/Commercial), project scope (multi-select of the 4 disciplines), city, message. Required: name + at least one of phone/email. Inline errors in gold (`#C6A15B`). Submission handler: lightweight — a Next.js API route forwarding to an email service (Resend) or a form service (Web3Forms) is enough; no database needed for this site.
+**Built** — `src/components/QuoteForm.tsx` + `src/app/api/quote/route.ts` (Resend; see `.env.example`). Without credentials it logs in dev and returns 503 in production rather than silently dropping a lead. Original spec, for reference: name, phone, email, property type (Residential/Commercial), project scope (multi-select of the 4 disciplines), city, message. Required: name + at least one of phone/email. Inline errors in gold (`#C6A15B`). Submission handler: lightweight — a Next.js API route forwarding to an email service (Resend) or a form service (Web3Forms) is enough; no database needed for this site.
 
 ## Stack & architecture
 - Next.js (App Router) + TypeScript + Tailwind CSS.
@@ -42,24 +59,38 @@ No contact/quote form exists yet in any design. Needs: name, phone, email, prope
 ## Project structure
 ```
 src/app/                 routes: / + residential, commercial, systems, work, about, contact
-src/app/globals.css      @theme design tokens (colors, --radius-btn, font families)
-src/app/layout.tsx       next/font (Archivo, Barlow, Space Mono) + site metadata
-src/components/          shared components; PageStub is temporary scaffolding
-src/lib/site.ts          business facts, disciplines, nav links, CTA_HREF — single source of truth
+src/app/globals.css      @theme tokens + motion system — read this first
+src/app/layout.tsx       next/font, site metadata, viewport, capability script
+src/app/template.tsx     route-change entrance (re-mounts per navigation)
+src/app/sitemap.ts       derived from navLinks — a new page cannot be omitted
+src/app/robots.ts        + not-found.tsx
+src/components/          shared components
+src/components/motion/   Reveal (scroll reveal), Spotlight (pointer bloom)
+src/lib/site.ts          business facts, disciplines, brands, process, nav, CTA_HREF
 src/data/projects.ts     Project[] for "Recent installations"
-public/                  logo-badge.png, logo-wordmark.png, images/ (project photos)
+public/                  logo-badge.webp, images/ (project photos)
 ```
 - Never retype a business fact into a component — import it from `src/lib/site.ts`. Phone links use `site.phoneHref`.
 - Every CTA points at `CTA_HREF`, not a literal path.
+- **Canonicals are per-page.** Do not put `alternates.canonical` on the root layout — every route inherits it, which declares all five content pages duplicates of the homepage.
 
 ## Status
-Scaffolding is done: tokens, fonts, layout, and stub pages all build and prerender static. **Not built yet:** the homepage bands, Header/Footer, the quote form and its handler, `LocalBusiness` JSON-LD, and real photography. The homepage build is the natural next task.
+Site is complete and builds static. **Open before launch:**
+- Thomas to re-approve the reworked homepage (he signed off on flatter 2a).
+- Real photography for the commercial-room and surveillance gaps.
+- Confirm the project locations in `src/data/projects.ts` (`locationConfirmed` is unset on all three) — they came from the handoff, not from him.
+- A vector logo. `public/logo-badge.webp` is a raster export.
+- `RESEND_API_KEY` + `QUOTE_TO_EMAIL` in Vercel, or the form returns 503.
+- Confirm the production domain (`site.url` is a placeholder).
 
-## Responsive targets (homepage spec — apply the same breakpoint logic sitewide)
-- ≥1280px: as specified in the handoff, centered content, full-bleed dark bands.
-- 1024–1279px: fluid, 40px gutter, H1 → 52px.
-- 768–1023px: hero stacks (photo above text), services grid → 2-col, projects → 2-col, H1 → 44px.
-- <768px: single column, 24px gutter, hamburger nav (solid black, gold links), H1 → 36px. Body copy never drops below 16px.
+See `QUESTIONS-FOR-THOMAS.md` for the full list.
+
+## Responsive
+The fixed breakpoint type ladder is gone — the `clamp()` scale in `@theme` covers 375–1440px continuously, so nothing snaps and the awkward in-between widths are handled. Layout breakpoints still apply:
+- ≥1280px: centered 1280px content, 52px gutter, full-bleed dark bands.
+- 1024–1279px: fluid, 40px gutter.
+- 768–1023px: hero stacks (photo above text), card grids → 2-col.
+- <768px: single column, 24px gutter, hamburger drawer (solid black, gold links). Body copy never below 16px.
 
 ## Working conventions for this project
 - This is a learning project for Claude Code — prefer Plan mode for anything multi-file (new pages, restructuring), default/manual approval for smaller edits.

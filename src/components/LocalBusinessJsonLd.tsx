@@ -18,8 +18,14 @@ export function LocalBusinessJsonLd() {
     legalName: site.legalName,
     description: site.descriptor,
     url: site.url,
-    telephone: site.phoneDisplay,
-    image: `${site.url}/logo-badge.png`,
+    // E.164, derived from the tel: href rather than the display string.
+    // Search engines want a dialable number with a country code; "(407)
+    // 927-4434" is for humans.
+    telephone: site.phoneHref.replace("tel:", ""),
+    // Was /logo-badge.png, which 404s — the badge ships as WebP. Structured
+    // data pointing at a missing image is worse than omitting it.
+    logo: `${site.url}/logo-badge.webp`,
+    image: `${site.url}/images/og-image.jpg`,
     address: {
       "@type": "PostalAddress",
       streetAddress: site.address.street,

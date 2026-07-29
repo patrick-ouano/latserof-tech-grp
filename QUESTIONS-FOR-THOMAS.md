@@ -57,14 +57,25 @@ Ordered by what blocks launch.
 
 ---
 
-## 3. Content for later pages
+## 3. Draft copy to sign off
 
-Only the homepage is designed. These have no content yet:
+**Every page is now built and written.** The copy on the five new pages is
+**draft and needs his eye.** It was written deliberately conservatively: every
+line either restates approved homepage copy or a fact already on file above.
 
-- [ ] **About** — how long in business, how it started, size of crew, what makes them different from other Orlando integrators.
-- [ ] **Residential / Commercial** — different messaging for each, or the same pitch?
-- [ ] **Systems** — how much technical detail? Buyers vary between "just make it work" and wanting the full spec.
-- [ ] **Pricing posture** — the brief says no public pricing. Confirm he doesn't even want "projects typically start around $X", which does filter out time-wasters.
+Nothing on the site claims a founding year, a crew size, an install count, a
+licence number, a certification, an award or a testimonial — because none of
+those have been confirmed. That is why the pages read a little lean. Most of
+the questions below would let us fix that.
+
+- [ ] **Read all five pages** — /residential, /commercial, /systems, /work, /about.
+- [ ] **"What that includes" lists** on /systems — four bullet lists derived from his own discipline descriptions. Are they accurate and complete? (`disciplines[].includes` in `src/lib/site.ts`)
+- [ ] **The four process steps** — Walkthrough → Design → Install → Service. Is that how a job actually runs?
+- [ ] **/about is thin, deliberately.** To fill it out: how long in business, how it started, size of crew, what genuinely separates them from other Orlando integrators.
+- [ ] **"And yes — Latserof is Forestal spelled backwards."** Currently on /about. Charming and true, but it's his name — happy to keep it, or cut it?
+- [ ] **The "we are not a retail store" panel** on /residential. It's an honest differentiator and heads off the wrong kind of enquiry, but confirm the tone is right.
+- [ ] **Pricing posture** — the brief says no public pricing, and /residential answers "Do you publish pricing?" with "no, the walkthrough produces a real number." Confirm he doesn't even want "projects typically start around $X", which does filter out time-wasters.
+- [ ] **Homepage rework** — the homepage no longer looks like the flat 2a mockup he signed off. Same colours and type, but with depth, rounded cards, glow and motion. **He needs to see and approve this.**
 
 ---
 
