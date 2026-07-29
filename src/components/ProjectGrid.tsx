@@ -71,7 +71,7 @@ function ProjectCard({ project }: { project: Project }) {
  */
 function PhotoPending() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 border border-dashed border-stroke bg-[#111] px-4 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 border border-dashed border-stroke bg-raised px-4 text-center">
       <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" className="text-stroke">
         <path
           d="M3 5h18v14H3z M3 16l5-5 4 4 3-3 6 6"

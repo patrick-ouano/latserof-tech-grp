@@ -32,7 +32,7 @@ export function ServiceList() {
             <li
               key={d.slug}
               className={
-                "group -mx-6 grid grid-cols-[48px_minmax(0,1fr)] items-center gap-x-6 gap-y-2 px-6 py-7 transition-colors duration-150 hover:bg-[#111] md:-mx-10 md:px-10 xl:-mx-[52px] xl:grid-cols-[64px_minmax(0,300px)_minmax(0,1fr)] xl:gap-x-8 xl:px-[52px] xl:py-[30px] " +
+                "group -mx-6 grid grid-cols-[48px_minmax(0,1fr)] items-center gap-x-6 gap-y-2 px-6 py-7 transition-colors duration-150 hover:bg-raised md:-mx-10 md:px-10 xl:-mx-[52px] xl:grid-cols-[64px_minmax(0,300px)_minmax(0,1fr)] xl:gap-x-8 xl:px-[52px] xl:py-[30px] " +
                 (i < disciplines.length - 1 ? "border-b border-hairline" : "")
               }
             >

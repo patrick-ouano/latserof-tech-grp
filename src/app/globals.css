@@ -14,6 +14,7 @@
 @theme {
   /* Color */
   --color-ink: #0b0b0b; /* page background, footer, button-on-gold fill */
+  --color-raised: #111111; /* service-row hover fill; the "#111" in the handoff */
   --color-hairline: #1e1c19; /* 1px dividers between sections and list rows */
   --color-gold: #c6a15b; /* primary accent: buttons, eyebrows, rules, CTA band */
   --color-gold-hover: #b08f4c; /* gold button hover (see "Interactions") */
