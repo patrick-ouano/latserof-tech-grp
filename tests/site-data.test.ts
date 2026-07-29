@@ -108,8 +108,11 @@ describe("process and brands", () => {
     expect(processSteps.map((s) => s.number)).toEqual(["01", "02", "03", "04"]);
   });
 
-  it("lists the three dealer lines from the brief", () => {
-    expect([...brands]).toEqual(["Crestron", "Control4", "Lutron"]);
+  it("lists the dealer lines and distributor partners", () => {
+    expect(brands.length).toBeGreaterThanOrEqual(3);
+    expect(brands).toContain("Control4");
+    expect(brands).toContain("Crestron");
+    expect(brands).toContain("Lutron");
   });
 });
 

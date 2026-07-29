@@ -134,27 +134,44 @@ export const disciplines = [
       "Local recording",
       "Remote viewing",
     ],
-    // No photograph: there is not one camera, NVR or monitor across all 38
-    // source frames. /systems renders an honest note here rather than a
-    // vendor's stock render. See PHOTO_MANIFEST.md.
-    image: null,
-    imageAlt: "",
+    // Outdoor camera install — added with the 2026-07-29 photo delivery.
+    image: "/images/system-cameras.webp",
+    imageAlt:
+      "Two outdoor bullet cameras mounted on a metal pole with weatherproof conduit",
     residential: "Cameras and door access you can check from anywhere, recorded locally rather than rented back to you.",
-    commercial: "Entry control and surveillance for premises with staff, stock or restricted areas.",
+    commercial: "Entry control and surveillance for schools, restaurants, businesses and premises with staff, stock or restricted areas.",
   },
 ] as const;
 
 export type Discipline = (typeof disciplines)[number];
 
 /**
- * Dealer lines, per CLAUDE.md's business facts.
+ * Dealer / partner lines.
  *
- * Rendered as type, never as logo files: dealer marketing rights for the
- * vendor assets in photos-source/ are still an open question with Thomas
- * (see PHOTO_MANIFEST.md), and setting the names in Archivo sidesteps it
- * without misrepresenting anything.
+ * Thomas is an industry partner with 21st Century Distribution and SnapAV —
+ * the names below are lines commonly specified from those catalogs (plus
+ * Crestron). Rendered as type, never as logo files: manufacturer marks are
+ * their trademarks, and marketing-rights questions stay out of the markup.
+ *
+ * Distributor names themselves live in `distributors` and can be cited in
+ * copy without implying a logo license.
  */
-export const brands = ["Crestron", "Control4", "Lutron"] as const;
+export const brands = [
+  "Control4",
+  "Crestron",
+  "Lutron",
+  "Episode",
+  "Binary",
+  "ClareVision",
+  "Araknis",
+  "WattBox",
+] as const;
+
+/** Distribution partners confirmed by Thomas 2026-07-29. */
+export const distributors = [
+  { name: "21st Century Distribution", href: "https://21stcenturydist.com/" },
+  { name: "SnapAV", href: "https://www.snapav.com/shop/en/snapav/home" },
+] as const;
 
 /**
  * How a job runs, start to finish. DRAFT — derived from approved copy

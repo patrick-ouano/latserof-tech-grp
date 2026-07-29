@@ -45,8 +45,8 @@ The `js` / `sda` capability classes are set by a blocking script in `layout.tsx`
 
 ## Assets
 - Logo: `public/logo-badge.png` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**) and `public/logo-wordmark.png` (horizontal lockup, use if a wider version is needed). Originals live in `design/Latserof Technologies website design/design_handoff_latserof_homepage/assets/`. These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch. The badge PNG is ~1MB, far heavier than a 54px header mark warrants; the vector solves this, otherwise re-export at 2x display size.
-- Photography: see `PHOTO_MANIFEST.md`. The *reference HTML* hotlinks Pexels placeholders; the **shipped images are real Latserof work**, exported from `photos-source/` by `npm run assets`. Two gaps remain and are not solvable from the existing files: no commercial *room* photo, and **zero** surveillance photos across all 38 source frames. `/work` renders an honest "PHOTOGRAPHY PENDING" plate for the latter rather than borrowing stock — do not fill it with vendor imagery.
-- The five vendor marketing files in `photos-source/` (Control4, Araknis, ClareVision) are third-party copyright and **must not** appear as project photography. Dealer names render as type in `BrandStrip`, never as logo files, until Thomas confirms marketing rights.
+- Photography: see `PHOTO_MANIFEST.md`. Shipped images are real Latserof work, exported from `photos-source/` by `npm run assets`. Surveillance photography was added 2026-07-29. Commercial *room* photos are still thin (rack shots cover the commercial card). Locations pending from Thomas.
+- The five vendor marketing files in `photos-source/` (Control4, Araknis, ClareVision) are third-party copyright and **must not** appear as project photography. Dealer names render as type in `BrandStrip`, never as logo files. Distributor partners: 21st Century Distribution and SnapAV.
 - Projects data should be modeled as data (not hardcoded JSX) — `{ category, title, location, image, slug? }` — since Thomas will add new installs over time.
 
 ## Forms
