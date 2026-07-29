@@ -11,7 +11,7 @@
 - Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Cameras & access.
 
 ## Design system — status
-- **Homepage: fully designed** — Direction 2a, "Gallery Black." Source of truth: `design/design_handoff_latserof_homepage/README.md` (full token table + copy) and `design/design_handoff_latserof_homepage/reference/homepage-2a.html` (static HTML reference — NOT production code, just look/spacing/copy at 1280px, no responsive behavior).
+- **Homepage: fully designed** — Direction 2a, "Gallery Black." Source of truth: `design/Latserof Technologies website design/design_handoff_latserof_homepage/README.md` (full token table + copy) and `design/Latserof Technologies website design/design_handoff_latserof_homepage/reference/homepage-2a.html` (static HTML reference — NOT production code, just look/spacing/copy at 1280px, no responsive behavior).
 - **All other pages (Residential, Commercial, Systems, Work, About, and a Contact/Quote page): not yet designed.** When building these, extend the homepage's approved tokens and component patterns rather than inventing a new visual language. If a page needs a layout the homepage doesn't cover, flag it for a quick design pass before committing to code.
 - Read the handoff README in full before writing any component — it has exact copy, spacing, hover states, and accessibility notes. Copy in the reference file is final; don't paraphrase headlines.
 
@@ -21,10 +21,10 @@
 - Border radius: 2px on buttons, 0 everywhere else. No shadows anywhere.
 - No text ever sits directly over a photo without a solid plate behind it.
 - `tel:` links for every phone number. Respect `prefers-reduced-motion` on any scroll/hover animation.
-- Set up Tailwind theme tokens (`ink`, `gold`, `paper`, `hairline`, etc.) once in `tailwind.config` mapped to the hex values in the README — reference by name in components, never hardcode hex inline.
+- Tailwind theme tokens (`ink`, `gold`, `paper`, `hairline`, etc.) are defined once in the `@theme` block in `src/app/globals.css` — this is Tailwind v4, which moved theme config out of JS and into CSS, so there is no `tailwind.config` file. Reference tokens by name in components (`bg-ink`, `text-gold`, `border-hairline`); never hardcode hex inline.
 
 ## Assets
-- Logo: `design/design_handoff_latserof_homepage/assets/logo-badge.png` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**) and `logo-wordmark.png` (horizontal lockup, use if a wider version is needed). These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch.
+- Logo: `public/logo-badge.png` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**) and `public/logo-wordmark.png` (horizontal lockup, use if a wider version is needed). Originals live in `design/Latserof Technologies website design/design_handoff_latserof_homepage/assets/`. These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch. The badge PNG is ~1MB, far heavier than a 54px header mark warrants; the vector solves this, otherwise re-export at 2x display size.
 - Photography: see `PHOTO_MANIFEST.md` for the raw source photos and which ones map to which slot. All homepage reference photos are Pexels placeholders and **must** be swapped for real project photography before launch.
 - Projects data should be modeled as data (not hardcoded JSX) — `{ category, title, location, image, slug? }` — since Thomas will add new installs over time.
 
@@ -36,6 +36,23 @@ No contact/quote form exists yet in any design. Needs: name, phone, email, prope
 - Static generation where possible, deploy target Vercel.
 - No backend/database for v1 — this is a lead-gen marketing site, not an app.
 - Add `LocalBusiness` JSON-LD using the business facts above.
+- Next.js 16 / React 19 / Tailwind 4. `AGENTS.md` points at the Next 16 docs bundled in `node_modules/next/dist/docs/` — check them before using an API that may have changed in this major.
+
+## Project structure
+```
+src/app/                 routes: / + residential, commercial, systems, work, about, contact
+src/app/globals.css      @theme design tokens (colors, --radius-btn, font families)
+src/app/layout.tsx       next/font (Archivo, Barlow, Space Mono) + site metadata
+src/components/          shared components; PageStub is temporary scaffolding
+src/lib/site.ts          business facts, disciplines, nav links, CTA_HREF — single source of truth
+src/data/projects.ts     Project[] for "Recent installations"
+public/                  logo-badge.png, logo-wordmark.png, images/ (project photos)
+```
+- Never retype a business fact into a component — import it from `src/lib/site.ts`. Phone links use `site.phoneHref`.
+- Every CTA points at `CTA_HREF`, not a literal path.
+
+## Status
+Scaffolding is done: tokens, fonts, layout, and stub pages all build and prerender static. **Not built yet:** the homepage bands, Header/Footer, the quote form and its handler, `LocalBusiness` JSON-LD, and real photography. The homepage build is the natural next task.
 
 ## Responsive targets (homepage spec — apply the same breakpoint logic sitewide)
 - ≥1280px: as specified in the handoff, centered content, full-bleed dark bands.
