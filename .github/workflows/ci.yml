@@ -42,6 +42,20 @@ jobs:
 
       - run: npm ci
 
+      # Required before tsc on a clean checkout.
+      #
+      # `LayoutProps`, `PageProps` and friends are globals that Next
+      # GENERATES into .next/types, and next-env.d.ts is generated too — both
+      # are gitignored, so they exist on a developer's machine (where a dev
+      # server or build has run) and do not exist here. Without this step tsc
+      # fails with "Cannot find name 'LayoutProps'", which looks like a code
+      # error and is not one.
+      #
+      # typegen does this without paying for a full build; the build job
+      # covers the rest.
+      - name: Generate Next route types
+        run: npx next typegen
+
       - name: Typecheck
         run: npx tsc --noEmit
 

@@ -56,7 +56,11 @@ test.describe("reduced motion", () => {
 
   test("nothing is left hidden or offset", async ({ page }) => {
     await page.goto("/systems");
-    await page.waitForLoadState("networkidle");
+    // Not networkidle: with a second (dev) server running for the hydration
+    // project, the network never reliably goes quiet and the wait times out.
+    // The CTA band is the last band on the page, so once its heading is
+    // visible every [data-reveal] above it exists and has settled.
+    await expect(page.getByRole("heading", { name: /Tell us the rooms/ })).toBeVisible();
 
     const offenders = await page
       .locator("[data-reveal]")

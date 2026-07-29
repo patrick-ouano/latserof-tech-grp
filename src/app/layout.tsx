@@ -95,6 +95,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${archivo.variable} ${barlow.variable} ${spaceMono.variable} h-full`}
+      /*
+       * CAPABILITY_SCRIPT below adds `js` (and `sda`) to this element before
+       * React hydrates — which is the entire point of it, since setting them
+       * after paint made content flash visible, snap hidden, then animate.
+       *
+       * That means the server HTML and the live DOM legitimately disagree
+       * about this one className, and React reports it as a hydration
+       * mismatch on every page load. This is the documented way to say "the
+       * difference is intentional".
+       *
+       * It suppresses warnings for THIS element's own attributes only — one
+       * level deep, not the tree — so real mismatches anywhere inside the
+       * page are still reported.
+       */
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-ink font-body text-paper antialiased">
         {/* First child of <body> so it executes before any [data-reveal]

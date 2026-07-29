@@ -55,10 +55,26 @@ shipped them:
 - the quote form never claims success when delivery failed
 - structured data points at files that actually exist
 
-> Reduced motion is emulated with `page.emulateMedia()`, not
-> `test.use({ reducedMotion })` — the latter silently does not take effect in
-> this setup, and the tests would pass against the animated build while
-> proving nothing.
+Playwright runs three projects: `chromium` and `mobile` against the production
+build on port 3100, and `hydration` against a `next dev` server on 3101 —
+because React reports hydration mismatches **in development only**.
+
+> Two gotchas worth knowing before you edit these:
+>
+> - Reduced motion must be emulated with `page.emulateMedia()`, not
+>   `test.use({ reducedMotion })` — the latter silently does not take effect
+>   here, and the tests would pass against the animated build while proving
+>   nothing.
+> - Don't use `waitForLoadState("networkidle")`. Two servers run during the
+>   suite and the network never reliably goes quiet. Wait on a real element.
+
+### Typecheck needs generated types
+
+`npx next typegen` **must** run before `tsc --noEmit` on a clean checkout.
+`LayoutProps`/`PageProps` are globals Next *generates*, and `next-env.d.ts` is
+generated too — both are gitignored, so they exist on your machine and not in
+CI. Without it you get `Cannot find name 'LayoutProps'`, which looks like a
+code error and isn't one. The `quality` job does this.
 
 ## CI/CD
 
