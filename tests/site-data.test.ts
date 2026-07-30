@@ -12,6 +12,7 @@ import {
   deliveryProcess,
   disciplines,
   navLinks,
+  offerings,
   process as processSteps,
   site,
   story,
@@ -164,6 +165,13 @@ describe("story", () => {
     expect(prose).not.toContain("Latserof Technologies Group");
     expect(prose).not.toContain("Stuart");
     expect(prose).not.toContain("Orange County");
+  });
+
+  it("keeps the capability list as data, not a paragraph", () => {
+    expect(offerings.length).toBeGreaterThan(8);
+    for (const item of offerings) {
+      expect(item.length).toBeGreaterThan(3);
+    }
   });
 });
 

@@ -9,7 +9,7 @@ import { DeliverySteps } from "@/components/DeliverySteps";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/motion/Reveal";
-import { CTA_HREF, CTA_LABEL, site, story } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, offerings, site, story } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -40,11 +40,11 @@ export default function AboutPage() {
         eyebrow="About"
         title={
           <>
-            The same crew,{" "}
-            <span className="text-gradient-gold">start to finish</span>.
+            Design exceptional technology.{" "}
+            <span className="text-gradient-gold">Install it professionally.</span>
           </>
         }
-        lede="Latserof Technologies is a licensed, insured low-voltage contractor working out of Kissimmee. We design the system, pull the cable, mount the hardware and support it afterwards — all in-house. Design services available upon request."
+        lede={`${site.brand} is a licensed, insured low-voltage contractor working out of Kissimmee. We design the system, pull the cable, mount the hardware and support it afterwards — all in-house. Design services available upon request.`}
         photo={{
           src: "/images/header-about.webp",
           alt: "A technician on a ladder wiring a projector mount into an open ceiling, tools on the ladder tray",
@@ -109,12 +109,9 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Three blocks of the client's own narrative. They cover related
-          ground in similar language, so at one flat type size they read as a
-          single undifferentiated wall. The label is set at meta size and each
-          block after the first opens on a hairline, which gives the eye three
-          places to stop instead of none. Copy is Thomas's — see `story`. */}
-      <Section id="story" title="What we do" meta="And why we do it">
+      {/* Four blocks of the client's own narrative, plus the capability list
+          under WHAT WE DO. Copy is Thomas's — see `story` and `offerings`. */}
+      <Section id="story" title="About Latserof Technologies" meta="What we stand for">
         <div className="grid gap-14 lg:gap-16">
           {story.map((block, i) => (
             <Reveal
@@ -136,6 +133,23 @@ export default function AboutPage() {
                     {paragraph}
                   </p>
                 ))}
+
+                {block.label === "WHAT WE DO" && (
+                  <ul className="mt-2 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                    {offerings.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-3 font-body text-copy text-body-dim"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </Reveal>
           ))}

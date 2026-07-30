@@ -226,94 +226,128 @@ export const process = [
 export const deliveryProcess = [
   {
     number: "01",
-    title: "Project consultation",
-    body: "We come and listen: what the rooms are for, who uses them, and what has to work on the first day.",
+    title: "Discovery & consultation",
+    body: "Meet to understand goals, vision, budget and expectations — what the rooms are for, who uses them, and what has to work on the first day.",
   },
   {
     number: "02",
-    title: "Needs analysis",
-    body: "What the system has to do, room by room, settled before any hardware is named.",
+    title: "Needs assessment",
+    body: "Evaluate the property, infrastructure and operational requirements before any hardware is named.",
   },
   {
     number: "03",
-    title: "Solution development",
-    body: "Layout, equipment and cabling specified for the actual room. Full design services available upon request.",
+    title: "System design & engineering",
+    body: "A customised system design with detailed recommendations, equipment selection and project planning. Full design services available upon request.",
   },
   {
     number: "04",
-    title: "Purchasing",
-    body: "Ordered as dealer lines through our distribution partners, not bought off a shelf and made to fit.",
+    title: "Procurement",
+    body: "Premium products sourced through our distribution partners — not bought off a shelf and made to fit.",
   },
   {
     number: "05",
-    title: "Staging",
-    body: "Racks built, addressed and configured on the bench, so what arrives on site is already a working system.",
+    title: "Staging & programming",
+    body: "Pre-build, configure, label and test on the bench so what arrives on site is already a working system.",
   },
   {
     number: "06",
     title: "Installation & integration",
-    body: "Wired, mounted, racked and labelled by the same crew that designed it.",
+    body: "Professionally install every component with clean workmanship and seamless integration between systems.",
   },
   {
     number: "07",
-    title: "Commissioning",
-    body: "Calibrated and tested as one system — not a shelf of parts that happen to be plugged into each other.",
+    title: "Commissioning & testing",
+    body: "Comprehensive testing, optimisation and quality assurance so every component operates as designed.",
   },
   {
     number: "08",
-    title: "Training",
-    body: "Handed over in person, to everyone who uses it, until nobody is guessing which button does what.",
+    title: "Client training",
+    body: "Personalised instruction so everyone who uses the system is comfortable operating it — nobody guessing which button does what.",
   },
   {
     number: "09",
-    title: "Support",
-    body: "Service afterwards from the people who installed it. Service calls by appointment.",
+    title: "Ongoing service & support",
+    body: "Responsive technical support, preventative maintenance, software updates and remote troubleshooting. Service calls by appointment.",
   },
   {
     number: "10",
     title: "Continuous enhancement",
-    body: "Systems grow. Rooms, sources and features get added to what is already there instead of starting over.",
+    body: "As technology evolves, expand and upgrade what is already there with features that protect the investment.",
   },
 ] as const;
 
 /**
- * Company narrative — the client's own marketing copy, supplied 2026-07-30.
+ * Company narrative — the client's own marketing copy, revised 2026-07-30.
  *
  * Lightly normalised so it cannot contradict facts stated elsewhere in this
- * file. Three changes, all worth knowing about:
- *   - "LTG Technologies" and "Latserof Technologies Group" both appeared in
- *     the source copy; both render as `site.brand`.
- *   - The city list (Orange County, Tampa, Stuart) is replaced by
- *     `site.serviceArea`. Stuart is on the Treasure Coast, well outside the
- *     stated area, and an SEO city run is not what this page is for.
- *   - "principals and founders each have over 35 years" is kept plural as
- *     written, and the "over 30 years" in the third block is kept too. Only
- *     Thomas is named anywhere on this site, so if there is no second
- *     principal — or if the two spans should agree — that is his correction
- *     to make, not ours to guess at.
+ * file. Changes worth knowing about:
+ *   - "LTG" / "Latserof Technologies Group" both render as `site.brand`.
+ *   - City lists are replaced by `site.serviceArea` (Stuart was dropped earlier;
+ *     it sits on the Treasure Coast, outside the stated area).
+ *   - "principals and founders" stays plural, and "over 35 years" / "more than
+ *     three decades" both stay as written. Only Thomas is named on the site,
+ *     so if there is no second principal — or if the spans should agree —
+ *     that is his correction to make, not ours to guess at.
+ *   - The long capability list lives in `offerings` below, not inline, so the
+ *     prose stays readable and the list can render as type rather than a wall.
  */
 export const story = [
   {
     label: "WHAT WE DO",
     paragraphs: [
-      `${site.brand} is a full-service smart home automation and commercial custom electronics design and integration company serving ${site.serviceArea}. Our total home control solutions make your property safe, elegant, fun and easy to use.`,
-      "Businesses get increased productivity, a better environment for employees and customers, and control simple enough that nobody needs a manual. Our team is made up of world-class experts in every field, whose first priority is the best products and service for our clients.",
+      `${site.brand} is a full-service technology integration company specialising in smart home automation, commercial technology solutions, networking, security and custom electronics design. Proudly serving ${site.serviceArea}, we create intelligent environments that are secure, elegant, efficient and simple to operate.`,
+      "For homeowners, we create intuitive living spaces that enhance comfort, convenience, security and entertainment. For businesses, we design technology systems that improve productivity, strengthen security and deliver exceptional experiences for employees and customers alike.",
+      "Every project is designed, engineered, installed and supported by experienced professionals committed to delivering outstanding craftsmanship and exceptional customer service.",
     ],
   },
   {
     label: "OUR EXPERIENCE",
     paragraphs: [
-      "A great company is made up of great people — people who approach each day with energy, integrity and an unwavering commitment to excellence. Our principals and founders each have over 35 years of experience designing and installing advanced home entertainment systems, and are committed to instilling those values in every member of the team.",
-      "From lighting, AV and shade control, to a home surveillance system, to total home control and everything in between, we have you covered. Whether it is a small theater or a complete home automation project, you can be sure of outstanding personal and professional service.",
+      "A great company is built by great people — professionals who bring integrity, expertise and a relentless commitment to excellence every day.",
+      "The leadership team at Latserof Technologies brings more than 35 years of combined experience in custom electronics, automation, networking, security and audiovisual system integration. Our extensive industry knowledge allows us to design technology solutions that are reliable, scalable and tailored to each client's unique needs.",
+      "Whether installing a dedicated home theater, deploying enterprise-grade networking, integrating intelligent lighting control, designing whole-home automation or implementing commercial security systems, we deliver solutions that perform flawlessly today while remaining ready for tomorrow.",
+      "Our reputation has been built on professionalism, attention to detail and long-term relationships with our clients.",
     ],
   },
   {
     label: "A PASSIONATE APPROACH",
     paragraphs: [
-      "We do what we truly love to do. Every project is approached with unwavering passion and an intense sense of integrity for doing things right, so the finished system exceeds expectations rather than merely meeting a spec.",
-      "Our team can transform a home or an office space into a musical and visual world. It is how we have done business for over 30 years, and it is why our clients trust us to do things right — and we are not about to let them down.",
+      "Technology is more than our profession — it is our passion. Every project is approached with enthusiasm, precision and an uncompromising commitment to quality. We believe every installation should look exceptional, perform flawlessly and provide years of dependable service.",
+      "Our team transforms homes and businesses into intelligent environments where technology works effortlessly in the background, allowing clients to enjoy the experience instead of managing the equipment.",
+      `For more than three decades, our commitment to excellence has earned the trust of homeowners, builders, architects, designers and business owners throughout ${site.serviceArea}.`,
     ],
   },
+  {
+    label: "OUR COMMITMENT",
+    paragraphs: [
+      "Our mission is simple: design exceptional technology, install it professionally, and support it for life.",
+      "We are committed to delivering innovative solutions, superior workmanship and customer service that exceeds expectations on every project.",
+    ],
+  },
+] as const;
+
+/**
+ * Capability list that sits under WHAT WE DO on /about.
+ *
+ * Kept as data rather than a paragraph so it can render as a clean grid
+ * instead of a comma-run, and so Thomas can add or drop a line without
+ * rewriting the surrounding prose.
+ */
+export const offerings = [
+  "Smart home automation",
+  "Commercial automation & control",
+  "Audio & video systems",
+  "Home theater design",
+  "Lighting control",
+  "Motorised shades",
+  "Enterprise & residential networking",
+  "Security & video surveillance",
+  "Access control systems",
+  "Wi-Fi design & optimisation",
+  "Structured cabling",
+  "Conference room & collaboration systems",
+  "Outdoor entertainment systems",
+  "Service & preventative maintenance",
 ] as const;
 
 /**
