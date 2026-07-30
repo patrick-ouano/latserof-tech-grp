@@ -428,18 +428,17 @@ html.js [data-reveal][data-revealed] {
   .text-gradient-gold {
     background: linear-gradient(
       104deg,
-      var(--color-paper) 0%,
-      var(--color-paper) 38%,
-      var(--color-gold-bright) 62%,
+      var(--color-gold-bright) 0%,
+      var(--color-gold-bright) 34%,
+      var(--color-gold) 72%,
       var(--color-gold) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    /* Without this the gradient is painted once across the whole inline box,
-       so a phrase that wraps gets the pale end of the ramp on line one and
-       the gold end on line two — it reads as two different colours rather
-       than one emphasis. `clone` restarts the ramp per line fragment. */
+    /* Keep every fragment within the gold family. A paper-to-gold ramp that
+       crossed a wrapped word made the two halves look like different
+       typefaces. `clone` still restarts the subtle gold ramp per line. */
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
