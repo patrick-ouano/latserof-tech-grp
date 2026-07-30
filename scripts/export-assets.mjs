@@ -102,20 +102,20 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // A tech on a ladder wiring a projector mount into an open ceiling,
-    // tools on the ladder tray. Replaced the display-mounting frame on
-    // 2026-07-29: this one has hands on the work mid-task rather than a
-    // finished panel, and it is dark, so it sits in the ink palette instead
-    // of fighting it.
+    // Two technicians fitting a display mount: one sets the bracket with a
+    // level and drill while the other assists. This replaced the ladder shot
+    // on 2026-07-30 because it shows the crew and the precision of the work,
+    // sits naturally in the dark palette, and carries no visible
+    // subcontractor branding.
     //
-    // Crop keeps the ceiling opening at the top and the tool tray at the
-    // bottom — the whole action. The centre band a plain 4:3 gravity would
-    // take loses the projector, which is the thing being installed.
-    src: "20170422_162202.jpg",
-    out: "header-about.webp",
+    // Source is portrait. The measured 4:3 crop keeps both technicians, the
+    // level, drill, bracket and recessed wiring box while dropping empty
+    // floor and the less useful bottom of the moving blanket.
+    src: "FBF2DD95-7975-4942-BCED-EDBF3BF87D15-converted.jpg",
+    out: "header-about-team.webp",
     width: 1600,
     height: 1200,
-    crop: { left: 0, top: 280, width: 2160, height: 1620 },
+    crop: { left: 0, top: 260, width: 3024, height: 2268 },
     position: "centre",
   },
   {

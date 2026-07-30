@@ -124,8 +124,8 @@ Two things follow:
 
 ## Crew at work
 - `45ED02D9` (3213×5712) — tech on ladder mounting a display bracket above a stone fireplace, lakeside home. Good "we do the work" shot
-- `FBF2DD95` (3024×4032) — two techs mounting a large display on a dark wood wall, moving blankets, Milwaukee tools
-- `20170422_162202` (2160×2880) — ★ **tech on a ladder wiring a projector mount into an open ceiling**, cable in hand, tools on the ladder tray, dark acoustic-panelled theater. The strongest *mid-task* frame in the set and dark enough to sit in the ink palette. Now `header-about.webp`. Note the polo reads "3digi… Automation" — a partner/sub's shirt, illegible at shipped size, but worth knowing
+- `FBF2DD95` (3024×4032) — ★ **two techs fitting a display mount on a dark wood wall**, with a level, drill, recessed wiring box, moving blankets and Milwaukee tools. Now `header-about-team.webp` (2026-07-30): it shows collaboration and precision, sits naturally in the ink palette, and carries no visible subcontractor branding
+- `20170422_162202` (2160×2880) — tech on a ladder wiring a projector mount into an open ceiling, cable in hand, tools on the ladder tray, dark acoustic-panelled theater. Previously `header-about.webp`; replaced because the polo reads "3digi… Automation" and the tighter single-person frame said less about Latserof's own crew. The old export name was retired as well to invalidate Next/Vercel image-optimizer caches
 
 ## Do not use
 - `18204926` (4032×3024) — blurry close-up of cabling with a finger in shot. Diagnostic photo, not portfolio
