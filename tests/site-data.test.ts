@@ -74,8 +74,13 @@ describe("disciplines", () => {
 
   it("pairs every image with alt text, and every missing image with none", () => {
     for (const d of disciplines) {
-      if (d.image) {
-        expect(d.image.startsWith("/images/")).toBe(true);
+      // Read `image` at its wider type on purpose. All four disciplines have
+      // a photo now, so TS narrows it to `string` and calls the else branch
+      // `never` — but the invariant under test is "photo and alt text travel
+      // together", which has to keep holding the day a photo is pulled.
+      const image: string | null = d.image;
+      if (image) {
+        expect(image.startsWith("/images/")).toBe(true);
         expect(d.imageAlt.length).toBeGreaterThan(0);
       } else {
         expect(d.imageAlt).toBe("");
