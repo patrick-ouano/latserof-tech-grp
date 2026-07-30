@@ -87,7 +87,11 @@ export function SiteHeader() {
             <span className="font-heading text-[16px] leading-none font-extrabold tracking-[0.16em] text-paper">
               LATSEROF
             </span>
-            <span className="font-heading text-[10px] leading-none font-semibold tracking-[0.30em] text-gold">
+            {/* 11px, not 10. At 10px with 0.30em tracking the descender-free
+                caps were at the legibility floor on a low-density display;
+                the tracking comes back a notch so the lockup stays the same
+                width under LATSEROF rather than growing past it. */}
+            <span className="font-heading text-[11px] leading-none font-semibold tracking-[0.26em] text-gold">
               TECHNOLOGIES
             </span>
           </span>

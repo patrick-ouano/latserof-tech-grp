@@ -51,7 +51,12 @@
   /* --- Lines --------------------------------------------------------- */
   --color-hairline: #1e1c19;
   --color-hairline-strong: #2a2621;
-  --color-stroke: #4a453d;
+  /* Boundary of an interactive control that is not currently selected: the
+     ghost button, the unchecked scope chips, the photo-pending plate. WCAG
+     wants 3:1 for those against their ground; the previous #4A453D managed
+     2.1:1 on ink, which read as a disabled edge rather than an available
+     one. #6A635A is 3.3:1 and still recessive next to gold. */
+  --color-stroke: #6a635a;
 
   /* --- Typography. Families bind to the next/font variables in
          layout.tsx. Archivo: headings, nav, buttons. Barlow: body, meta.
@@ -64,8 +69,37 @@
          Replaces the per-breakpoint px ladder: one clamp() covers 375px
          through 1440px continuously, so nothing snaps at a breakpoint and
          the awkward in-between widths (820px, 1100px) are handled. ---- */
-  --text-display: clamp(2.5rem, 1.1rem + 5.8vw, 5.25rem);
-  --text-display--line-height: 1.02;
+  /* Hero only, and container-relative (cqw) rather than viewport-relative
+     (vw) — the one place on the site where vw is the wrong unit.
+
+     The hero headline is two authored lines and the longest of them is
+     9.38em wide. What has to hold it is the text COLUMN, and the column does
+     not track the viewport: at 768px it is the full width, then the
+     two-column layout takes hold at 1024px and it drops to roughly half.
+     So the available width falls as the viewport grows, while any vw scale
+     keeps climbing — which is why the tagline was wrapping two lines into
+     four from 1024px up. No clamp() on vw can fix that; the type has to
+     shrink at the breakpoint, and only the container knows to.
+
+     10cqw is ~5% under the width the longest line needs at every size from
+     768px to 1440px. Note cqw resolves against the container's CONTENT box,
+     so the column's own padding is already excluded — do not subtract it
+     twice. Falls back to the viewport if the token is ever used outside a
+     container, which is the sane reading anyway; keep the `@container` on
+     the hero text column.
+
+     Ceiling is a guard, not a target: the column's content box caps at 619px
+     inside the 1280px canvas, so this tops out near 62px on its own.
+
+     Floor is 2rem, down from 2.5rem, and that is deliberate: at 2.5rem the
+     tagline no longer fits a 375px phone and broke into four ragged lines.
+     Two clean lines are worth more than 8px of size on a handset, where the
+     headline is the only large type on screen and has nothing to compete
+     with. It is still ~2x the lede. */
+  --text-display: clamp(2rem, 10cqw, 4rem);
+  /* Was 1.02, a one-line value that let the mask rows nearly touch once the
+     headline reliably set as two. */
+  --text-display--line-height: 1.06;
   --text-display--letter-spacing: -0.03em;
 
   --text-h1: clamp(2.125rem, 1.35rem + 3.2vw, 3.75rem);
@@ -402,6 +436,12 @@ html.js [data-reveal][data-revealed] {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    /* Without this the gradient is painted once across the whole inline box,
+       so a phrase that wraps gets the pale end of the ramp on line one and
+       the gold end on line two — it reads as two different colours rather
+       than one emphasis. `clone` restarts the ramp per line fragment. */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 }
 
