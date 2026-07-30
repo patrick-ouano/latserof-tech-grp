@@ -8,7 +8,7 @@ import { CTA_LABEL, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: CTA_LABEL,
-  description: `Free on-site surveys across ${site.serviceArea} — new construction, renovation, or a system that needs rescuing. No remote quotes.`,
+  description: `On-site surveys across ${site.serviceArea} — new construction, renovation, or a system that needs rescuing. No remote quotes.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -38,7 +38,7 @@ export default function ContactPage() {
             Tell us <span className="text-gradient-gold">the rooms</span>.
           </>
         }
-        lede={`Surveys are free across ${site.serviceArea} — new construction, renovation or a system that needs rescuing. Tell us roughly what you’re after and we’ll come and look. We do not give remote quotes.`}
+        lede={`We survey on site across ${site.serviceArea} — new construction, renovation or a system that needs rescuing. Tell us roughly what you’re after and we’ll come and look. We do not give remote quotes.`}
       />
 
       <Container className="py-16 xl:py-20">

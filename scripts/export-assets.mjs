@@ -169,41 +169,56 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // A four-camera array on a property-entrance pole. Replaced
-    // 23C5DD64 on 2026-07-29: that source is 2160x2880 with the cameras
-    // stacked up one edge, so the 4:3 slot on /systems sliced the upper
-    // camera clean in half — the discipline is "cameras" and the photo cut
-    // a camera off.
+    // Four bullet cameras on one pole head, palm fronds across the top of the
+    // frame. Took over the /systems discipline slot on 2026-07-30 when
+    // 20190719 moved to the homepage project card — see the entry below.
     //
-    // Cropped at native 1400x1050 (no resampling at all) around the head of
-    // the pole, so all four cameras sit inside the frame with the tile roof
-    // and tree behind them for scale.
-    src: "20190719_113348.jpg",
+    // This is the *illustration* slot, so a tight cluster against sky is the
+    // right job for it: the discipline is "Cameras & access" and this is four
+    // cameras, unobstructed, nothing severed. Its weakness as a portfolio
+    // photograph — no ground, no building, no sense of the property — is
+    // exactly what stops mattering at illustration size.
+    //
+    // Crop is the full source width at 4:3, centring the cluster with the
+    // pole running out of the bottom edge. Any higher and the frond eats the
+    // top cameras; any lower and the cluster rides the top of the frame.
+    src: "20180413_123834.jpg",
     out: "system-cameras.webp",
     width: 1400,
     height: 1050,
-    crop: { left: 280, top: 460, width: 1400, height: 1050 },
+    crop: { left: 0, top: 600, width: 1867, height: 1400 },
     position: "centre",
   },
   {
-    // Four bullet cameras on one pole head, palm fronds over the top of the
-    // frame. Replaced the CAM 6 close-up on 2026-07-30 for two reasons: the
-    // 3:2 slot took a centre band out of a 2160x3840 portrait and sheared the
-    // camera's head off, and even uncut a single housing is a poor
-    // illustration of a card titled "Multi-camera outdoor system".
+    // Third replacement for this card, and the reason is the same each time:
+    // the two earlier sources were fragments. The CAM 6 close-up (6D3F0035)
+    // was one housing shot against stone, and the palm-frond pole (20180413,
+    // now on /systems above) was a camera cluster against bare sky with
+    // nothing under it — so at card size both read as a photo that had been
+    // cut out of something rather than composed.
     //
-    // A different job from `system-cameras.webp` on /systems (that is
-    // 20190719, a private entrance; this is the gated multi-family property),
-    // so the two pages are not showing the same pole twice.
+    // 20190719 is the one camera frame in the set that is actually a
+    // *photograph of an installation*: four cameras on the pole head, hard
+    // midday sun, tile roof and magnolia behind for scale, the house wall and
+    // brick gate carrying the bottom of the frame. Nothing is severed and
+    // nothing is floating.
     //
-    // Crop centres the cluster in the 3:2 rect. Any lower and the condo
-    // roofline crowds in under it; any higher and the pole runs out of the
-    // bottom of the frame with nothing holding it up.
-    src: "20180413_123834.jpg",
+    // Exported 4:3 rather than the 3:2 the other project cards use, because
+    // ProjectGrid's slot *is* 4:3 (`aspect-[4/3]`, object-cover): a 3:2 file
+    // gets 89px taken off each side at render time, which is invisible on a
+    // wide cinema interior and not invisible on a pole with cameras 200px
+    // from the frame edge. At 4:3 the rect below is exactly what ships.
+    //
+    // The rect stops just above the lockable enclosure at the foot of the
+    // pole. A 4:3 landscape crop of a 1867x3840 portrait tops out at 1400px
+    // tall, which cannot hold both the camera head and the whole enclosure —
+    // so the frame ends on the house wall instead of cutting the enclosure in
+    // half, which would repeat the mistake this entry keeps fixing.
+    src: "20190719_113348.jpg",
     out: "project-surveillance-cameras.webp",
     width: 1600,
-    height: 1067,
-    crop: { left: 0, top: 560, width: 1867, height: 1245 },
+    height: 1200,
+    crop: { left: 0, top: 560, width: 1867, height: 1400 },
     position: "centre",
   },
   {

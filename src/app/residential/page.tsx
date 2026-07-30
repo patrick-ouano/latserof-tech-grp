@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const FAQ: QA[] = [
   {
     q: "Do you publish pricing?",
-    a: "No. Every system is specified for the rooms it goes in, so a price list would be guesswork on both sides. We do not give remote quotes — a free on-site survey is what comes first.",
+    a: "No. Every system is specified for the rooms it goes in, so a price list would be guesswork on both sides. We do not give remote quotes — an on-site survey is what comes first.",
   },
   {
     q: "Will you work on a system somebody else installed?",

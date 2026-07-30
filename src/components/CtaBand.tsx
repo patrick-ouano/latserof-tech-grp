@@ -34,7 +34,7 @@ export function CtaBand() {
             Tell us the rooms. We&rsquo;ll come and look.
           </h2>
           <p className="mt-4 font-body text-lede text-on-gold-body">
-            Free on-site surveys across {site.serviceArea} — new construction,
+            On-site surveys across {site.serviceArea} — new construction,
             renovation or a system that needs rescuing. No remote quotes; the
             survey comes first.
           </p>

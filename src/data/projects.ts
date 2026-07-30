@@ -63,7 +63,7 @@ export const projects: Project[] = [
     title: "Multi-camera outdoor system",
     location: "Central Florida",
     image: "/images/project-surveillance-cameras.webp",
-    alt: "Four outdoor bullet cameras mounted on a single pole head against a blue sky, palm fronds overhead",
+    alt: "Four outdoor bullet cameras on a pole at a gated property entrance, aimed to cover every approach, with a tile-roofed house behind",
   },
   {
     category: "RESIDENTIAL",

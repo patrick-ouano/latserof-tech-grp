@@ -135,9 +135,11 @@ export const disciplines = [
       "Remote viewing",
     ],
     // Outdoor camera install — added with the 2026-07-29 photo delivery.
+    // Reframed 2026-07-30: the property-entrance shot moved to the homepage
+    // project card, which needed a composed photograph more than this slot does.
     image: "/images/system-cameras.webp",
     imageAlt:
-      "Four outdoor bullet cameras on a single property-entrance pole, aimed to cover every approach",
+      "Four outdoor bullet cameras clustered on a single pole head against a blue sky, palm fronds overhead",
     residential: "Cameras and door access you can check from anywhere, recorded locally rather than rented back to you.",
     commercial: "Entry control and surveillance for schools, restaurants, businesses and premises with staff, stock or restricted areas.",
   },
@@ -175,14 +177,21 @@ export const distributors = [
 
 /**
  * How a job runs, start to finish. DRAFT — derived from approved copy
- * ("Walkthroughs are free anywhere in Central Florida"; "designed, wired and
+ * ("Walkthroughs are ... anywhere in Central Florida"; "designed, wired and
  * supported by the same crew that installed it") rather than invented.
+ *
+ * The handoff copy says walkthroughs are *free*. The site deliberately does
+ * not, as of 2026-07-30: naming a price of zero is a commitment about money on
+ * a site that otherwise quotes nothing, and it invites the reading that
+ * whatever follows the survey is on the house too. The reach is the promise
+ * worth making — we come to you, anywhere in the service area — so the copy
+ * says that and stops. `no-free-copy.test.ts` keeps it out.
  */
 export const process = [
   {
     number: "01",
     title: "Survey",
-    body: `We come and look at the rooms. Free across ${site.serviceArea}, whether it is new construction, a renovation or a system that needs rescuing.`,
+    body: `We come and look at the rooms — anywhere across ${site.serviceArea}, whether it is new construction, a renovation or a system that needs rescuing.`,
   },
   {
     number: "02",

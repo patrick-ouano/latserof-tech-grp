@@ -66,11 +66,41 @@ edge gravity on a 1:2 frame slices whatever is on the pole. Use an explicit
 
 | File | Dim | Notes |
 |---|---|---|
-| `20190719_113348` | 1867×3840 | ★ **Best camera shot.** Four bullet cameras on one property-entrance pole, lockable enclosure below, tile roof + magnolia behind, clean blue sky. Now `system-cameras.webp` |
-| `20180413_123834` | 1867×3840 | Four-camera cluster on a tall pole, palm fronds overhead, condo block and gated "DO NOT ENTER" entry behind. Reads multi-family / HOA, and unmistakably Florida. Now `project-surveillance-cameras.webp` (2026-07-30) |
+| `20190719_113348` | 1867×3840 | ★ **Best camera shot.** Four bullet cameras on one property-entrance pole, lockable enclosure below, tile roof + magnolia behind, hard midday sun. Was `system-cameras.webp`; **promoted to `project-surveillance-cameras.webp` 2026-07-30** — the homepage card needed the one frame here that is a composed photograph rather than a detail |
+| `20180413_123834` | 1867×3840 | Four-camera cluster on a tall pole, palm fronds overhead, condo block and gated "DO NOT ENTER" entry behind. Reads multi-family / HOA, and unmistakably Florida. Was `project-surveillance-cameras.webp` for a few hours on 2026-07-30; **now `system-cameras.webp`** |
 | `20180925_164549` | 1867×3840 | Same pole and property as `20190719`, later and cloudier light. **Same job — do not use both** |
 | `23C5DD64` | 2160×2880 | Two cameras plus a third housing on a pole. Was `system-cameras.webp` until 2026-07-29; the 4:3 crop cut the upper camera in half. Superseded |
 | `6D3F0035` | 2160×3840 | Close detail of a camera labelled CAM 6 on stacked stone. Was `project-surveillance-cameras.webp` until 2026-07-30 — the 3:2 slot sheared the camera head off, and one housing is a thin illustration of a card titled "multi-camera". **Unused — usable as a detail shot if a slot ever wants one** |
+
+### The surveillance card took three attempts — read this before a fourth
+
+`project-surveillance-cameras.webp` was changed on 2026-07-29, then twice on
+2026-07-30. Every rejection was the same complaint in different words: the photo
+looked **cut out**. Worth naming the cause, because it is a property of the
+source set and not of any one crop.
+
+Five of the six camera photos are 1:2 phone portraits aimed *up* at a pole. Point
+a phone up and you get the subject and sky and nothing else — no ground, no
+building, no horizon. Crop that to a landscape slot and the result has no bottom
+edge that means anything: the pole leaves the frame, the sky fills half the
+picture, and it reads as a fragment however carefully the rect is measured. Two
+attempts were spent moving the rect around, which could not fix it.
+
+`20190719` is the exception — shot from further back, so the house wall, brick
+gate and hedge close the bottom of the frame. That is why it is now on the card,
+and it is why the remaining alternatives are not upgrades: they are all the same
+upward phone shot.
+
+Two things follow:
+1. **The card is as good as this set allows.** Improving it needs a new
+   photograph, not a new crop — a camera install shot from 20–30ft back at
+   eye level, with the building in it. Cheap to ask Thomas for.
+2. **Check the aspect the slot actually renders.** `ProjectGrid` is
+   `aspect-[4/3]` with `object-cover`, and the project entries in
+   `export-assets.mjs` export 3:2 — so every other project card silently loses
+   89px off each side at render time. Harmless on a wide cinema interior,
+   not harmless on a pole. This entry exports 4:3 so the measured rect is what
+   ships; the others were left alone rather than re-cropped unasked.
 
 ## Equipment racks / networking
 
@@ -147,9 +177,11 @@ The homepage has three project cards: RESIDENTIAL, COMMERCIAL, SURVEILLANCE.
   `header-commercial.webp`; `A3D15F9C` (MXnet rack) still covers the homepage
   card. A true conference/boardroom *table* photo is still absent, so the
   boardroom project card leans on rack photography.
-- **Surveillance** — ~~zero photos~~ **resolved 2026-07-29.** New camera installs
-  (`23C5DD64`, `6D3F0035`, and related) now feed `system-cameras.webp` and
-  `project-surveillance-cameras.webp`.
+- **Surveillance** — ~~zero photos~~ **resolved 2026-07-29**, reframed twice
+  since. `20190719` carries the homepage card and `20180413` the /systems
+  discipline slot as of 2026-07-30. Adequate, not strong — see "the
+  surveillance card took three attempts" above for why, and for the one photo
+  worth asking Thomas to take.
 
 Locations still pending from Thomas (cities per room group).
 
@@ -200,6 +232,10 @@ Thomas shot himself. The swap costs nothing — drop a new
    the single highest-value photo still missing from the site, and unlike the
    hero screen it costs nothing but his time.
 4. **Bigger original of `Foerstal 676`?** (optional)
+4b. **One camera install shot from back at eye level**, with the building in
+   frame — see the surveillance section. Every camera photo in the set is a
+   phone pointed straight up at a pole, which is why that card has been
+   reframed three times. Second-cheapest high-value photo after the portrait.
 5. License number — keep current site copy; not a priority.
 6. Domain is on GoDaddy — point DNS at Vercel when ready.
 
