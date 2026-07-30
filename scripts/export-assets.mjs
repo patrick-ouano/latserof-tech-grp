@@ -16,11 +16,13 @@
  * the security limits"), so run `py scripts/convert-heic.py` first.
  */
 
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import sharp from "sharp";
+
+import { warpOntoQuad } from "./lib/screen-composite.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = path.join(ROOT, "photos-source");
@@ -196,12 +198,63 @@ const PHOTOS = [
 ];
 
 /**
+ * Content projected onto the cinema screen in the hero photo.
+ *
+ * The screen in `hero-cinema-theater.webp` is genuinely blank, so showing
+ * something on it is a perspective warp onto the four measured corners — see
+ * scripts/lib/screen-composite.mjs for the maths.
+ *
+ * ⚠️ RIGHTS. Whatever goes here is published on a commercial site, so it must
+ * be footage Latserof is licensed to use. Motorsport broadcast frames, team
+ * liveries and championship logos are none of them free to reuse, and this
+ * repo already refuses vendor marketing photos for the same reason (see
+ * PHOTO_MANIFEST.md). Confirm the licence before shipping a frame here.
+ *
+ * The composite is skipped, not failed, when the file is absent: the hero
+ * with a blank screen is a perfectly good photo, and a missing optional
+ * still should not break `npm run assets` for everyone else.
+ */
+const SCREEN = {
+  base: "hero-cinema-theater.webp",
+  /** Drop the still in photos-source/ under this basename. */
+  content: "screen-content",
+  extensions: [".jpg", ".jpeg", ".png", ".webp"],
+  /**
+   * Screen corners, TL TR BR BL, in the 2400x1350 exported hero.
+   *
+   * Measured off the shipped file rather than the camera original — the
+   * export is a pure downscale of a 16:9 source, so there is no crop to
+   * account for, and anyone can re-check these against the same image.
+   * Found by fitting the wall/screen luminance gradient on all four edges;
+   * a flat threshold drifts because the screen's upper-left is much dimmer
+   * than its centre.
+   */
+  corners: [
+    [192.7, 104.9],
+    [1073.9, 248.4],
+    [1076.6, 620.0],
+    [275.3, 691.6],
+  ],
+  /**
+   * How much of the screen's own lighting to keep. Lower = more of the
+   * projector hotspot and the dim upper-left corner show through the
+   * projected image, which is what stops it reading as a flat paste.
+   */
+  lightFloor: 0.58,
+  supersample: 3,
+};
+
+/**
  * Open Graph card. Local trades get shared over WhatsApp and Facebook
  * constantly; without this a shared link renders as bare text.
  * 1200x630 is the size every platform crops from.
+ *
+ * Derived from the *exported* hero, not the camera original, so whatever is
+ * on the screen in the hero is also on the shared card. 1200x630 is a wider
+ * ratio than 16:9, so this still crops top and bottom.
  */
 const OG = {
-  src: "PXL_20231222_193946370.jpeg",
+  from: "hero-cinema-theater.webp",
   out: "og-image.jpg", // jpg: a couple of scrapers still refuse WebP
   width: 1200,
   height: 630,
@@ -313,6 +366,93 @@ function buildIco(images) {
   return Buffer.concat([header, directory, ...images.map((i) => i.data)]);
 }
 
+/**
+ * Warp SCREEN.content onto the blank cinema screen in the exported hero.
+ *
+ * Runs after the photography pass, so it edits the WebP that pass just
+ * wrote. Returns a status string for the log; never throws for a missing
+ * source, because the still is optional.
+ */
+async function compositeScreen() {
+  const found = SCREEN.extensions
+    .map((ext) => path.join(SRC, SCREEN.content + ext))
+    .find((p) => existsSync(p));
+
+  if (!found) {
+    return `no ${SCREEN.content}.* in photos-source/ — screen left blank`;
+  }
+
+  const basePath = path.join(OUT, SCREEN.base);
+  if (!existsSync(basePath)) {
+    throw new Error(`${SCREEN.base} was not exported, nothing to composite onto`);
+  }
+
+  // Read through a Buffer, not a path: this writes back to the same file, and
+  // libvips keeps the input open long enough to make an in-place write fail
+  // on Windows with "unable to open for write".
+  const base = await sharp(readFileSync(basePath))
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  // Pre-resize the still to roughly the screen's on-screen width times the
+  // supersample rate. Warping a 4000px original down to an 880px quad one
+  // bilinear tap at a time aliases badly; this makes the sampling ~1:1.
+  const [tl, tr, br, bl] = SCREEN.corners;
+  const edge = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+  const target =
+    Math.ceil(Math.max(edge(tl, tr), edge(bl, br)) * SCREEN.supersample);
+
+  const content = await sharp(found)
+    .rotate()
+    // Screens are 16:9; cover-fit so the still fills it rather than
+    // letterboxing black bars onto a cinema screen, which would look broken.
+    .resize(target, Math.round((target * 9) / 16), {
+      fit: "cover",
+      position: "centre",
+    })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const overlay = warpOntoQuad(
+    {
+      data: content.data,
+      width: content.info.width,
+      height: content.info.height,
+      channels: content.info.channels,
+    },
+    SCREEN.corners,
+    {
+      data: base.data,
+      width: base.info.width,
+      height: base.info.height,
+      channels: base.info.channels,
+    },
+    { supersample: SCREEN.supersample, lightFloor: SCREEN.lightFloor },
+  );
+
+  const info = await sharp(base.data, {
+    raw: {
+      width: base.info.width,
+      height: base.info.height,
+      channels: base.info.channels,
+    },
+  })
+    .composite([
+      {
+        input: overlay.data,
+        raw: { width: overlay.width, height: overlay.height, channels: 4 },
+        top: 0,
+        left: 0,
+      },
+    ])
+    .webp({ quality: 82 })
+    .toFile(basePath);
+
+  report(`${SCREEN.base} (screen)`, info);
+  return `projected ${path.basename(found)}`;
+}
+
 let failed = 0;
 
 function report(name, info) {
@@ -351,10 +491,18 @@ async function run() {
     }
   }
 
+  console.log("\nscreen composite");
+  try {
+    console.log(`  ${await compositeScreen()}`);
+  } catch (err) {
+    console.error(`  FAILED   screen composite: ${err.message}`);
+    failed += 1;
+  }
+
+  // After the composite, so the shared card shows the same screen as the hero.
   console.log("\nopen graph");
   try {
-    const info = await sharp(path.join(SRC, OG.src))
-      .rotate()
+    const info = await sharp(path.join(OUT, OG.from))
       .resize(OG.width, OG.height, { fit: "cover", position: "centre" })
       .jpeg({ quality: 80, mozjpeg: true })
       .toFile(path.join(OUT, OG.out));

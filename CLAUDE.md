@@ -46,6 +46,7 @@ The `js` / `sda` capability classes are set by a blocking script in `layout.tsx`
 ## Assets
 - Logo: `public/logo-badge.png` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**) and `public/logo-wordmark.png` (horizontal lockup, use if a wider version is needed). Originals live in `design/Latserof Technologies website design/design_handoff_latserof_homepage/assets/`. These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch. The badge PNG is ~1MB, far heavier than a 54px header mark warrants; the vector solves this, otherwise re-export at 2x display size.
 - Photography: see `PHOTO_MANIFEST.md`. Shipped images are real Latserof work, exported from `photos-source/` by `npm run assets`. Surveillance photography was added 2026-07-29. Commercial *room* photos are still thin (rack shots cover the commercial card). Locations pending from Thomas.
+- **Hero cinema screen.** The screen in `hero-cinema-theater.webp` is blank, and `npm run assets` can project a still onto it — put the file in `photos-source/` as `screen-content.*` and the export warps it onto the measured corners (`scripts/lib/screen-composite.mjs`, `SCREEN` in `scripts/export-assets.mjs`). Absent, the step is skipped and the screen stays blank. `og-image.jpg` derives from the finished hero, so it inherits whatever is on the screen. Thomas asked for a Formula 1 car; **no licensed still exists yet** — broadcast frames and team liveries are third-party IP, same rule as the vendor photos below. See `PHOTO_MANIFEST.md`.
 - The five vendor marketing files in `photos-source/` (Control4, Araknis, ClareVision) are third-party copyright and **must not** appear as project photography. Dealer names render as type in `BrandStrip`, never as logo files. Distributor partners: 21st Century Distribution and SnapAV.
 - Projects data should be modeled as data (not hardcoded JSX) — `{ category, title, location, image, slug? }` — since Thomas will add new installs over time.
 
@@ -85,6 +86,7 @@ Site is complete and builds static. **Open before launch:**
 - `RESEND_API_KEY` in Vercel; `QUOTE_TO_EMAIL` defaults to `tj@927hifi.com` in `.env.example`.
 - Confirm the production domain on GoDaddy (`site.url` is a placeholder hostname until DNS is pointed at Vercel).
 - License number: keep whatever is currently on the site; not a priority.
+- A licensed still for the hero cinema screen, if the F1 idea goes ahead — the pipeline is built and waiting on the image (see Assets).
 
 ## Responsive
 The fixed breakpoint type ladder is gone — the `clamp()` scale in `@theme` covers 375–1440px continuously, so nothing snaps and the awkward in-between widths are handled. Layout breakpoints still apply:

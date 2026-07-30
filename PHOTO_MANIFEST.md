@@ -130,6 +130,36 @@ The homepage has three project cards: RESIDENTIAL, COMMERCIAL, SURVEILLANCE.
 
 Locations still pending from Thomas (cities per room group).
 
+---
+
+## Content on the hero cinema screen
+
+The screen in `hero-cinema-theater.webp` is genuinely blank — it is a white
+rectangle seen at an angle. Thomas asked for something on it (a Formula 1 car).
+
+`npm run assets` supports this: drop a still in `photos-source/` named
+`screen-content.jpg` (`.jpeg`, `.png` and `.webp` also work) and the export
+warps it onto the screen's four measured corners, then multiplies the room's
+own light falloff back over it so it reads as projected rather than pasted.
+The maths is in `scripts/lib/screen-composite.mjs`; the corners and blend
+settings are the `SCREEN` block in `scripts/export-assets.mjs`. With no such
+file the step is skipped and the screen stays blank, so the export never
+breaks for want of an optional still. `og-image.jpg` is now derived from the
+finished hero, so whatever is on the screen is also on the shared link card.
+
+⚠️ **The still is not sourced yet, and it is a rights question, not a
+technical one.** Motorsport broadcast frames, team liveries, car designs and
+championship logos are all somebody's licensed property, and this file already
+refuses vendor marketing photos on exactly that basis. A frame Thomas shot
+himself, or properly licensed stock, is fine. A grab off a race broadcast is
+not — on a commercial contractor's homepage it is the most visible thing on
+the page.
+
+Worth knowing before it ships: the screen is the brightest object in a very
+dark frame and sits directly beside the gold gradient headline, so saturated
+content there pulls hard against the ink/gold/paper palette. A dark, low-
+saturation frame will sit in the design far better than a bright livery shot.
+
 ## Other questions
 1. **Locations** for each room above (city is enough). Ask per *room group*, not per file.
 2. ~~Legal entity name.~~ **Resolved: Latserof Technologies Grp LLC.**
