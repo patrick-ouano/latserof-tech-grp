@@ -1,12 +1,13 @@
 # Photo manifest — Latserof Tech Grp source photos
 
-Raw folder: `photos-source/` (43 files, gitignored). Reviewed 2026-07-29 — every
-file below has been opened and described. **Locations are still unknown** and
-need confirming with Thomas; they're the one thing that can't be read off the
-pixels.
+Raw folder: `photos-source/` (68 entries, gitignored — HEICs are counted twice
+because each has a `-converted.jpg` sibling). Reviewed 2026-07-29 — every file
+below has been opened and described. **Locations are still unknown** and need
+confirming with Thomas; they're the one thing that can't be read off the pixels.
 
-38 are Latserof's own project photos. 5 are vendor marketing collateral — see
-"Vendor marketing assets" below; those must not be used as project photography.
+All but 5 are Latserof's own project photos. Those 5 are vendor marketing
+collateral — see "Vendor marketing assets" below; they must not be used as
+project photography.
 
 HEIC files convert cleanly (verified with pillow-heif). No manual conversion or
 renaming is needed — the export script handles crop, resize, WebP and naming.
@@ -56,6 +57,21 @@ Ultra-wide, so a square hero crop loses a lot. Fine for wide banners.
 
 ---
 
+## Surveillance — camera installs
+
+All shot on a phone in portrait, most at 1867×3840 (≈1:2). That ratio is the
+thing to watch: the site's discipline slot is **4:3**, and a plain centre or
+edge gravity on a 1:2 frame slices whatever is on the pole. Use an explicit
+`crop` rect in `scripts/export-assets.mjs` for every one of these.
+
+| File | Dim | Notes |
+|---|---|---|
+| `20190719_113348` | 1867×3840 | ★ **Best camera shot.** Four bullet cameras on one property-entrance pole, lockable enclosure below, tile roof + magnolia behind, clean blue sky. Now `system-cameras.webp` |
+| `20180413_123834` | 1867×3840 | Four-camera cluster on a tall pole, palm fronds overhead, condo block and gated "DO NOT ENTER" entry behind. Reads multi-family / HOA, and unmistakably Florida. **Unused — good spare** |
+| `20180925_164549` | 1867×3840 | Same pole and property as `20190719`, later and cloudier light. **Same job — do not use both** |
+| `23C5DD64` | 2160×2880 | Two cameras plus a third housing on a pole. Was `system-cameras.webp` until 2026-07-29; the 4:3 crop cut the upper camera in half. Superseded |
+| `6D3F0035` | 2160×3840 | Close detail of a camera labelled CAM 6 on stacked stone. Now `project-surveillance-cameras.webp` |
+
 ## Equipment racks / networking
 
 | File | Dim | Notes |
@@ -72,9 +88,14 @@ Ultra-wide, so a square hero crop loses a lot. Fine for wide banners.
 | `20170128_192202` | 1458×2592 | Rack, **Thomas selfie** |
 | `F6CEE2EE` | 2316×3088 | **Thomas selfie**, racks labelled GREAT ROOM / HD MATRIX / OASIS |
 
+## Commercial interiors ★ gap closed 2026-07-29
+- `C189AAEA` (3840×1775) — **twelve-panel video wall going up in an office.** Drop ceiling, troffer lighting, tech on an orange ladder still commissioning it, Samsung cartons on the floor. Two panels showing "Channel Scan Complete!". The one frame in the set that unmistakably reads *commercial building* rather than *equipment*, and it has a person working in it. Now `header-commercial.webp`. Slightly soft — camera shake — but usable at header size
+- `20191017_125656` (1836×3264) — **Thomas in front of a finished 4×4 video wall**, branded blue LTG shirt, "T.J." on the cuff. **Mirrored** (front-camera preview): un-flop it or the signage and his own embroidered logo read backwards. Now `about-owner.webp`
+
 ## Crew at work
 - `45ED02D9` (3213×5712) — tech on ladder mounting a display bracket above a stone fireplace, lakeside home. Good "we do the work" shot
 - `FBF2DD95` (3024×4032) — two techs mounting a large display on a dark wood wall, moving blankets, Milwaukee tools
+- `20170422_162202` (2160×2880) — ★ **tech on a ladder wiring a projector mount into an open ceiling**, cable in hand, tools on the ladder tray, dark acoustic-panelled theater. The strongest *mid-task* frame in the set and dark enough to sit in the ink palette. Now `header-about.webp`. Note the polo reads "3digi… Automation" — a partner/sub's shirt, illegible at shipped size, but worth knowing
 
 ## Do not use
 - `18204926` (4032×3024) — blurry close-up of cabling with a finger in shot. Diagnostic photo, not portfolio
@@ -121,9 +142,11 @@ The homepage has three project cards: RESIDENTIAL, COMMERCIAL, SURVEILLANCE.
 - **Residential** — covered many times over. No problem. New exterior lighting
   shots (`C454E4AC`, `8F842BF6`, `15E7E267`) strengthen the "safer and smarter"
   residential story.
-- **Commercial** — still thin on *rooms*. `A3D15F9C` (MXnet rack) is the main
-  commercial read; schools / restaurants / businesses are confirmed as the
-  audience, but we still lack a conference-room photo.
+- **Commercial** — ~~still thin on *rooms*~~ **resolved 2026-07-29.**
+  `C189AAEA` is a video wall being installed in an office and now carries
+  `header-commercial.webp`; `A3D15F9C` (MXnet rack) still covers the homepage
+  card. A true conference/boardroom *table* photo is still absent, so the
+  boardroom project card leans on rack photography.
 - **Surveillance** — ~~zero photos~~ **resolved 2026-07-29.** New camera installs
   (`23C5DD64`, `6D3F0035`, and related) now feed `system-cameras.webp` and
   `project-surveillance-cameras.webp`.
@@ -147,24 +170,30 @@ file the step is skipped and the screen stays blank, so the export never
 breaks for want of an optional still. `og-image.jpg` is now derived from the
 finished hero, so whatever is on the screen is also on the shared link card.
 
-⚠️ **The still is not sourced yet, and it is a rights question, not a
-technical one.** Motorsport broadcast frames, team liveries, car designs and
-championship logos are all somebody's licensed property, and this file already
-refuses vendor marketing photos on exactly that basis. A frame Thomas shot
-himself, or properly licensed stock, is fine. A grab off a race broadcast is
-not — on a commercial contractor's homepage it is the most visible thing on
-the page.
+**A still is now in place (2026-07-29).** `screen-content.png` (1024×576) is a
+night shot of the Las Vegas Grand Prix — a car under the lights with sparks
+under the floor, the Sphere behind it, and Salesforce and Wynn trackside
+signage. It composites well: at 1024px it lands close to 1:1 on the ~880px
+screen quad, so there is no visible upscaling, and being dark and blue it
+reads as projected light against the room's own blue cove lighting instead of
+fighting the ink/gold palette. `og-image.jpg` picks it up automatically.
 
-Worth knowing before it ships: the screen is the brightest object in a very
-dark frame and sits directly beside the gold gradient headline, so saturated
-content there pulls hard against the ink/gold/paper palette. A dark, low-
-saturation frame will sit in the design far better than a bright livery shot.
+⚠️ **Still an open rights question — the technical side is done, the licence
+is not.** That frame is press/broadcast motorsport photography: the image
+itself, the team livery and the trackside marks all belong to somebody. This
+file refuses vendor marketing photos on exactly that basis, and the screen is
+the brightest object on the homepage, so it is the least discreet possible
+place to borrow an image. Before launch, either license it or swap in a frame
+Thomas shot himself. The swap costs nothing — drop a new
+`photos-source/screen-content.*` and re-run `npm run assets`.
 
 ## Other questions
 1. **Locations** for each room above (city is enough). Ask per *room group*, not per file.
 2. ~~Legal entity name.~~ **Resolved: Latserof Technologies Grp LLC.**
-3. ~~Happy appearing on the site?~~ **Yes** — About page uses `about-owner.webp`
-   from `20170509_170045`.
+3. ~~Happy appearing on the site?~~ **Yes** — About page uses `about-owner.webp`,
+   from `20191017_125656` since 2026-07-29 (was `20170509_170045`, a selfie with
+   half his head out of frame). Worth asking whether he has a deliberate
+   headshot; this is still a phone snapshot, just a much better one.
 4. **Bigger original of `Foerstal 676`?** (optional)
 5. License number — keep current site copy; not a priority.
 6. Domain is on GoDaddy — point DNS at Vercel when ready.
