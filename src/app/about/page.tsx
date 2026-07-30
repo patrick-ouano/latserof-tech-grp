@@ -117,40 +117,57 @@ export default function AboutPage() {
             <Reveal
               key={block.label}
               index={i}
-              className={`grid gap-x-12 gap-y-5 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] ${
+              className={`grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] ${
                 i > 0 ? "border-t border-hairline pt-14 lg:pt-16" : ""
               }`}
             >
               <h3 className="font-mono text-meta leading-snug font-bold text-gold uppercase lg:pt-[10px]">
                 {block.label}
               </h3>
-              <div className="space-y-6">
-                {block.paragraphs.map((paragraph) => (
+              <div>
+                {/* The opening paragraph of each block carries the lede size;
+                    the rest step down to body. Every paragraph used to be set
+                    at lede, which is a size meant for one paragraph, not
+                    twelve — at that weight the four blocks read as a single
+                    undifferentiated wall with nowhere for the eye to land.
+                    The step-down gives each block a visible way in, and takes
+                    roughly a screen and a half off the page. */}
+                {block.paragraphs.map((paragraph, p) => (
                   <p
                     key={paragraph}
-                    className="max-w-[58ch] font-body text-lede text-paper-dim"
+                    className={
+                      p === 0
+                        ? "max-w-[56ch] font-body text-lede text-paper-dim"
+                        : "mt-5 max-w-[68ch] font-body text-copy text-body-dim"
+                    }
                   >
                     {paragraph}
                   </p>
                 ))}
-
-                {block.label === "WHAT WE DO" && (
-                  <ul className="mt-2 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                    {offerings.map((item) => (
-                      <li
-                        key={item}
-                        className="flex gap-3 font-body text-copy text-body-dim"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </div>
+
+              {/* Spans both columns, unlike the prose. It is the one element
+                  in the section that reaches the full width of the rule above
+                  it, which stops the whole band reading as a narrow ribbon of
+                  text against an empty right half. Three columns rather than
+                  two on desktop: thirteen short noun phrases in two columns
+                  ran longer than the prose it belongs to. */}
+              {block.label === "WHAT WE DO" && (
+                <ul className="mt-4 grid gap-x-8 gap-y-3 border-t border-hairline pt-8 sm:grid-cols-2 lg:col-span-2 lg:mt-6 lg:grid-cols-3 lg:pt-10">
+                  {offerings.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-3 font-body text-copy text-body-dim"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </Reveal>
           ))}
         </div>
