@@ -6,7 +6,7 @@ const PAGES = [
   { path: "/commercial", heading: /Rooms that work/ },
   { path: "/systems", heading: /Four disciplines/ },
   { path: "/work", heading: /Recent/ },
-  { path: "/about", heading: /Design exceptional technology/ },
+  { path: "/about", heading: /Design it. Install it./ },
   { path: "/contact", heading: /Tell us/ },
 ];
 

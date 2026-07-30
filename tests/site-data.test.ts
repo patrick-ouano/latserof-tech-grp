@@ -153,6 +153,20 @@ describe("story", () => {
     }
   });
 
+  it("ships every story photograph with useful alt text", () => {
+    const photographed = story.filter((block) => block.image);
+    expect(photographed.length).toBeGreaterThanOrEqual(2);
+
+    for (const block of photographed) {
+      const image = block.image!;
+      expect(image.alt.length).toBeGreaterThan(30);
+      expect(
+        existsSync(path.join(ROOT, "public", image.src)),
+        `missing ${image.src}`,
+      ).toBe(true);
+    }
+  });
+
   /**
    * The source copy called the company three different things and listed a
    * city outside the service area. Both were normalised on the way in, and

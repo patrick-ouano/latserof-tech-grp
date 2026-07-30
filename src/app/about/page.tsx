@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import { AboutStory } from "@/components/AboutStory";
 import { BrandStrip } from "@/components/BrandStrip";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
@@ -9,7 +10,7 @@ import { DeliverySteps } from "@/components/DeliverySteps";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/motion/Reveal";
-import { CTA_HREF, CTA_LABEL, offerings, site, story } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -40,14 +41,19 @@ export default function AboutPage() {
         eyebrow="About"
         title={
           <>
-            Design exceptional technology.{" "}
-            <span className="text-gradient-gold">Install it professionally.</span>
+            <span className="block whitespace-nowrap">
+              Design it. Install it.
+            </span>
+            {" "}
+            <span className="text-gradient-gold block whitespace-nowrap">
+              Support it for life.
+            </span>
           </>
         }
-        lede={`${site.brand} is a licensed, insured low-voltage contractor working out of Kissimmee. We design the system, pull the cable, mount the hardware and support it afterwards — all in-house. Design services available upon request.`}
+        lede={`A licensed, insured low-voltage contractor based in Kissimmee. One team designs, installs and supports every system across ${site.serviceArea}. Design services are available upon request.`}
         photo={{
-          src: "/images/header-about.webp",
-          alt: "A technician on a ladder wiring a projector mount into an open ceiling, tools on the ladder tray",
+          src: "/images/header-about-team.webp",
+          alt: "Two technicians level and fasten a display mounting bracket during an installation",
         }}
       >
         <div className="flex flex-wrap gap-[14px]">
@@ -58,7 +64,7 @@ export default function AboutPage() {
         </div>
       </PageHeader>
 
-      <Section id="owner" title="Who you deal with" meta="No account managers">
+      <Section id="owner" title="Who you deal with">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-16">
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-card border border-hairline bg-surface-2">
@@ -109,68 +115,10 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Four blocks of the client's own narrative, plus the capability list
-          under WHAT WE DO. Copy is Thomas's — see `story` and `offerings`. */}
+      {/* Concise company narrative and proof-of-work photography. The full
+          ten-step delivery detail remains in the process section below. */}
       <Section id="story" title="About Latserof Technologies" meta="What we stand for">
-        <div className="grid gap-14 lg:gap-16">
-          {story.map((block, i) => (
-            <Reveal
-              key={block.label}
-              index={i}
-              className={`grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] ${
-                i > 0 ? "border-t border-hairline pt-14 lg:pt-16" : ""
-              }`}
-            >
-              <h3 className="font-mono text-meta leading-snug font-bold text-gold uppercase lg:pt-[10px]">
-                {block.label}
-              </h3>
-              <div>
-                {/* The opening paragraph of each block carries the lede size;
-                    the rest step down to body. Every paragraph used to be set
-                    at lede, which is a size meant for one paragraph, not
-                    twelve — at that weight the four blocks read as a single
-                    undifferentiated wall with nowhere for the eye to land.
-                    The step-down gives each block a visible way in, and takes
-                    roughly a screen and a half off the page. */}
-                {block.paragraphs.map((paragraph, p) => (
-                  <p
-                    key={paragraph}
-                    className={
-                      p === 0
-                        ? "max-w-[56ch] font-body text-lede text-paper-dim"
-                        : "mt-5 max-w-[68ch] font-body text-copy text-body-dim"
-                    }
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-
-              {/* Spans both columns, unlike the prose. It is the one element
-                  in the section that reaches the full width of the rule above
-                  it, which stops the whole band reading as a narrow ribbon of
-                  text against an empty right half. Three columns rather than
-                  two on desktop: thirteen short noun phrases in two columns
-                  ran longer than the prose it belongs to. */}
-              {block.label === "WHAT WE DO" && (
-                <ul className="mt-4 grid gap-x-8 gap-y-3 border-t border-hairline pt-8 sm:grid-cols-2 lg:col-span-2 lg:mt-6 lg:grid-cols-3 lg:pt-10">
-                  {offerings.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 font-body text-copy text-body-dim"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </Reveal>
-          ))}
-        </div>
+        <AboutStory />
       </Section>
 
       {/* The ten-step long form, not the four-beat summary the other pages

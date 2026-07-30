@@ -276,52 +276,57 @@ export const deliveryProcess = [
   },
 ] as const;
 
+export type StoryBlock = {
+  label: string;
+  paragraphs: readonly string[];
+  image?: { src: string; alt: string };
+};
+
 /**
- * Company narrative — the client's own marketing copy, revised 2026-07-30.
+ * Web edit of the client's company narrative, revised 2026-07-30.
  *
- * Lightly normalised so it cannot contradict facts stated elsewhere in this
- * file. Changes worth knowing about:
- *   - "LTG" / "Latserof Technologies Group" both render as `site.brand`.
- *   - City lists are replaced by `site.serviceArea` (Stuart was dropped earlier;
- *     it sits on the Treasure Coast, outside the stated area).
- *   - "principals and founders" stays plural, and "over 35 years" / "more than
- *     three decades" both stay as written. Only Thomas is named on the site,
- *     so if there is no second principal — or if the spans should agree —
- *     that is his correction to make, not ours to guess at.
- *   - The long capability list lives in `offerings` below, not inline, so the
- *     prose stays readable and the list can render as type rather than a wall.
+ * The supplied version repeated the same quality and experience claims across
+ * twelve long paragraphs. This keeps its confirmed substance but removes
+ * repetition so /about can be scanned: seven paragraphs, two proof-of-work
+ * photographs, and the capability list below rather than inline.
+ *
+ * Brand and service-area references still come from `site`; no city list or
+ * alternate company name is typed into the prose.
  */
-export const story = [
+export const story: readonly StoryBlock[] = [
   {
     label: "WHAT WE DO",
     paragraphs: [
-      `${site.brand} is a full-service technology integration company specialising in smart home automation, commercial technology solutions, networking, security and custom electronics design. Proudly serving ${site.serviceArea}, we create intelligent environments that are secure, elegant, efficient and simple to operate.`,
-      "For homeowners, we create intuitive living spaces that enhance comfort, convenience, security and entertainment. For businesses, we design technology systems that improve productivity, strengthen security and deliver exceptional experiences for employees and customers alike.",
-      "Every project is designed, engineered, installed and supported by experienced professionals committed to delivering outstanding craftsmanship and exceptional customer service.",
+      `${site.brand} designs and installs smart home, commercial AV, networking and security systems across ${site.serviceArea}. One team carries every project from design through installation and support.`,
+      "For homeowners, that means simpler control, stronger security and better entertainment. For businesses, it means reliable systems that support the people using the space.",
     ],
   },
   {
     label: "OUR EXPERIENCE",
     paragraphs: [
-      "A great company is built by great people — professionals who bring integrity, expertise and a relentless commitment to excellence every day.",
-      "The leadership team at Latserof Technologies brings more than 35 years of combined experience in custom electronics, automation, networking, security and audiovisual system integration. Our extensive industry knowledge allows us to design technology solutions that are reliable, scalable and tailored to each client's unique needs.",
-      "Whether installing a dedicated home theater, deploying enterprise-grade networking, integrating intelligent lighting control, designing whole-home automation or implementing commercial security systems, we deliver solutions that perform flawlessly today while remaining ready for tomorrow.",
-      "Our reputation has been built on professionalism, attention to detail and long-term relationships with our clients.",
+      "More than 35 years of combined experience informs every design — across custom electronics, automation, networking, security and audiovisual integration.",
+      "From a dedicated theater to an enterprise network, we build reliable systems around the property, the people using it and what may need to expand later.",
     ],
+    image: {
+      src: "/images/project-control4-rack.webp",
+      alt: "A completed Control4 equipment rack with labelled components and neatly managed cabling",
+    },
   },
   {
     label: "A PASSIONATE APPROACH",
     paragraphs: [
-      "Technology is more than our profession — it is our passion. Every project is approached with enthusiasm, precision and an uncompromising commitment to quality. We believe every installation should look exceptional, perform flawlessly and provide years of dependable service.",
-      "Our team transforms homes and businesses into intelligent environments where technology works effortlessly in the background, allowing clients to enjoy the experience instead of managing the equipment.",
-      `For more than three decades, our commitment to excellence has earned the trust of homeowners, builders, architects, designers and business owners throughout ${site.serviceArea}.`,
+      "Technology should work quietly in the background. The room should feel considered, the controls should feel obvious and the equipment should never become the client's job to manage.",
+      "We approach every installation with precision, clean workmanship and a commitment to dependable service long after commissioning.",
     ],
+    image: {
+      src: "/images/project-modern-theater.webp",
+      alt: "A completed private theater with blue cove lighting, acoustic panels and tiered seating",
+    },
   },
   {
     label: "OUR COMMITMENT",
     paragraphs: [
       "Our mission is simple: design exceptional technology, install it professionally, and support it for life.",
-      "We are committed to delivering innovative solutions, superior workmanship and customer service that exceeds expectations on every project.",
     ],
   },
 ] as const;
