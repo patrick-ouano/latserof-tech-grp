@@ -67,10 +67,10 @@ edge gravity on a 1:2 frame slices whatever is on the pole. Use an explicit
 | File | Dim | Notes |
 |---|---|---|
 | `20190719_113348` | 1867×3840 | ★ **Best camera shot.** Four bullet cameras on one property-entrance pole, lockable enclosure below, tile roof + magnolia behind, clean blue sky. Now `system-cameras.webp` |
-| `20180413_123834` | 1867×3840 | Four-camera cluster on a tall pole, palm fronds overhead, condo block and gated "DO NOT ENTER" entry behind. Reads multi-family / HOA, and unmistakably Florida. **Unused — good spare** |
+| `20180413_123834` | 1867×3840 | Four-camera cluster on a tall pole, palm fronds overhead, condo block and gated "DO NOT ENTER" entry behind. Reads multi-family / HOA, and unmistakably Florida. Now `project-surveillance-cameras.webp` (2026-07-30) |
 | `20180925_164549` | 1867×3840 | Same pole and property as `20190719`, later and cloudier light. **Same job — do not use both** |
 | `23C5DD64` | 2160×2880 | Two cameras plus a third housing on a pole. Was `system-cameras.webp` until 2026-07-29; the 4:3 crop cut the upper camera in half. Superseded |
-| `6D3F0035` | 2160×3840 | Close detail of a camera labelled CAM 6 on stacked stone. Now `project-surveillance-cameras.webp` |
+| `6D3F0035` | 2160×3840 | Close detail of a camera labelled CAM 6 on stacked stone. Was `project-surveillance-cameras.webp` until 2026-07-30 — the 3:2 slot sheared the camera head off, and one housing is a thin illustration of a card titled "multi-camera". **Unused — usable as a detail shot if a slot ever wants one** |
 
 ## Equipment racks / networking
 
@@ -84,13 +84,13 @@ edge gravity on a 1:2 frame slices whatever is on the pole. Use an explicit
 | `20120907_135926` | 2048×1536 | ★ Patch-panel detail, green + red cabling. Good abstract "structured cabling" texture |
 | `IMG_2990` | 3213×5712 | Rack mid-install, blue/yellow structured cable bundle |
 | `20130829_115446` | 1151×2048 | Control4 rack, blue LEDs |
-| `20160525_162737` | 1944×2592 | Same racks as `162549`, **Thomas in frame** |
+| `20160525_162737` | 1944×2592 | Same racks as `162549`, **Thomas in frame** — branded LTG shirt, standing beside the rack. Now `about-owner.webp` (2026-07-30). Dark and a little noisy, but not a selfie and correctly lit for the ink palette. Crop must stop short of the right edge: a bystander's hand is in it |
 | `20170128_192202` | 1458×2592 | Rack, **Thomas selfie** |
 | `F6CEE2EE` | 2316×3088 | **Thomas selfie**, racks labelled GREAT ROOM / HD MATRIX / OASIS |
 
 ## Commercial interiors ★ gap closed 2026-07-29
 - `C189AAEA` (3840×1775) — **twelve-panel video wall going up in an office.** Drop ceiling, troffer lighting, tech on an orange ladder still commissioning it, Samsung cartons on the floor. Two panels showing "Channel Scan Complete!". The one frame in the set that unmistakably reads *commercial building* rather than *equipment*, and it has a person working in it. Now `header-commercial.webp`. Slightly soft — camera shake — but usable at header size
-- `20191017_125656` (1836×3264) — **Thomas in front of a finished 4×4 video wall**, branded blue LTG shirt, "T.J." on the cuff. **Mirrored** (front-camera preview): un-flop it or the signage and his own embroidered logo read backwards. Now `about-owner.webp`
+- `20191017_125656` (1836×3264) — **Thomas in front of a finished 4×4 video wall**, branded blue LTG shirt, "T.J." on the cuff. **Mirrored** (front-camera preview): un-flop it or the signage and his own embroidered logo read backwards. Was `about-owner.webp` from 2026-07-29 to 2026-07-30 — correctly framed but shot straight into a lit video wall, so he is backlit and flat and the panels' own content competes behind his head. Superseded by `20160525_162737`. **Unused**
 
 ## Crew at work
 - `45ED02D9` (3213×5712) — tech on ladder mounting a display bracket above a stone fireplace, lakeside home. Good "we do the work" shot
@@ -191,9 +191,14 @@ Thomas shot himself. The swap costs nothing — drop a new
 1. **Locations** for each room above (city is enough). Ask per *room group*, not per file.
 2. ~~Legal entity name.~~ **Resolved: Latserof Technologies Grp LLC.**
 3. ~~Happy appearing on the site?~~ **Yes** — About page uses `about-owner.webp`,
-   from `20191017_125656` since 2026-07-29 (was `20170509_170045`, a selfie with
-   half his head out of frame). Worth asking whether he has a deliberate
-   headshot; this is still a phone snapshot, just a much better one.
+   from `20160525_162737` since 2026-07-30 (`20170509_170045` → `20191017_125656`
+   → this). Three passes over the same slot is the tell: **none of the five
+   frames of Thomas in this set is a deliberate photograph of him.** They are a
+   selfie with half his head out of frame, two rack selfies, a backlit shot
+   against a video wall, and this one, which is the best of them mainly by
+   being unposed and correctly exposed. Ask him for one proper portrait — it is
+   the single highest-value photo still missing from the site, and unlike the
+   hero screen it costs nothing but his time.
 4. **Bigger original of `Foerstal 676`?** (optional)
 5. License number — keep current site copy; not a priority.
 6. Domain is on GoDaddy — point DNS at Vercel when ready.

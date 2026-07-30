@@ -119,23 +119,26 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // Thomas in a branded LTG shirt in front of a video wall he installed.
-    // Replaced the attic-cinema frame on 2026-07-29: that one was a selfie
-    // with half his head outside the frame, which is not what "who you deal
-    // with" should open on. He confirmed he is happy to appear (2026-07-29).
+    // Thomas in a branded LTG shirt standing beside a Control4 rack he built.
+    // Third frame in this slot. The video-wall shot it replaces (2026-07-30)
+    // was correctly framed but badly *lit* — shot into a lit video wall, so
+    // he came out backlit and flat, with the panels' own content competing
+    // for attention behind his head. This one is dark, which the ink palette
+    // wants anyway, and puts him next to the work rather than in front of a
+    // screen. He confirmed he is happy to appear (2026-07-29).
     //
-    // `flop` because the phone saved the mirrored preview: without it the
-    // on-screen signage reads backwards and, worse, so do the embroidered
-    // LTG emblem on his chest and the "T.J." on his cuff.
+    // Not a selfie, so no `flop` here: the embroidered LTG star reads the
+    // right way round on his chest already.
     //
-    // Framed head-to-hip. Full-length put his face at ~40px on the rendered
-    // 36vw column, too small for the one photograph of the owner.
-    src: "20191017_125656.jpg",
+    // Crop is the whole point. The frame's right edge has a bystander's hand
+    // in it, and a 4:5 gravity crop of the full 1944x2592 keeps that hand and
+    // loses the bottom of the rack. This rect stops at x=1650, short of the
+    // hand, and runs the rack from its top rail to the floor beside him.
+    src: "20160525_162737.jpg",
     out: "about-owner.webp",
     width: 1200,
     height: 1500,
-    crop: { left: 88, top: 1030, width: 1080, height: 1350 },
-    flop: true,
+    crop: { left: 620, top: 430, width: 1030, height: 1288 },
     position: "centre",
   },
 
@@ -183,12 +186,24 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // Close detail of a labelled camera (CAM 6) on stacked stone — strong
-    // project-card read for the surveillance slot on the homepage.
-    src: "6D3F0035-C8DC-4158-9EE6-371257F90B36.jpg",
+    // Four bullet cameras on one pole head, palm fronds over the top of the
+    // frame. Replaced the CAM 6 close-up on 2026-07-30 for two reasons: the
+    // 3:2 slot took a centre band out of a 2160x3840 portrait and sheared the
+    // camera's head off, and even uncut a single housing is a poor
+    // illustration of a card titled "Multi-camera outdoor system".
+    //
+    // A different job from `system-cameras.webp` on /systems (that is
+    // 20190719, a private entrance; this is the gated multi-family property),
+    // so the two pages are not showing the same pole twice.
+    //
+    // Crop centres the cluster in the 3:2 rect. Any lower and the condo
+    // roofline crowds in under it; any higher and the pole runs out of the
+    // bottom of the frame with nothing holding it up.
+    src: "20180413_123834.jpg",
     out: "project-surveillance-cameras.webp",
     width: 1600,
     height: 1067,
+    crop: { left: 0, top: 560, width: 1867, height: 1245 },
     position: "centre",
   },
   {

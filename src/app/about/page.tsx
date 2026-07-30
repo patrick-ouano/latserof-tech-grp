@@ -64,10 +64,10 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-card border border-hairline bg-surface-2">
               <Image
                 src="/images/about-owner.webp"
-                alt={`${site.owner.name} in a Latserof shirt in front of a video wall he installed`}
+                alt={`${site.owner.name} in a Latserof shirt beside a Control4 equipment rack he built`}
                 fill
                 sizes="(min-width: 1024px) 36vw, 100vw"
-                className="object-cover object-[center_20%]"
+                className="object-cover"
               />
             </div>
           </Reveal>
@@ -76,26 +76,26 @@ export default function AboutPage() {
             <p className="font-heading text-h3 font-extrabold text-paper">
               {site.owner.name}
             </p>
-            <p className="mt-2 font-mono text-[12px] leading-relaxed font-bold text-gold uppercase">
+            <p className="mt-2 font-mono text-label leading-relaxed font-bold text-gold uppercase">
               {site.owner.title}
             </p>
-            <p className="mt-6 max-w-[54ch] font-body text-copy text-body-dim">
+            <p className="mt-6 max-w-[52ch] font-body text-lede text-paper-dim">
               The person who walks your rooms is the person who designs the
               system and stands behind it. On a job this size that matters
               more than an org chart — there is nobody for a detail to get
               lost between.
             </p>
-            <p className="mt-5 max-w-[54ch] font-body text-copy text-muted">
+            <p className="mt-5 max-w-[52ch] font-body text-copy text-muted">
               And yes — Latserof is Forestal spelled backwards.
             </p>
 
             <dl className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
               {FACTS.map((fact) => (
                 <div key={fact.label}>
-                  <dt className="font-mono text-[12px] leading-none font-bold text-gold">
+                  <dt className="font-mono text-label leading-none font-bold text-gold">
                     {fact.label}
                   </dt>
-                  <dd className="mt-3 font-body text-meta leading-[1.7] text-body-dim">
+                  <dd className="mt-3 font-body text-copy leading-[1.7] text-body-dim">
                     {fact.lines.map((line) => (
                       <span key={line} className="block">
                         {line}
@@ -109,22 +109,29 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Three blocks of the client's own narrative. They cover related
+          ground in similar language, so at one flat type size they read as a
+          single undifferentiated wall. The label is set at meta size and each
+          block after the first opens on a hairline, which gives the eye three
+          places to stop instead of none. Copy is Thomas's — see `story`. */}
       <Section id="story" title="What we do" meta="And why we do it">
-        <div className="grid gap-14">
+        <div className="grid gap-14 lg:gap-16">
           {story.map((block, i) => (
             <Reveal
               key={block.label}
               index={i}
-              className="grid gap-x-12 gap-y-4 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]"
+              className={`grid gap-x-12 gap-y-5 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] ${
+                i > 0 ? "border-t border-hairline pt-14 lg:pt-16" : ""
+              }`}
             >
-              <h3 className="font-mono text-[12px] leading-none font-bold text-gold uppercase lg:pt-[7px]">
+              <h3 className="font-mono text-meta leading-snug font-bold text-gold uppercase lg:pt-[10px]">
                 {block.label}
               </h3>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {block.paragraphs.map((paragraph) => (
                   <p
                     key={paragraph}
-                    className="max-w-[62ch] font-body text-copy text-body-dim"
+                    className="max-w-[58ch] font-body text-lede text-paper-dim"
                   >
                     {paragraph}
                   </p>

@@ -22,14 +22,14 @@ export function DeliverySteps() {
           index={i % 2}
           className="flex min-w-0 gap-5"
         >
-          <span className="mt-[3px] inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-pill border border-gold/35 bg-surface-2 font-mono text-[12px] leading-none font-bold text-gold">
+          <span className="mt-[3px] inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-pill border border-gold/35 bg-surface-2 font-mono text-label leading-none font-bold text-gold">
             {step.number}
           </span>
           <div className="min-w-0">
-            <h3 className="font-heading text-copy font-extrabold text-paper">
+            <h3 className="font-heading text-h3 font-extrabold text-paper">
               {step.title}
             </h3>
-            <p className="mt-2 max-w-[44ch] font-body text-meta text-body-dim">
+            <p className="mt-2 max-w-[46ch] font-body text-copy text-body-dim">
               {step.body}
             </p>
           </div>
