@@ -5,11 +5,11 @@ import { BrandStrip } from "@/components/BrandStrip";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
+import { DeliverySteps } from "@/components/DeliverySteps";
 import { PageHeader } from "@/components/PageHeader";
-import { ProcessSteps } from "@/components/ProcessSteps";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/motion/Reveal";
-import { CTA_HREF, CTA_LABEL, site } from "@/lib/site";
+import { CTA_HREF, CTA_LABEL, site, story } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -109,8 +109,36 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section id="process" title="How we work" meta="Start to finish">
-        <ProcessSteps />
+      <Section id="story" title="What we do" meta="And why we do it">
+        <div className="grid gap-14">
+          {story.map((block, i) => (
+            <Reveal
+              key={block.label}
+              index={i}
+              className="grid gap-x-12 gap-y-4 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)]"
+            >
+              <h3 className="font-mono text-[12px] leading-none font-bold text-gold uppercase lg:pt-[7px]">
+                {block.label}
+              </h3>
+              <div className="space-y-5">
+                {block.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="max-w-[62ch] font-body text-copy text-body-dim"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* The ten-step long form, not the four-beat summary the other pages
+          carry. Someone who has read this far wants the detail. */}
+      <Section id="process" title="How we work" meta="Ten steps, every project">
+        <DeliverySteps />
       </Section>
 
       <Container className="pb-20">

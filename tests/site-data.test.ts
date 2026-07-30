@@ -9,10 +9,12 @@ import { projects, projectsIn } from "@/data/projects";
 import {
   CTA_HREF,
   brands,
+  deliveryProcess,
   disciplines,
   navLinks,
   process as processSteps,
   site,
+  story,
 } from "@/lib/site";
 
 const ROOT = process.cwd();
@@ -113,11 +115,55 @@ describe("process and brands", () => {
     expect(processSteps.map((s) => s.number)).toEqual(["01", "02", "03", "04"]);
   });
 
+  it("numbers the ten delivery steps in order, with copy on each", () => {
+    expect(deliveryProcess).toHaveLength(10);
+    expect(deliveryProcess.map((s) => s.number)).toEqual([
+      "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+    ]);
+    for (const step of deliveryProcess) {
+      expect(step.title.length).toBeGreaterThan(0);
+      expect(step.body.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("keeps the four-beat summary and the long form as separate sequences", () => {
+    // /residential and /commercial render `process`; /about renders
+    // `deliveryProcess`. Collapsing one into the other would silently change
+    // three pages at once.
+    expect(processSteps.length).not.toBe(deliveryProcess.length);
+  });
+
   it("lists the dealer lines and distributor partners", () => {
     expect(brands.length).toBeGreaterThanOrEqual(3);
     expect(brands).toContain("Control4");
     expect(brands).toContain("Crestron");
     expect(brands).toContain("Lutron");
+  });
+});
+
+describe("story", () => {
+  it("gives every block a label and real paragraphs", () => {
+    expect(story.length).toBeGreaterThan(0);
+    const labels = story.map((b) => b.label);
+    expect(new Set(labels).size).toBe(labels.length);
+    for (const block of story) {
+      expect(block.paragraphs.length).toBeGreaterThan(0);
+      for (const p of block.paragraphs) expect(p.length).toBeGreaterThan(40);
+    }
+  });
+
+  /**
+   * The source copy called the company three different things and listed a
+   * city outside the service area. Both were normalised on the way in, and
+   * both are the kind of thing that creeps back the next time copy is pasted.
+   */
+  it("names the company one way, and claims no service area we do not state", () => {
+    const prose = story.flatMap((b) => b.paragraphs).join(" ");
+    expect(prose).toContain(site.brand);
+    expect(prose).not.toContain("LTG Technologies");
+    expect(prose).not.toContain("Latserof Technologies Group");
+    expect(prose).not.toContain("Stuart");
+    expect(prose).not.toContain("Orange County");
   });
 });
 

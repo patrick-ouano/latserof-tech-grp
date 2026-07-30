@@ -202,6 +202,112 @@ export const process = [
 ] as const;
 
 /**
+ * The full delivery sequence, as a job actually runs.
+ *
+ * The step *names* are the client's own (supplied 2026-07-30); the one-line
+ * bodies are DRAFT, written from approved copy and facts already in this
+ * file — dealer purchasing through `distributors`, "the same crew that
+ * installed it", "service calls by appointment".
+ *
+ * This is the long form, and it does not replace `process` above. That one
+ * is the four-beat public summary and stays on /residential and /commercial,
+ * where a visitor wants reassurance rather than a project plan. Only /about
+ * has room for ten steps.
+ */
+export const deliveryProcess = [
+  {
+    number: "01",
+    title: "Project consultation",
+    body: "We come and listen: what the rooms are for, who uses them, and what has to work on the first day.",
+  },
+  {
+    number: "02",
+    title: "Needs analysis",
+    body: "What the system has to do, room by room, settled before any hardware is named.",
+  },
+  {
+    number: "03",
+    title: "Solution development",
+    body: "Layout, equipment and cabling specified for the actual room. Full design services available upon request.",
+  },
+  {
+    number: "04",
+    title: "Purchasing",
+    body: "Ordered as dealer lines through our distribution partners, not bought off a shelf and made to fit.",
+  },
+  {
+    number: "05",
+    title: "Staging",
+    body: "Racks built, addressed and configured on the bench, so what arrives on site is already a working system.",
+  },
+  {
+    number: "06",
+    title: "Installation & integration",
+    body: "Wired, mounted, racked and labelled by the same crew that designed it.",
+  },
+  {
+    number: "07",
+    title: "Commissioning",
+    body: "Calibrated and tested as one system — not a shelf of parts that happen to be plugged into each other.",
+  },
+  {
+    number: "08",
+    title: "Training",
+    body: "Handed over in person, to everyone who uses it, until nobody is guessing which button does what.",
+  },
+  {
+    number: "09",
+    title: "Support",
+    body: "Service afterwards from the people who installed it. Service calls by appointment.",
+  },
+  {
+    number: "10",
+    title: "Continuous enhancement",
+    body: "Systems grow. Rooms, sources and features get added to what is already there instead of starting over.",
+  },
+] as const;
+
+/**
+ * Company narrative — the client's own marketing copy, supplied 2026-07-30.
+ *
+ * Lightly normalised so it cannot contradict facts stated elsewhere in this
+ * file. Three changes, all worth knowing about:
+ *   - "LTG Technologies" and "Latserof Technologies Group" both appeared in
+ *     the source copy; both render as `site.brand`.
+ *   - The city list (Orange County, Tampa, Stuart) is replaced by
+ *     `site.serviceArea`. Stuart is on the Treasure Coast, well outside the
+ *     stated area, and an SEO city run is not what this page is for.
+ *   - "principals and founders each have over 35 years" is kept plural as
+ *     written, and the "over 30 years" in the third block is kept too. Only
+ *     Thomas is named anywhere on this site, so if there is no second
+ *     principal — or if the two spans should agree — that is his correction
+ *     to make, not ours to guess at.
+ */
+export const story = [
+  {
+    label: "WHAT WE DO",
+    paragraphs: [
+      `${site.brand} is a full-service smart home automation and commercial custom electronics design and integration company serving ${site.serviceArea}. Our total home control solutions make your property safe, elegant, fun and easy to use.`,
+      "Businesses get increased productivity, a better environment for employees and customers, and control simple enough that nobody needs a manual. Our team is made up of world-class experts in every field, whose first priority is the best products and service for our clients.",
+    ],
+  },
+  {
+    label: "OUR EXPERIENCE",
+    paragraphs: [
+      "A great company is made up of great people — people who approach each day with energy, integrity and an unwavering commitment to excellence. Our principals and founders each have over 35 years of experience designing and installing advanced home entertainment systems, and are committed to instilling those values in every member of the team.",
+      "From lighting, AV and shade control, to a home surveillance system, to total home control and everything in between, we have you covered. Whether it is a small theater or a complete home automation project, you can be sure of outstanding personal and professional service.",
+    ],
+  },
+  {
+    label: "A PASSIONATE APPROACH",
+    paragraphs: [
+      "We do what we truly love to do. Every project is approached with unwavering passion and an intense sense of integrity for doing things right, so the finished system exceeds expectations rather than merely meeting a spec.",
+      "Our team can transform a home or an office space into a musical and visual world. It is how we have done business for over 30 years, and it is why our clients trust us to do things right — and we are not about to let them down.",
+    ],
+  },
+] as const;
+
+/**
  * Complementary offerings delivered with a partner rather than in-house.
  *
  * Kept separate from `disciplines` deliberately: the homepage copy commits

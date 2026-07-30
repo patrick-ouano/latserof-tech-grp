@@ -13,6 +13,8 @@
 - Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Cameras & access.
 - Design services available upon request.
 - Primary CTA label: **Request for Survey** → `/contact`.
+- **Two process sequences, both real, neither interchangeable.** `process` (site.ts) is the four-beat public summary — Survey → Design → Install → Service — and stays on `/residential` and `/commercial`. `deliveryProcess` is the client's own ten-step sequence (consultation, needs analysis, solution development, purchasing, staging, installation & integration, commissioning, training, support, continuous enhancement) and renders on `/about` only, via `DeliverySteps`. A unit test asserts they stay different lengths, because collapsing one into the other silently rewrites three pages.
+- **Company narrative** lives in `story` (site.ts) and renders on `/about`: WHAT WE DO · OUR EXPERIENCE · A PASSIONATE APPROACH. This is Thomas's own marketing copy, supplied 2026-07-30, normalised on the way in — see the doc comment for what changed and why. Three things in it are **his to confirm, not ours to fix**: "principals and founders" is plural where the site names only him; the copy says "over 35 years" of experience in one place and "over 30 years" in another; and its city list included Stuart, FL, which is Treasure Coast and outside the stated service area (dropped, in favour of `site.serviceArea`). A test guards the brand-name and service-area normalisation so a future copy paste cannot quietly undo it.
 
 ## Design system — status
 - **The whole site is built.** Homepage, Residential, Commercial, Systems, Work, About and Contact all ship real content, and `PageStub` has been deleted.
@@ -87,6 +89,7 @@ Site is complete and builds static. **Open before launch:**
 - `RESEND_API_KEY` in Vercel; `QUOTE_TO_EMAIL` defaults to `tj@927hifi.com` in `.env.example`.
 - Confirm the production domain on GoDaddy (`site.url` is a placeholder hostname until DNS is pointed at Vercel).
 - License number: keep whatever is currently on the site; not a priority.
+- **Three questions on the narrative copy he supplied 2026-07-30** (see Business facts): is there a second principal, is it 35 years or 30, and does the service area really reach Stuart? The copy ships as written apart from the Stuart line; none of the three blocks the launch.
 - **A licence for the hero cinema screen still, or a replacement.** The F1 frame currently composited onto the screen (and therefore onto `og-image.jpg`) is unlicensed press photography — see Assets. This is the one open item with legal exposure rather than cosmetic risk.
 
 ## Responsive
@@ -106,6 +109,8 @@ The fixed breakpoint type ladder is gone — the `clamp()` scale in `@theme` cov
 - `<html>` carries `suppressHydrationWarning` because the capability script writes `js`/`sda` onto it before React hydrates. That is intentional and the server cannot know those values. It suppresses that element's own attributes only, one level deep. `e2e/hydration.spec.ts` asserts `js`/`sda` are the *only* difference, so nothing else can start mutating `<html>` under cover of the suppression.
 - The `hydration` Playwright project runs against `next dev` on port 3101, because **React reports hydration mismatches in development only** — a production build stays silent and re-renders. The rest of the suite uses the production build on 3100.
 - Don't use `waitForLoadState("networkidle")`: two servers run during the suite and the network never reliably goes quiet. Wait on a real element instead.
+- ⚠️ **`reuseExistingServer` means a green suite can prove nothing.** It is on locally (off in CI), so if anything is already listening on 3100 the suite skips `npm run build` entirely and tests whatever that process built — possibly hours ago, without the change under test. Check the build actually contains your change (`grep` the new copy in `.next/server/app/<route>.html`) before believing a local pass, and kill 3100/3101 when in doubt.
+- A long-lived reused server on 3100 can also wedge the **image optimizer**: one `/_next/image` variant starts hanging forever while every other variant of the same file is fine, and `page.goto`'s `load` never fires, so the failure surfaces as a navigation timeout on a page that visibly rendered. It is process state, not a bad image — sharp re-encodes the file in ~50ms and a restarted server serves it instantly. Restart the server before investigating the photo.
 - CI (`.github/workflows/ci.yml`) runs typecheck, lint, unit, build and e2e. **It does not deploy** — Vercel's Git integration does that on its own, and a deploy step would race with it. The `build` job asserts every page route still prerenders; `/api/quote` is the only permitted dynamic route.
 - Security headers live in `next.config.ts`, not `vercel.json`, so they apply to `next start` and can be asserted in `e2e/headers.spec.ts`. There is deliberately no CSP: `layout.tsx` ships a required inline script, so a real CSP needs a per-request nonce and that would end static prerendering.
 
