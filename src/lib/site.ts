@@ -137,7 +137,7 @@ export const disciplines = [
     // Outdoor camera install — added with the 2026-07-29 photo delivery.
     image: "/images/system-cameras.webp",
     imageAlt:
-      "Two outdoor bullet cameras mounted on a metal pole with weatherproof conduit",
+      "Four outdoor bullet cameras on a single property-entrance pole, aimed to cover every approach",
     residential: "Cameras and door access you can check from anywhere, recorded locally rather than rented back to you.",
     commercial: "Entry control and surveillance for schools, restaurants, businesses and premises with staff, stock or restricted areas.",
   },

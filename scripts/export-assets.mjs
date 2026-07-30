@@ -33,6 +33,18 @@ const APP = path.join(ROOT, "src", "app");
 /**
  * `position` controls which part survives the crop. Portrait rack shots and
  * ultra-wide room shots both lose a lot when squared off, so this matters.
+ *
+ * `crop` overrides it with an explicit `{ left, top, width, height }` rect in
+ * source pixels, applied before the resize. `position` can only pick an edge
+ * or the centre, which is not enough for the phone photos in this set: a
+ * camera pole shot 1867x3840 has its subject a third of the way down a 1:2
+ * frame, and *every* gravity a 4:3 slot allows slices a camera in half. Give
+ * a rect and the subject is framed rather than approximated. Measure it
+ * against the source's post-`rotate()` dimensions.
+ *
+ * `flop` mirrors horizontally. Only for front-camera selfies, where the phone
+ * saved the preview rather than the true image: signage and embroidered logos
+ * come out reversed, and un-mirroring restores what was actually there.
  */
 const PHOTOS = [
   {
@@ -71,31 +83,59 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // Two racks with shelves labelled ROUTER / ACCESS POINTS / NETWORK
-    // SWITCH. The source is 3213x5712, so a landscape crop keeps only the
-    // middle band — which is where the labelling is.
-    src: "990503C8-784A-48B4-80EB-336A8A0856DE-converted.jpg",
+    // A 4x3 video wall going up in an office, with a tech on the ladder
+    // still working on it. Replaced the rack elevation here on 2026-07-29:
+    // racks read "equipment", and this page has to read "commercial
+    // building". It is also the conference-room-class interior the manifest
+    // had listed as missing.
+    //
+    // Source is 3840x1775, so the 4:3 crop is width-bound. Framed from the
+    // left edge of the wall to the right edge of the tech; that clips one
+    // panel column at the frame edge, which on a repeating grid reads as
+    // the wall continuing rather than as a mistake, whereas clipping the
+    // person would just look wrong.
+    src: "C189AAEA-17F6-43B4-B230-08E504E2826D.jpg",
     out: "header-commercial.webp",
     width: 1600,
     height: 1200,
+    crop: { left: 560, top: 0, width: 2366, height: 1775 },
     position: "centre",
   },
   {
-    // Two techs mounting a display. The only "we do the work" frame in the
-    // set, which is exactly what an About page wants.
-    src: "FBF2DD95-7975-4942-BCED-EDBF3BF87D15-converted.jpg",
+    // A tech on a ladder wiring a projector mount into an open ceiling,
+    // tools on the ladder tray. Replaced the display-mounting frame on
+    // 2026-07-29: this one has hands on the work mid-task rather than a
+    // finished panel, and it is dark, so it sits in the ink palette instead
+    // of fighting it.
+    //
+    // Crop keeps the ceiling opening at the top and the tool tray at the
+    // bottom — the whole action. The centre band a plain 4:3 gravity would
+    // take loses the projector, which is the thing being installed.
+    src: "20170422_162202.jpg",
     out: "header-about.webp",
     width: 1600,
     height: 1200,
+    crop: { left: 0, top: 280, width: 2160, height: 1620 },
     position: "centre",
   },
   {
-    // Thomas in a completed attic cinema — he confirmed he is happy to
-    // appear on the site (2026-07-29). Portrait crop for the About column.
-    src: "20170509_170045.jpg",
+    // Thomas in a branded LTG shirt in front of a video wall he installed.
+    // Replaced the attic-cinema frame on 2026-07-29: that one was a selfie
+    // with half his head outside the frame, which is not what "who you deal
+    // with" should open on. He confirmed he is happy to appear (2026-07-29).
+    //
+    // `flop` because the phone saved the mirrored preview: without it the
+    // on-screen signage reads backwards and, worse, so do the embroidered
+    // LTG emblem on his chest and the "T.J." on his cuff.
+    //
+    // Framed head-to-hip. Full-length put his face at ~40px on the rendered
+    // 36vw column, too small for the one photograph of the owner.
+    src: "20191017_125656.jpg",
     out: "about-owner.webp",
     width: 1200,
     height: 1500,
+    crop: { left: 88, top: 1030, width: 1080, height: 1350 },
+    flop: true,
     position: "centre",
   },
 
@@ -126,12 +166,20 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // New 2026-07-29 delivery — outdoor bullet cameras on a conduit run.
-    // Closes the surveillance photography gap.
-    src: "23C5DD64-D64A-4A69-A3E1-709B57AF895E.jpg",
+    // A four-camera array on a property-entrance pole. Replaced
+    // 23C5DD64 on 2026-07-29: that source is 2160x2880 with the cameras
+    // stacked up one edge, so the 4:3 slot on /systems sliced the upper
+    // camera clean in half — the discipline is "cameras" and the photo cut
+    // a camera off.
+    //
+    // Cropped at native 1400x1050 (no resampling at all) around the head of
+    // the pole, so all four cameras sit inside the frame with the tile roof
+    // and tree behind them for scale.
+    src: "20190719_113348.jpg",
     out: "system-cameras.webp",
     width: 1400,
     height: 1050,
+    crop: { left: 280, top: 460, width: 1400, height: 1050 },
     position: "centre",
   },
   {
@@ -476,8 +524,12 @@ async function run() {
       continue;
     }
     try {
-      const info = await sharp(from)
-        .rotate()
+      let pipeline = sharp(from).rotate();
+      // Before the resize: `crop` is measured in source pixels.
+      if (item.crop) pipeline = pipeline.extract(item.crop);
+      if (item.flop) pipeline = pipeline.flop();
+
+      const info = await pipeline
         .resize(item.width, item.height, {
           fit: "cover",
           position: item.position,

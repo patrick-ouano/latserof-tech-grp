@@ -42,7 +42,7 @@ export default function CommercialPage() {
         lede="Schools, restaurants and businesses — boardroom and venue AV, conferencing, structured cabling, access control and surveillance, specified for the building, installed by the crew that designed it, and serviced by the same people afterwards. Design services available upon request."
         photo={{
           src: "/images/header-commercial.webp",
-          alt: "Equipment racks with shelves labelled router, access points and network switch, beside a monitor running configuration software",
+          alt: "A technician on a ladder commissioning a twelve-panel video wall in an office",
         }}
       >
         <div className="flex flex-wrap gap-[14px]">

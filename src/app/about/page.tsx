@@ -47,7 +47,7 @@ export default function AboutPage() {
         lede="Latserof Technologies is a licensed, insured low-voltage contractor working out of Kissimmee. We design the system, pull the cable, mount the hardware and support it afterwards — all in-house. Design services available upon request."
         photo={{
           src: "/images/header-about.webp",
-          alt: "Two technicians mounting a large display on a dark wood wall, with moving blankets protecting the floor",
+          alt: "A technician on a ladder wiring a projector mount into an open ceiling, tools on the ladder tray",
         }}
       >
         <div className="flex flex-wrap gap-[14px]">
@@ -64,7 +64,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-card border border-hairline bg-surface-2">
               <Image
                 src="/images/about-owner.webp"
-                alt={`${site.owner.name} at a completed cinema install`}
+                alt={`${site.owner.name} in a Latserof shirt in front of a video wall he installed`}
                 fill
                 sizes="(min-width: 1024px) 36vw, 100vw"
                 className="object-cover object-[center_20%]"
