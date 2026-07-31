@@ -48,17 +48,14 @@ export function Hero() {
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="parallax object-cover brightness-[.78]"
+            className="parallax object-cover brightness-95"
           />
           {/* Scrim, so the photo dissolves into the text column instead of
               butting against it with a hard vertical seam.
 
-              Carried further across the frame than it used to be. The lit
-              screen is the brightest, highest-contrast object in the band and
-              sits at the same optical weight as the headline, so the eye went
-              right before it read anything. Dimming the photo and extending
-              the falloff puts the headline first again without hiding the
-              room — the screen is still the thing you look at second. */}
+              Brightness sits near full so the room reads clearly; the gradient
+              still keeps the headline first. Was .78 — that made the cinema
+              feel murky on the ink band. */}
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent lg:bg-gradient-to-r lg:from-ink lg:via-ink/28 lg:to-transparent"
