@@ -200,7 +200,7 @@ const PHOTOS = [
     // 20190719 moved to the homepage project card — see the entry below.
     //
     // This is the *illustration* slot, so a tight cluster against sky is the
-    // right job for it: the discipline is "Cameras & access" and this is four
+    // right job for it: the discipline is cameras / access control and this is four
     // cameras, unobstructed, nothing severed. Its weakness as a portfolio
     // photograph — no ground, no building, no sense of the property — is
     // exactly what stops mattering at illustration size.

@@ -10,7 +10,7 @@
 - Hours: Mon–Fri 8:00–5:00. Service calls by appointment.
 - Service area: Greater Orlando, Central Florida and Tampa.
 - Business type: licensed low-voltage / custom AV & automation integrator. Industry partners with **21st Century Distribution** and **SnapAV** — dealer lines from those catalogs (Control4, Crestron, Lutron, Episode, Binary, ClareVision, Araknis, etc.). **Not** a retail electronics store — no public pricing, no e-commerce, no SKU-level product pages. No priced quotes on the site; CTAs request a **survey / walkthrough** only.
-- Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Cameras & access.
+- Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Surveillance Systems and Access Control.
 - Design services available upon request.
 - Primary CTA label: **Request for Survey** → `/contact`.
 - **The site never says "free."** Removed everywhere 2026-07-30 at the client's request — a site that publishes no prices should not publish a price of zero either, and it insinuates that what follows the survey is also on the house. This is the one place the **approved handoff copy is overridden**: `reference/homepage-2a.html` and the handoff README still read "Walkthroughs are free anywhere in Central Florida", and they are wrong now. Say the reach ("on-site surveys across Greater Orlando…"), not the cost. `tests/no-free-copy.test.ts` scans `src/` and fails on the word — it had crept into four separate pages from that one handoff line.

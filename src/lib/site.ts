@@ -125,8 +125,8 @@ export const disciplines = [
   {
     number: "04",
     slug: "cameras",
-    title: "Cameras & access",
-    body: "Surveillance, intercom and door access with local recording — reviewed and serviced by us, monitored from anywhere by you.",
+    title: "Surveillance Systems and Access Control",
+    body: "See there when you can't be there.",
     includes: [
       "Surveillance cameras",
       "Intercom",
