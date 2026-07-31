@@ -106,7 +106,7 @@ Two things follow:
 
 | File | Dim | Notes |
 |---|---|---|
-| `990503C8` | 3213×5712 | ★ **Best networking shot.** Two racks, shelves labelled ROUTER / ACCESS POINTS / NETWORK SWITCH, Dell monitor + laptop running Control4 Composer |
+| `990503C8` | 3213×5712 | ★ **Best networking shot.** Two racks, shelves labelled ROUTER / ACCESS POINTS / NETWORK SWITCH, Dell monitor + laptop running Control4 Composer. Was `about-experience-racks.webp` on /about (2026-07-30); later About experience slots used theater then night lighting instead. **Unused on About** |
 | `A3D15F9C` | 3024×4032 | ★ **Reads commercial.** MXnet AV-over-IP rack, dual Murideo test monitors, blue/green patch cabling |
 | `20180906_134352` | 1440×2560 | Triad + Control4, very clean and well-labelled |
 | `20191011_175946` | 1960×4032 | Two Middle Atlantic racks, ceiling UniFi AP visible. Very tall — needs cropping |
@@ -114,16 +114,16 @@ Two things follow:
 | `20120907_135926` | 2048×1536 | ★ Patch-panel detail, green + red cabling. Good abstract "structured cabling" texture |
 | `IMG_2990` | 3213×5712 | Rack mid-install, blue/yellow structured cable bundle |
 | `20130829_115446` | 1151×2048 | Control4 rack, blue LEDs |
-| `20160525_162737` | 1944×2592 | Same racks as `162549`, **Thomas in frame** — branded LTG shirt, standing beside the rack. Now `about-owner.webp` (2026-07-30). Dark and a little noisy, but not a selfie and correctly lit for the ink palette. Crop must stop short of the right edge: a bystander's hand is in it |
+| `20160525_162737` | 1944×2592 | Same racks as `162549`, **Thomas in frame** — branded LTG shirt, standing beside the rack. Was `about-owner.webp` (2026-07-30 morning); superseded the same day by `F6CEE2EE` because he was small and dim in the closet frame. Crop must stop short of the right edge: a bystander's hand is in it. **Unused** |
 | `20170128_192202` | 1458×2592 | Rack, **Thomas selfie** |
-| `F6CEE2EE` | 2316×3088 | **Thomas selfie**, racks labelled GREAT ROOM / HD MATRIX / OASIS |
+| `F6CEE2EE` | 2316×3088 | **Thomas selfie**, racks labelled GREAT ROOM / HD MATRIX / OASIS. Was `about-owner-racks.webp` (2026-07-30 evening); superseded 2026-07-31 by the video-wall portrait. Labels already read correctly — no `flop`. **Unused** |
 
 ## Commercial interiors ★ gap closed 2026-07-29
 - `C189AAEA` (3840×1775) — **twelve-panel video wall going up in an office.** Drop ceiling, troffer lighting, tech on an orange ladder still commissioning it, Samsung cartons on the floor. Two panels showing "Channel Scan Complete!". The one frame in the set that unmistakably reads *commercial building* rather than *equipment*, and it has a person working in it. Now `header-commercial.webp`. Slightly soft — camera shake — but usable at header size
-- `20191017_125656` (1836×3264) — **Thomas in front of a finished 4×4 video wall**, branded blue LTG shirt, "T.J." on the cuff. **Mirrored** (front-camera preview): un-flop it or the signage and his own embroidered logo read backwards. Was `about-owner.webp` from 2026-07-29 to 2026-07-30 — correctly framed but shot straight into a lit video wall, so he is backlit and flat and the panels' own content competes behind his head. Superseded by `20160525_162737`. **Unused**
+- `20191017_125656` (1836×3264) — **Thomas in front of a finished 4×4 video wall**, branded blue LTG shirt, "T.J." on the cuff. **Mirrored** (front-camera preview): un-flop it or the signage and his own embroidered logo read backwards. Now `about-owner-videowall.webp` again (2026-07-31): strongest commercial-backdrop portrait in the set; he is slightly backlit by the panels. Previously held this slot 2026-07-29 → 2026-07-30 morning before the closet-rack and selfie passes
 
 ## Crew at work
-- `45ED02D9` (3213×5712) — tech on ladder mounting a display bracket above a stone fireplace, lakeside home. Good "we do the work" shot
+- `45ED02D9` (3213×5712) — tech on ladder mounting a display bracket above a stone fireplace, lakeside home. Now `about-passionate-install.webp` on /about (2026-07-30): the "someone working" still for A PASSIONATE APPROACH
 - `FBF2DD95` (3024×4032) — ★ **two techs fitting a display mount on a dark wood wall**, with a level, drill, recessed wiring box, moving blankets and Milwaukee tools. Now `header-about-team.webp` (2026-07-30): it shows collaboration and precision, sits naturally in the ink palette, and carries no visible subcontractor branding
 - `20170422_162202` (2160×2880) — tech on a ladder wiring a projector mount into an open ceiling, cable in hand, tools on the ladder tray, dark acoustic-panelled theater. Previously `header-about.webp`; replaced because the polo reads "3digi… Automation" and the tighter single-person frame said less about Latserof's own crew. The old export name was retired as well to invalidate Next/Vercel image-optimizer caches
 
@@ -222,15 +222,12 @@ Thomas shot himself. The swap costs nothing — drop a new
 ## Other questions
 1. **Locations** for each room above (city is enough). Ask per *room group*, not per file.
 2. ~~Legal entity name.~~ **Resolved: Latserof Technologies Grp LLC.**
-3. ~~Happy appearing on the site?~~ **Yes** — About page uses `about-owner.webp`,
-   from `20160525_162737` since 2026-07-30 (`20170509_170045` → `20191017_125656`
-   → this). Three passes over the same slot is the tell: **none of the five
-   frames of Thomas in this set is a deliberate photograph of him.** They are a
-   selfie with half his head out of frame, two rack selfies, a backlit shot
-   against a video wall, and this one, which is the best of them mainly by
-   being unposed and correctly exposed. Ask him for one proper portrait — it is
-   the single highest-value photo still missing from the site, and unlike the
-   hero screen it costs nothing but his time.
+3. ~~Happy appearing on the site?~~ **Yes** — About page uses `about-owner-videowall.webp`,
+   from `20191017_125656` since 2026-07-31 (`20170509` → video wall → closet rack →
+   rack selfie → back to video wall). Five passes over the same slot is the tell:
+   **none of the frames of Thomas in this set is a deliberate photograph of him.**
+   Ask him for one proper portrait — it is the single highest-value photo still
+   missing from the site, and unlike the hero screen it costs nothing but his time.
 4. **Bigger original of `Foerstal 676`?** (optional)
 4b. **One camera install shot from back at eye level**, with the building in
    frame — see the surveillance section. Every camera photo in the set is a

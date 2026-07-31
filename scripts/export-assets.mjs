@@ -119,26 +119,52 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // Thomas in a branded LTG shirt standing beside a Control4 rack he built.
-    // Third frame in this slot. The video-wall shot it replaces (2026-07-30)
-    // was correctly framed but badly *lit* — shot into a lit video wall, so
-    // he came out backlit and flat, with the panels' own content competing
-    // for attention behind his head. This one is dark, which the ink palette
-    // wants anyway, and puts him next to the work rather than in front of a
-    // screen. He confirmed he is happy to appear (2026-07-29).
+    // Thomas in a branded blue LTG shirt in front of a finished 4×4 video
+    // wall. Fifth frame in this slot (2026-07-31). The rack selfie it
+    // replaces put his face large but read as a phone snap with a Hurley
+    // cap; this one shows finished commercial work behind him and the
+    // embroidered logo on his chest. Front-camera preview — `flop` so the
+    // TNT / DIRECTV signage and his logo read the right way round. New
+    // filename busts the Next image-optimizer cache.
     //
-    // Not a selfie, so no `flop` here: the embroidered LTG star reads the
-    // right way round on his chest already.
-    //
-    // Crop is the whole point. The frame's right edge has a bystander's hand
-    // in it, and a 4:5 gravity crop of the full 1944x2592 keeps that hand and
-    // loses the bottom of the rack. This rect stops at x=1650, short of the
-    // hand, and runs the rack from its top rail to the floor beside him.
-    src: "20160525_162737.jpg",
-    out: "about-owner.webp",
+    // He is slightly backlit by the panels; still the strongest "owner of
+    // a commercial AV company" frame in the set. Source is 1836×3264. The
+    // 4:5 crop keeps him from belt to crown with the wall filling the
+    // background.
+    src: "20191017_125656.jpg",
+    out: "about-owner-videowall.webp",
     width: 1200,
     height: 1500,
-    crop: { left: 620, top: 430, width: 1030, height: 1288 },
+    crop: { left: 240, top: 480, width: 1440, height: 1800 },
+    flop: true,
+    position: "centre",
+  },
+  {
+    // /about "OUR EXPERIENCE" — night exterior of a home with architectural
+    // and landscape lighting. Replaces the blue-cove theater still
+    // (2026-07-31): that frame was from the same shoot as the homepage hero,
+    // so the page felt like it was repeating the same room. This one is
+    // finished work that does not compete with the hero, and it reads as
+    // control & lighting rather than another cinema interior.
+    // Same source as project-residential-lighting.webp; dedicated filename
+    // so the About slot can change without touching the Work card.
+    src: "C454E4AC-9CAE-4F7C-90F6-439668485FFA.jpg",
+    out: "about-experience-lighting.webp",
+    width: 1400,
+    height: 933,
+    position: "centre",
+  },
+  {
+    // /about "A PASSIONATE APPROACH" — tech on a ladder dressing cable behind
+    // a wall-mount above a stone fireplace. Replaces the finished theater
+    // still so the block shows someone working, matching the precision copy.
+    // Portrait source; 3:2 crop keeps the tech, bracket, level line and tools
+    // on the mantel while dropping empty floor and the bed edge.
+    src: "45ED02D9-CD86-4582-A604-6354AD39E864-converted.jpg",
+    out: "about-passionate-install.webp",
+    width: 1400,
+    height: 933,
+    crop: { left: 0, top: 680, width: 3213, height: 2142 },
     position: "centre",
   },
 

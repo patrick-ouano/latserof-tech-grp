@@ -308,8 +308,8 @@ export const story: readonly StoryBlock[] = [
       "From a dedicated theater to an enterprise network, we build reliable systems around the property, the people using it and what may need to expand later.",
     ],
     image: {
-      src: "/images/project-control4-rack.webp",
-      alt: "A completed Control4 equipment rack with labelled components and neatly managed cabling",
+      src: "/images/about-experience-lighting.webp",
+      alt: "A modern home at night with warm architectural and landscape lighting along the facade and walkway",
     },
   },
   {
@@ -319,8 +319,8 @@ export const story: readonly StoryBlock[] = [
       "We approach every installation with precision, clean workmanship and a commitment to dependable service long after commissioning.",
     ],
     image: {
-      src: "/images/project-modern-theater.webp",
-      alt: "A completed private theater with blue cove lighting, acoustic panels and tiered seating",
+      src: "/images/about-passionate-install.webp",
+      alt: "A technician on a ladder dressing cable behind a display wall-mount above a stone fireplace",
     },
   },
   {

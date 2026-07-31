@@ -69,8 +69,8 @@ export default function AboutPage() {
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-card border border-hairline bg-surface-2">
               <Image
-                src="/images/about-owner.webp"
-                alt={`${site.owner.name} in a Latserof shirt beside a Control4 equipment rack he built`}
+                src="/images/about-owner-videowall.webp"
+                alt={`${site.owner.name} in a Latserof shirt in front of a finished commercial video wall`}
                 fill
                 sizes="(min-width: 1024px) 36vw, 100vw"
                 className="object-cover"
