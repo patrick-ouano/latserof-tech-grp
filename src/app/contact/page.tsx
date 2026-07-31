@@ -58,6 +58,15 @@ export default function ContactPage() {
               >
                 {site.phoneDisplay}
               </a>
+              <p className="mt-4 font-mono text-[12px] leading-none font-bold text-gold">
+                OFFICE
+              </p>
+              <a
+                href={site.officePhoneHref}
+                className="mt-3 block font-heading text-[20px] leading-none font-bold text-paper transition-colors duration-200 hover:text-gold"
+              >
+                {site.officePhoneDisplay}
+              </a>
 
               <hr className="hairline-gradient my-8" />
 

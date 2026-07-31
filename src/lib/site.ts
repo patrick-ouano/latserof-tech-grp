@@ -2,9 +2,10 @@
  * Business facts — single source of truth.
  *
  * Every phone link, address block, footer, and the LocalBusiness JSON-LD
- * reads from here. The phone number in particular must exist in exactly one
+ * reads from here. The primary phone in particular must exist in exactly one
  * place: it appears in the header, hero, CTA band, footer, and structured
- * data, and a stale number in any one of those is a lost lead.
+ * data, and a stale number in any one of those is a lost lead. The office
+ * line is secondary — shown on Contact and in the footer CONTACT column.
  *
  * These values are fixed by the client. Do not invent alternatives.
  */
@@ -31,9 +32,13 @@ export const site = {
     title: "Owner / Operations Manager, Custom Design & Engineering",
   },
 
-  /** Display form for humans; href form for the `tel:` link. Always pair. */
-  phoneDisplay: "(855) 530-4434",
-  phoneHref: "tel:+18555304434",
+  /** Primary line for humans; href form for the `tel:` link. Always pair. */
+  phoneDisplay: "(407) 927-4434",
+  phoneHref: "tel:+14079274434",
+
+  /** Office line — Contact aside and footer CONTACT, labeled as Office. */
+  officePhoneDisplay: "(855) 530-4434",
+  officePhoneHref: "tel:+18555304434",
 
   address: {
     street: "3050 Dyer Blvd, Suite 242",

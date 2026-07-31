@@ -40,7 +40,7 @@ test.describe("quote form", () => {
     );
 
     await page.getByLabel(/^Name/).fill("Thomas Forestal");
-    await page.getByLabel(/^Phone/).fill("(855) 530-4434");
+    await page.getByLabel(/^Phone/).fill("(407) 927-4434");
     await page.getByRole("button", { name: /Request for Survey/i }).click();
 
     await expect(page.getByRole("status")).toContainText(/we.ve got it/i);
@@ -76,15 +76,15 @@ test.describe("quote form", () => {
     await page.route("**/api/quote", (route) =>
       route.fulfill({
         status: 503,
-        json: { error: "We couldn't send that just now. Please call us on (855) 530-4434." },
+        json: { error: "We couldn't send that just now. Please call us on (407) 927-4434." },
       }),
     );
 
     await page.getByLabel(/^Name/).fill("Thomas");
-    await page.getByLabel(/^Phone/).fill("8555304434");
+    await page.getByLabel(/^Phone/).fill("4079274434");
     await page.getByRole("button", { name: /Request for Survey/i }).click();
 
-    await expect(alertIn(page)).toContainText(/855/);
+    await expect(alertIn(page)).toContainText(/407/);
     await expect(page.getByRole("status")).toHaveCount(0);
   });
 

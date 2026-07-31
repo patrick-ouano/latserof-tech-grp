@@ -38,6 +38,13 @@ describe("business facts", () => {
     expect(dialled).toBe(`1${displayed}`);
   });
 
+  it("keeps the office tel: href and display in sync", () => {
+    const displayed = site.officePhoneDisplay.replace(/\D/g, "");
+    const dialled = site.officePhoneHref.replace(/\D/g, "");
+    expect(site.officePhoneHref.startsWith("tel:+")).toBe(true);
+    expect(dialled).toBe(`1${displayed}`);
+  });
+
   it("is an LLC, as confirmed by Thomas", () => {
     expect(site.legalName).toContain("LLC");
     expect(site.legalName).not.toContain("Inc.");

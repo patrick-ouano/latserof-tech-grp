@@ -76,6 +76,15 @@ export function SiteFooter() {
           >
             {site.phoneDisplay}
           </a>
+          <p className="mt-2.5">
+            <span className="text-muted">Office </span>
+            <a
+              href={site.officePhoneHref}
+              className="font-semibold text-paper transition-colors duration-200 hover:text-gold"
+            >
+              {site.officePhoneDisplay}
+            </a>
+          </p>
           <address className="mt-2.5 leading-[1.7] not-italic">
             {site.address.street}
             <br />

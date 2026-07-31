@@ -38,7 +38,7 @@ test.describe("routes", () => {
     test(`${page_.path} offers a dialable phone number`, async ({ page }) => {
       await page.goto(page_.path);
       await expect(
-        page.locator('a[href="tel:+18555304434"]').first(),
+        page.locator('a[href="tel:+14079274434"]').first(),
       ).toBeAttached();
     });
   }
@@ -56,7 +56,22 @@ test.describe("routes", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       /isn.t here/,
     );
+    await expect(page.locator('a[href="tel:+14079274434"]').first()).toBeAttached();
+  });
+
+  test("contact and footer expose the office line as well as the primary", async ({
+    page,
+  }) => {
+    await page.goto("/contact");
+    await expect(page.locator('a[href="tel:+14079274434"]').first()).toBeAttached();
     await expect(page.locator('a[href="tel:+18555304434"]').first()).toBeAttached();
+    await expect(page.getByText("OFFICE")).toBeVisible();
+
+    // Footer is on every page; pin it from contact so both numbers stay linked.
+    const footer = page.locator("footer");
+    await expect(footer.locator('a[href="tel:+14079274434"]')).toBeAttached();
+    await expect(footer.locator('a[href="tel:+18555304434"]')).toBeAttached();
+    await expect(footer.getByText(/Office/)).toBeVisible();
   });
 
   test("sitemap lists every page and robots points at it", async ({ request }) => {
@@ -82,7 +97,7 @@ test.describe("routes", () => {
 
     expect(data["@type"]).toBe("LocalBusiness");
     // Search engines want a dialable number with a country code.
-    expect(data.telephone).toBe("+18555304434");
+    expect(data.telephone).toBe("+14079274434");
     expect(data.legalName).toContain("LLC");
 
     // Structured data pointing at a missing image is worse than none.
