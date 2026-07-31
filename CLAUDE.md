@@ -4,7 +4,7 @@
 - Legal name: **Latserof Technologies Grp LLC**. Display brand: **Latserof Technologies**.
 - Tagline: **Making Your Home Safer and Smarter**.
 - Owner: Thomas John Forestal (Owner / Operations Manager, Custom Design & Engineering). Happy to appear on the site.
-- Phone: **(407) 927-4434** — always link as `tel:+14079274434`.
+- Phone (office): **(855) 530-4434** — always link as `tel:+18555304434`.
 - Quote / survey form delivery: **tj@927hifi.com** (`QUOTE_TO_EMAIL`).
 - Address: 3050 Dyer Blvd, Suite 242, Kissimmee, FL 34741.
 - Hours: Mon–Fri 8:00–5:00. Service calls by appointment.

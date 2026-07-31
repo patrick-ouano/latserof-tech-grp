@@ -19,8 +19,8 @@ export function LocalBusinessJsonLd() {
     description: site.descriptor,
     url: site.url,
     // E.164, derived from the tel: href rather than the display string.
-    // Search engines want a dialable number with a country code; "(407)
-    // 927-4434" is for humans.
+    // Search engines want a dialable number with a country code; "(855)
+    // 530-4434" is for humans.
     telephone: site.phoneHref.replace("tel:", ""),
     // Was /logo-badge.png, which 404s — the badge ships as WebP. Structured
     // data pointing at a missing image is worse than omitting it.
