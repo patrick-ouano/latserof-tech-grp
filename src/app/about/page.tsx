@@ -122,8 +122,8 @@ export default function AboutPage() {
       </Section>
 
       {/* The ten-step long form, not the four-beat summary the other pages
-          carry. Someone who has read this far wants the detail. */}
-      <Section id="process" title="How we work" meta="Ten steps, every project">
+          carry. Step numbers live in DeliverySteps — no redundant meta. */}
+      <Section id="process" title="How we work">
         <DeliverySteps />
       </Section>
 
