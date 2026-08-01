@@ -48,7 +48,10 @@ const APP = path.join(ROOT, "src", "app");
  */
 const PHOTOS = [
   {
-    src: "PXL_20231222_193946370.jpeg",
+    // Blue-LED cinema & wet bar angle — same room as the previous hero
+    // (…193946370), shot from a step further back so the riser and cove
+    // lighting read more clearly. Corners remeasured 2026-07-31.
+    src: "PXL_20231222_193801294.jpeg",
     out: "hero-cinema-theater.webp",
     width: 2400,
     height: 1350, // 16:9, matches the source; CSS crops it per breakpoint
@@ -261,7 +264,9 @@ const PHOTOS = [
   // One frame per ROOM, never two angles of the same job on two cards — see
   // the room groups in PHOTO_MANIFEST.md.
   {
-    src: "PXL_20231222_193801294.jpeg",
+    // Swapped with the hero source 2026-07-31 so the homepage hero and this
+    // /work card are two angles of the same room, not the same frame twice.
+    src: "PXL_20231222_193946370.jpeg",
     out: "project-modern-theater.webp",
     width: 1600,
     height: 1067,
@@ -326,18 +331,15 @@ const SCREEN = {
   /**
    * Screen corners, TL TR BR BL, in the 2400x1350 exported hero.
    *
-   * Measured off the shipped file rather than the camera original — the
-   * export is a pure downscale of a 16:9 source, so there is no crop to
-   * account for, and anyone can re-check these against the same image.
-   * Found by fitting the wall/screen luminance gradient on all four edges;
-   * a flat threshold drifts because the screen's upper-left is much dimmer
-   * than its centre.
+   * Remeasured 2026-07-31 against PXL_20231222_193801294 (pure 16:9
+   * downscale, no crop). Gradient edge-fit from a mid-screen seed — a flat
+   * luminance threshold drifts on the dim upper-left corner.
    */
   corners: [
-    [192.7, 104.9],
-    [1073.9, 248.4],
-    [1076.6, 620.0],
-    [275.3, 691.6],
+    [271.7, 212.1],
+    [1083.8, 341.9],
+    [1075.5, 693.3],
+    [304.3, 736.5],
   ],
   /**
    * How much of the screen's own lighting to keep. Lower = more of the
