@@ -105,7 +105,7 @@ export const projects: Project[] = [
     category: "NETWORKING",
     title: "Rack build & structured cabling",
     location: "Central Florida",
-    image: "/images/project-control4-rack.webp",
-    alt: "Equipment rack with labelled Triad amplification and Control4 automation hardware",
+    image: "/images/project-dual-racks.webp",
+    alt: "Two equipment racks with labelled networking, structured cabling and Control4 audio distribution",
   },
 ];

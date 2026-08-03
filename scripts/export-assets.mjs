@@ -296,12 +296,15 @@ const PHOTOS = [
     position: "centre",
   },
   {
-    // Triad + Control4, clean and well-labelled. A different pair of racks
-    // from the header shot above.
-    src: "20180906_134352.jpg",
-    out: "project-control4-rack.webp",
+    // Dual-rack build: labelled networking, patch cables, Control4.
+    // Exported at 4:3 to match ProjectCard's aspect-[4/3]. Shifted down
+    // from the source top so the rack columns fill the card instead of
+    // the monitors and ceiling that sit above them.
+    src: "990503C8-784A-48B4-80EB-336A8A0856DE-converted.jpg",
+    out: "project-dual-racks.webp",
     width: 1600,
-    height: 1067,
+    height: 1200,
+    crop: { left: 0, top: 1900, width: 3213, height: 2410 },
     position: "centre",
   },
 ];
