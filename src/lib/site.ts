@@ -153,31 +153,31 @@ export const disciplines = [
 export type Discipline = (typeof disciplines)[number];
 
 /**
- * Dealer / partner lines.
+ * Dealer lines shown on the site.
  *
- * Thomas is an industry partner with 21st Century Distribution and SnapAV —
- * the names below are lines commonly specified from those catalogs (plus
- * Crestron). Rendered as type, never as logo files: manufacturer marks are
- * their trademarks, and marketing-rights questions stay out of the markup.
- *
- * Distributor names themselves live in `distributors` and can be cited in
- * copy without implying a logo license.
+ * Biggest recognizable names from the catalogs Latserof buys through —
+ * names only, never logo files. Distributor houses are not listed. Count
+ * fits BrandStrip's auto-fill grid without leaving a sparse half-empty card.
  */
 export const brands = [
   "Control4",
   "Crestron",
   "Lutron",
-  "Episode",
-  "Binary",
-  "ClareVision",
-  "Araknis",
-  "WattBox",
-] as const;
-
-/** Distribution partners confirmed by Thomas 2026-07-29. */
-export const distributors = [
-  { name: "21st Century Distribution", href: "https://21stcenturydist.com/" },
-  { name: "SnapAV", href: "https://www.snapav.com/shop/en/snapav/home" },
+  "Sonos",
+  "Samsung",
+  "Sony",
+  "Denon",
+  "Yamaha",
+  "Bose",
+  "Ubiquiti",
+  "LG",
+  "Apple",
+  "JBL",
+  "Klipsch",
+  "Epson",
+  "Sonance",
+  "Nest",
+  "Alarm.com",
 ] as const;
 
 /**
@@ -220,7 +220,7 @@ export const process = [
  *
  * The step *names* are the client's own (supplied 2026-07-30); the one-line
  * bodies are DRAFT, written from approved copy and facts already in this
- * file — dealer purchasing through `distributors`, "the same crew that
+ * file — dealer purchasing through catalog brands, "the same crew that
  * installed it", "service calls by appointment".
  *
  * This is the long form, and it does not replace `process` above. That one

@@ -1,49 +1,33 @@
 import { Reveal } from "@/components/motion/Reveal";
-import { brands, distributors } from "@/lib/site";
+import { brands } from "@/lib/site";
 
 /**
- * Partner lines, set as type rather than as logo files.
+ * Dealer lines as type — never logo files (trademark / rights).
  *
- * Manufacturer logos are trademarks we do not have a clear license to place.
- * Names in Archivo say the same thing without that question. Distributor
- * partners are cited below the brand row.
+ * Auto-fill grid so the card stays evenly occupied at every width instead
+ * of collapsing into two sparse columns with a dead right half.
  */
 export function BrandStrip() {
   return (
     <Reveal variant="fade">
-      <div className="flex flex-col gap-6 rounded-card border border-hairline bg-surface-1 px-7 py-7 xl:px-9">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
-          <p className="shrink-0 font-mono text-[12px] leading-none font-bold text-gold">
+      <div className="rounded-card border border-hairline bg-surface-1 px-6 py-7 sm:px-8 sm:py-8 xl:px-10 xl:py-9">
+        <div className="mb-6 flex items-center gap-4 sm:mb-7">
+          <p className="shrink-0 font-mono text-[11px] leading-none font-bold tracking-[0.2em] text-gold sm:text-[12px]">
             SYSTEMS WE BUILD WITH
           </p>
-          <ul className="flex flex-wrap items-center gap-x-8 gap-y-4">
-            {brands.map((brand) => (
-              <li
-                key={brand}
-                className="font-heading text-[18px] leading-none font-extrabold tracking-[0.02em] text-paper-dim"
-              >
-                {brand}
-              </li>
-            ))}
-          </ul>
+          <span className="h-px min-w-8 flex-1 bg-hairline" aria-hidden="true" />
         </div>
-        <p className="font-body text-[14px] leading-relaxed text-muted">
-          Industry partner with{" "}
-          {distributors.map((d, i) => (
-            <span key={d.name}>
-              {i > 0 ? (i === distributors.length - 1 ? " and " : ", ") : null}
-              <a
-                href={d.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-body-dim underline-offset-2 transition-colors hover:text-gold hover:underline"
-              >
-                {d.name}
-              </a>
-            </span>
+
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] gap-x-3 gap-y-4 sm:grid-cols-[repeat(auto-fill,minmax(9rem,1fr))] sm:gap-x-5 sm:gap-y-5">
+          {brands.map((brand) => (
+            <li
+              key={brand}
+              className="border-b border-hairline/60 pb-3 font-heading text-[15px] leading-none font-bold tracking-[0.03em] text-paper/90 sm:text-[16px]"
+            >
+              {brand}
+            </li>
           ))}
-          .
-        </p>
+        </ul>
       </div>
     </Reveal>
   );
