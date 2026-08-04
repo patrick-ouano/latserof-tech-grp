@@ -372,25 +372,12 @@ const OG = {
 /**
  * The brand mark.
  *
- * Source is the handoff original: a 700px PNG with a clean alpha cutout of
+ * Source is brand/logo-badge.png: a 700px PNG with a clean alpha cutout of
  * the emblem. 256px covers the largest use (88px in the footer) at 2x with
- * headroom, and WebP takes it from ~979KB to ~31KB.
- *
- * NOT sourced from "Latserof Tech Grp Logo Vector.svg". Despite the name it
- * is not a vector: it is one 2160px JPEG wrapped in an <svg> element, zero
- * <path> nodes, 1.6MB. It is also a photograph of the physical embroidered
- * patch lying on white fabric, with the wordmark included and no
- * transparency, so it is a different asset entirely and unusable on a dark
- * ground. A real vector is still outstanding; see QUESTIONS-FOR-THOMAS.md.
+ * headroom, and WebP takes it from ~979KB to ~31KB. A real vector from
+ * Thomas is still outstanding before launch.
  */
-const LOGO_SRC = path.join(
-  ROOT,
-  "design",
-  "Latserof Technologies website design",
-  "design_handoff_latserof_homepage",
-  "assets",
-  "logo-badge.png",
-);
+const LOGO_SRC = path.join(ROOT, "brand", "logo-badge.png");
 
 /**
  * Favicons, from the same emblem.
@@ -627,7 +614,7 @@ async function run() {
 
   console.log("\nbrand mark");
   if (!existsSync(LOGO_SRC)) {
-    console.error("  MISSING  handoff logo-badge.png, skipping");
+    console.error("  MISSING  brand/logo-badge.png, skipping");
     failed += 1;
   } else {
     try {

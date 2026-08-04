@@ -13,15 +13,15 @@
 - Four core disciplines: (01) Cinema & media rooms, (02) Control & lighting, (03) Networks that hold, (04) Surveillance Systems and Access Control.
 - Design services available upon request.
 - Primary CTA label: **Request for Survey** → `/contact`.
-- **The site never says "free."** Removed everywhere 2026-07-30 at the client's request — a site that publishes no prices should not publish a price of zero either, and it insinuates that what follows the survey is also on the house. This is the one place the **approved handoff copy is overridden**: `reference/homepage-2a.html` and the handoff README still read "Walkthroughs are free anywhere in Central Florida", and they are wrong now. Say the reach ("on-site surveys across Greater Orlando…"), not the cost. `tests/no-free-copy.test.ts` scans `src/` and fails on the word — it had crept into four separate pages from that one handoff line.
+- **The site never says "free."** Removed everywhere 2026-07-30 at the client's request — a site that publishes no prices should not publish a price of zero either, and it insinuates that what follows the survey is also on the house. Say the reach ("on-site surveys across Greater Orlando…"), not the cost. `tests/no-free-copy.test.ts` scans `src/` and fails on the word.
 - **Two process sequences, both real, neither interchangeable.** `process` (site.ts) is the four-beat public summary — Survey → Design → Install → Service — and stays on `/residential` and `/commercial`. `deliveryProcess` is the client's own ten-step sequence (consultation, needs analysis, solution development, purchasing, staging, installation & integration, commissioning, training, support, continuous enhancement) and renders on `/about` only, via `DeliverySteps`. A unit test asserts they stay different lengths, because collapsing one into the other silently rewrites three pages.
 - **Company narrative** lives in `story` (site.ts) and renders on `/about`: WHAT WE DO · OUR EXPERIENCE · A PASSIONATE APPROACH · OUR COMMITMENT. Thomas supplied the source copy 2026-07-30; it was edited for web readability later that day from twelve repetitive paragraphs to seven, with proof-of-work photography on two blocks. The concise edit omits the source's plural "principals and founders", its conflicting "more than three decades" line, and Stuart, FL; it retains the specific claim of **more than 35 years of combined experience**, which Thomas should still confirm. A test guards the brand name, service area and story image files.
 
 ## Design system — status
 - **The whole site is built.** Homepage, Residential, Commercial, Systems, Work, About and Contact all ship real content, and `PageStub` has been deleted.
-- The current visual language is **"Gallery Black, lit"** — an evolution of the approved Direction 2a, decided 2026-07-29. It keeps 2a's palette and typography and reworks its depth, geometry and motion. `src/app/globals.css` is the source of truth; read its `@theme` block before writing any component.
-- **The design handoff is now historical.** `design/Latserof Technologies website design/design_handoff_latserof_homepage/` still holds the original token table, the exact approved copy, and `reference/homepage-2a.html`. Treat it as the authority on **copy** (still final — don't paraphrase headlines) and as *superseded* on radius, shadow, hover and type-scale. Where it and `globals.css` disagree about styling, `globals.css` wins.
-- ⚠️ **Thomas signed off on 2a, not on this.** The homepage he approved looked flatter. Get the reworked homepage re-approved before launch.
+- The current visual language is **"Gallery Black, lit"** — an evolution of Direction 2a. It keeps 2a's palette and typography and reworks its depth, geometry and motion. `src/app/globals.css` is the source of truth; read its `@theme` block before writing any component.
+- Approved homepage **copy** stays final — don't paraphrase headlines. Styling follows `globals.css`.
+- ⚠️ **Thomas signed off on flatter 2a, not on this rework.** Get the reworked homepage re-approved before launch.
 
 ## Design constraints (apply site-wide)
 Still binding:
@@ -31,7 +31,7 @@ Still binding:
 - Body copy never below 16px. Focus rings are never removed.
 - Tailwind theme tokens are defined once in the `@theme` block in `src/app/globals.css` — this is Tailwind v4, which moved theme config out of JS and into CSS, so there is no `tailwind.config` file. Reference tokens by name (`bg-ink`, `text-gold`, `shadow-glow`, `text-h2`); never hardcode a hex inline.
 
-Superseded by the rework (the handoff still states the old rule — ignore it):
+Superseded by the rework (older flat 2a rules — ignore them):
 - ~~Border radius 2px on buttons, 0 everywhere else~~ → `--radius-btn` 10px, `--radius-card` 16px, `--radius-lg` 24px, `--radius-pill`.
 - ~~No shadows anywhere~~ → `--shadow-card`, `--shadow-lift`, `--shadow-glow`, `--shadow-glow-sm`.
 - ~~Hover is a colour change only, no lift~~ → buttons and cards lift and glow.
@@ -47,7 +47,7 @@ Three layers, ordered so nothing can ever strand content invisible:
 The `js` / `sda` capability classes are set by a blocking script in `layout.tsx` **before first paint** — setting them in an effect causes content to paint visible, snap hidden, then animate. The header shell, hero parallax and reading-progress bar are all CSS scroll timelines; there is deliberately **no scroll listener anywhere in the site**.
 
 ## Assets
-- Logo: `public/logo-badge.png` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**) and `public/logo-wordmark.png` (horizontal lockup, use if a wider version is needed). Originals live in `design/Latserof Technologies website design/design_handoff_latserof_homepage/assets/`. These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch. The badge PNG is ~1MB, far heavier than a 54px header mark warrants; the vector solves this, otherwise re-export at 2x display size.
+- Logo: `public/logo-badge.webp` (the emblem — gold on black, brand anchor, **never recolor/crop/place on non-black surface**). Source PNG lives in `brand/logo-badge.png` (and `brand/logo-wordmark.png` if a wider lockup is needed). These are PNG placeholders — ask Thomas for a vector (SVG/EPS) before launch. The source badge is ~1MB; `npm run assets` exports the ~31KB WebP used on the site.
 - Photography: see `PHOTO_MANIFEST.md`. Shipped images are real Latserof work, exported from `photos-source/` by `npm run assets`. Surveillance photography was added 2026-07-29. Commercial *room* photos are still thin (rack shots cover the commercial card). Locations pending from Thomas.
 - **Hero cinema screen.** The screen in `hero-cinema-theater.webp` was blank; `npm run assets` projects a still onto it — put the file in `photos-source/` as `screen-content.*` and the export warps it onto the measured corners (`scripts/lib/screen-composite.mjs`, `SCREEN` in `scripts/export-assets.mjs`). Absent, the step is skipped and the screen stays blank. `og-image.jpg` derives from the finished hero, so it inherits whatever is on the screen. **A Las Vegas GP night frame is composited in as of 2026-07-29 and is still unlicensed** — broadcast frames and team liveries are third-party IP, same rule as the vendor photos below, and this is the most visible image on the site. License it or replace it with Thomas's own footage before launch. See `PHOTO_MANIFEST.md`.
 - Photo *framing* is data, not a manual crop: entries in `scripts/export-assets.mjs` take an optional `crop` rect (source pixels, applied pre-resize) and `flop`. The phone photos are mostly ≈1:2 portraits going into 4:3 and 4:5 slots, where gravity alone cuts the subject in half — give a rect. `flop` un-mirrors front-camera selfies, which otherwise ship reversed signage and a backwards LTG logo.
@@ -76,6 +76,7 @@ src/components/          shared components
 src/components/motion/   Reveal (scroll reveal), Spotlight (pointer bloom)
 src/lib/site.ts          business facts, disciplines, brands, process, nav, CTA_HREF
 src/data/projects.ts     Project[] for "Recent installations"
+brand/                   logo source PNGs (export → public/logo-badge.webp)
 public/                  logo-badge.webp, images/ (project photos)
 ```
 - Never retype a business fact into a component — import it from `src/lib/site.ts`. Phone links use `site.phoneHref`.
