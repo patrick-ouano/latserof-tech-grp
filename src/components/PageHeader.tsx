@@ -43,7 +43,7 @@ export function PageHeader({
       </p>
 
       <h1
-        className="animate-enter max-w-[18ch] font-heading text-h1 font-black text-paper"
+        className="animate-enter max-w-[22ch] font-heading text-h1 font-black text-paper"
         style={{ animationDelay: "90ms" }}
       >
         {title}
@@ -68,16 +68,28 @@ export function PageHeader({
 
   if (!photo) {
     return (
-      <section className="relative overflow-hidden border-b border-hairline">
-        <div className="mesh-glow" aria-hidden="true" />
+      <section className="relative border-b border-hairline">
+        {/* Clip the mesh only — overflow-hidden on the section was shearing
+            the last glyph of gold titles that sat against max-w. */}
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          aria-hidden="true"
+        >
+          <div className="mesh-glow" />
+        </div>
         <Container className="relative py-16 md:py-20 xl:py-28">{text}</Container>
       </section>
     );
   }
 
   return (
-    <section className="relative overflow-hidden border-b border-hairline">
-      <div className="mesh-glow" aria-hidden="true" />
+    <section className="relative border-b border-hairline">
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="mesh-glow" />
+      </div>
 
       <div className="relative mx-auto grid w-full max-w-[1280px] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
         {/* Photo first in the DOM so it stacks above the text on small

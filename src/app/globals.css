@@ -426,6 +426,11 @@ html.js [data-reveal][data-revealed] {
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .text-gradient-gold {
+    /* inline-block so end padding widens the clip box — Archivo Black +
+       tight tracking paints the last glyph past its advance width, and
+       background-clip:text shears it (the clipped "r" on /systems). */
+    display: inline-block;
+    padding-inline-end: 0.14em;
     background: linear-gradient(
       104deg,
       var(--color-gold-bright) 0%,

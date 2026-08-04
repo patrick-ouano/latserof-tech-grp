@@ -45,7 +45,7 @@ export default function AboutPage() {
               Design it. Install it.
             </span>
             {" "}
-            <span className="text-gradient-gold block whitespace-nowrap">
+            <span className="text-gradient-gold whitespace-nowrap">
               Support it for life.
             </span>
           </>
