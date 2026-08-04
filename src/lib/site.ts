@@ -67,11 +67,9 @@ export const site = {
 /**
  * `title` and `body` are approved homepage copy — do not paraphrase them.
  *
- * `includes`, `residential` and `commercial` are DRAFT, written for the
- * pages the handoff never covered. Every line is derived from the approved
- * body copy above it or from a business fact in this file — nothing here
- * claims a capability the client has not already stated. Logged in
- * QUESTIONS-FOR-THOMAS.md for his review.
+ * `includes`, `residential` and `commercial` are draft expansions of the
+ * approved body copy / business facts above — nothing here claims a
+ * capability the client has not already stated.
  */
 export const disciplines = [
   {

@@ -13,8 +13,8 @@ export type Project = {
   category: string;
   title: string;
   /**
-   * City. PROVISIONAL until Thomas confirms which job each room was —
-   * see QUESTIONS-FOR-THOMAS.md. Set `locationConfirmed` once he has.
+   * City. Provisional until Thomas confirms which job each room was.
+   * Set `locationConfirmed` once he has.
    */
   location: string;
   locationConfirmed?: boolean;

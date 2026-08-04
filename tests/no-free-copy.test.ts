@@ -18,9 +18,7 @@ import { describe, expect, it } from "vitest";
  * says only the reach.
  *
  * Asserted rather than trusted because it is one word, it reads as a selling
- * point, and it re-entered the copy twice already. The handoff still has the
- * original line in it (`design/.../reference/homepage-2a.html`), so the next
- * person to work from that document will paste it back in good faith.
+ * point, and it re-entered the copy twice already.
  *
  * Comments are exempt — the reasoning above has to be allowed to name the word
  * it is banning, and `SiteHeader` uses the ordinary English idiom in a note

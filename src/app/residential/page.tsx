@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 /* Draft copy — every answer below restates a fact already established in
    src/lib/site.ts or in approved homepage copy. Nothing here claims a
    capability, a price, a timescale or a credential the client has not
-   already stated. Logged in QUESTIONS-FOR-THOMAS.md. */
+   already stated. */
 const FAQ: QA[] = [
   {
     q: "Do you publish pricing?",
