@@ -65,7 +65,7 @@ test.describe("routes", () => {
     await page.goto("/contact");
     await expect(page.locator('a[href="tel:+14079274434"]').first()).toBeAttached();
     await expect(page.locator('a[href="tel:+18555304434"]').first()).toBeAttached();
-    await expect(page.getByText("OFFICE")).toBeVisible();
+    await expect(page.getByText("OFFICE", { exact: true })).toBeVisible();
 
     // Footer is on every page; pin it from contact so both numbers stay linked.
     const footer = page.locator("footer");
