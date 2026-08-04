@@ -4,6 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { projects, projectsIn } from "@/data/projects";
+import { controlLineDemos } from "@/data/line-demos";
 // `process` is aliased: site.ts exports one, and it would shadow Node's
 // global that the filesystem assertions below rely on.
 import {
@@ -243,5 +244,23 @@ describe("projects", () => {
       .toBe(true);
     expect(projectsIn(["RESIDENTIAL"], 2)).toHaveLength(2);
     expect(projectsIn(["NOPE"])).toHaveLength(0);
+  });
+});
+
+describe("control line demos", () => {
+  it("keeps unique YouTube ids and captions", () => {
+    expect(controlLineDemos.length).toBeGreaterThan(0);
+    const ids = controlLineDemos.map((d) => d.youtubeId);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const demo of controlLineDemos) {
+      expect(demo.youtubeId).toMatch(/^[A-Za-z0-9_-]{11}$/);
+      expect(demo.brand.length).toBeGreaterThan(0);
+      expect(demo.title.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("names Lutron, which is already on the brand strip", () => {
+    expect(controlLineDemos.some((d) => d.brand === "Lutron")).toBe(true);
+    expect(brands).toContain("Lutron");
   });
 });

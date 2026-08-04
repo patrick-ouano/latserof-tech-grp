@@ -5,6 +5,7 @@ import { BrandStrip } from "@/components/BrandStrip";
 import { CheckList } from "@/components/CheckList";
 import { Container } from "@/components/Container";
 import { CtaBand } from "@/components/CtaBand";
+import { LineDemos } from "@/components/LineDemos";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/motion/Reveal";
@@ -121,6 +122,10 @@ export default function SystemsPage() {
               )}
             </Reveal>
           </div>
+
+          {/* Vendor demos for lines under this discipline — not project
+              footage. See src/data/line-demos.ts. */}
+          {d.slug === "control" ? <LineDemos /> : null}
         </Section>
       ))}
 
